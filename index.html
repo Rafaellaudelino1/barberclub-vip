@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>BarberClub Pro — Experiência VIP & Gestão Completa</title>
+  <title>BarberClub Pro — Sistema de Agendamento & Gestão VIP</title>
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -110,7 +110,7 @@
   <div id="view-portal" class="fixed inset-0 z-50 bg-obsidian-950 flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden">
     
     <!-- LADO ESQUERDO: IMAGEM TEMÁTICA DE BARBEARIA + EMBLEMA MONOCROMÁTICO -->
-    <div class="relative w-full lg:w-1/2 min-h-[44vh] lg:min-h-screen flex flex-col justify-between p-6 sm:p-12 overflow-hidden border-b lg:border-b-0 lg:border-r border-zinc-800/80">
+    <div class="relative w-full lg:w-1/2 min-h-[42vh] lg:min-h-screen flex flex-col justify-between p-6 sm:p-12 overflow-hidden border-b lg:border-b-0 lg:border-r border-zinc-800/80">
       <!-- Imagem de Fundo Personalizável pelo Proprietário -->
       <div id="portal-hero-bg" class="absolute inset-0 bg-cover bg-center scale-105 transition-transform duration-1000"
            style="background-image: url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1400&q=85');">
@@ -159,37 +159,34 @@
       </div>
     </div>
 
-    <!-- LADO DIREITO: FUNDO PRETO COM LOGO EM MARCA D'ÁGUA CINZA + ACESSO POR TELEFONE -->
-    <div class="relative w-full lg:w-1/2 min-h-[56vh] lg:min-h-screen bg-obsidian-950 flex flex-col justify-between p-6 sm:p-12 overflow-hidden">
+    <!-- LADO DIREITO: FUNDO PRETO COM LOGO EM MARCA D'ÁGUA CINZA + ACESSO DO CLIENTE -->
+    <div class="relative w-full lg:w-1/2 min-h-[58vh] lg:min-h-screen bg-obsidian-950 flex flex-col justify-between p-6 sm:p-12 overflow-hidden">
       
       <!-- Marca d'Água Gigante da Logo no Fundo Cinza/Preto -->
       <div id="portal-right-watermark" class="absolute inset-0 flex items-center justify-center select-none overflow-hidden">
         <!-- Injetado via JS -->
       </div>
 
-      <!-- Topo Direito: Acesso Rápido do Proprietário -->
+      <!-- Topo Direito: Apenas Ver Vitrine (Sem botão do proprietário no topo) -->
       <div class="relative z-10 flex items-center justify-end gap-2">
         <button onclick="enterShowcaseAsGuest()" class="px-3.5 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800 text-xs font-semibold text-zinc-300 flex items-center gap-1.5 transition">
-          <i data-lucide="eye" class="w-3.5 h-3.5 text-amber-500"></i> Ver Vitrine & Preços
-        </button>
-        <button onclick="handleAdminAccessClick()" class="px-3.5 py-2 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 border border-amber-500/30 text-xs font-semibold text-amber-400 flex items-center gap-1.5 transition">
-          <i data-lucide="lock" class="w-3.5 h-3.5"></i> Área do Proprietário
+          <i data-lucide="eye" class="w-3.5 h-3.5 text-amber-500"></i> Ver Cortes & Valores
         </button>
       </div>
 
       <!-- Centro Direito: Card de Login / Cadastro Instantâneo por Telefone -->
-      <div class="relative z-10 my-auto w-full max-w-md mx-auto">
-        <div class="bg-obsidian-900/90 backdrop-blur-xl border border-zinc-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6">
+      <div class="relative z-10 my-auto w-full max-w-md mx-auto py-4">
+        <div class="bg-obsidian-900/90 backdrop-blur-xl border border-zinc-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-5">
           
           <div class="space-y-1.5 text-center sm:text-left">
             <div class="inline-flex items-center gap-1.5 text-amber-400 text-xs font-bold uppercase tracking-wider">
               <i data-lucide="sparkles" class="w-4 h-4"></i> Acesso Rápido do Cliente
             </div>
             <h2 class="font-royal text-xl sm:text-2xl font-bold text-white">
-              Reserve seu Horário
+              Agende seu Horário
             </h2>
             <p class="text-xs text-zinc-400 leading-relaxed">
-              Digite seu WhatsApp abaixo. Se já for cliente da casa, você entra automaticamente sem senha.
+              Informe seu WhatsApp abaixo. Se já for cliente cadastrado, sua entrada é imediata.
             </p>
           </div>
 
@@ -220,7 +217,7 @@
             <!-- Campo de Nome Completo se o telefone ainda não estiver cadastrado -->
             <div id="portal-new-client-fields" class="hidden animate-fade-in space-y-3 pt-1">
               <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-[11px] text-amber-300">
-                ✨ <strong>Primeiro acesso detectado!</strong> Digite seu nome completo abaixo para criar seu cadastro VIP instantaneamente:
+                ✨ <strong>Primeiro acesso!</strong> Digite seu nome completo abaixo para concluir seu cadastro na hora:
               </div>
               <div>
                 <label class="block text-[11px] font-extrabold uppercase tracking-wider text-zinc-400 mb-1.5">
@@ -240,8 +237,16 @@
             </button>
           </form>
 
+          <!-- Botão de Demonstração Rápida (Cliente Demo em 1 Clique) -->
+          <div id="portal-demo-client-box" class="pt-2 border-t border-zinc-800/80">
+            <button type="button" onclick="loginAsDemoClient()" class="w-full py-2.5 px-4 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 text-xs font-bold flex items-center justify-center gap-2 transition">
+              <i data-lucide="zap" class="w-4 h-4 text-amber-400"></i>
+              <span>Entrar com Cliente Demo (Teste em 1 Clique)</span>
+            </button>
+          </div>
+
           <!-- Destaques Rápidos de Experiência -->
-          <div class="grid grid-cols-3 gap-2 pt-4 border-t border-zinc-800/80 text-center">
+          <div class="grid grid-cols-3 gap-2 pt-2 text-center">
             <div class="p-2 rounded-xl bg-obsidian-950/70 border border-zinc-800/60">
               <i data-lucide="scissors" class="w-4 h-4 text-amber-500 mx-auto mb-1"></i>
               <span class="block text-[10px] font-bold text-zinc-300">Mestres Barbeiros</span>
@@ -259,16 +264,20 @@
         </div>
       </div>
 
-      <!-- Rodapé Direito -->
-      <div class="relative z-10 text-center sm:text-right text-[11px] text-zinc-600">
-        Sistema Multi-Tenant • Unidade <code id="portal-store-code" class="text-zinc-400">default</code>
+      <!-- RODAPÉ INFERIOR DIREITO: ACESSO DISCRETO DO PROPRIETÁRIO / ADMIN -->
+      <div class="relative z-10 pt-3 border-t border-zinc-900/80 flex items-center justify-between text-[11px] text-zinc-600">
+        <span>Unidade: <code id="portal-store-code" class="text-zinc-500">demo</code></span>
+        <button onclick="handleAdminAccessClick()" class="text-zinc-500 hover:text-amber-400 font-semibold flex items-center gap-1.5 transition py-1 px-2 rounded-lg hover:bg-zinc-900/60">
+          <i data-lucide="lock" class="w-3 h-3"></i>
+          <span>Área do Proprietário</span>
+        </button>
       </div>
 
     </div>
   </div>
 
   <!-- ======================================================================= -->
-  <!-- HEADER SUPERIOR PRINCIPAL (EXIBIDO APÓS ENTRAR NA LOJA OU NO ADMIN)      -->
+  <!-- HEADER SUPERIOR PRINCIPAL (LIMPO PARA O CLIENTE - SEM BOTÃO ADMIN)      -->
   <!-- ======================================================================= -->
   <header id="main-app-header" class="hidden sticky top-0 z-40 backdrop-blur-xl bg-obsidian-950/90 border-b border-zinc-800/80">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2">
@@ -293,21 +302,16 @@
         </div>
       </div>
 
-      <!-- Ações Rápidas: Perfil do Cliente + Alternar Gestão -->
+      <!-- Ações Rápidas do Topo: Apenas Capa Inicial e Perfil do Cliente -->
       <div class="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-        <button onclick="openSplitPortal()" class="hidden md:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 border border-zinc-800 text-xs font-medium text-zinc-300 transition">
+        <button onclick="openSplitPortal()" class="flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 border border-zinc-800 text-xs font-medium text-zinc-300 transition">
           <i data-lucide="layout-panel-left" class="w-3.5 h-3.5 text-amber-500"></i>
-          <span>Capa Inicial</span>
+          <span class="hidden sm:inline">Tela Inicial</span>
         </button>
 
-        <button id="btn-client-auth" onclick="openClientAuthModal()" class="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-2 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 border border-zinc-700/80 text-xs sm:text-sm font-medium text-zinc-200 transition">
+        <button id="btn-client-auth" onclick="openClientAuthModal()" class="flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 border border-zinc-700/80 text-xs sm:text-sm font-medium text-zinc-200 transition">
           <i data-lucide="user-check" class="w-4 h-4 text-amber-500 shrink-0"></i>
-          <span id="client-auth-label" class="max-w-[95px] sm:max-w-[150px] truncate">Entrar</span>
-        </button>
-
-        <button id="btn-toggle-admin" onclick="handleAdminAccessClick()" class="flex items-center gap-1.5 px-2.5 sm:px-3.5 py-2 rounded-xl bg-amber-600/15 hover:bg-amber-600/25 border border-amber-500/40 text-amber-400 text-xs sm:text-sm font-semibold transition">
-          <i data-lucide="shield-check" class="w-4 h-4 shrink-0"></i>
-          <span id="admin-btn-text" class="hidden sm:inline">Proprietário</span>
+          <span id="client-auth-label" class="max-w-[110px] sm:max-w-[160px] truncate">Entrar</span>
         </button>
       </div>
 
@@ -455,13 +459,24 @@
 
   </main>
 
-  <!-- RODAPÉ -->
-  <footer id="main-app-footer" class="hidden border-t border-zinc-900 bg-obsidian-950 py-5 px-4 text-center text-xs text-zinc-500 mt-auto">
-    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
-      <p><span id="footer-shop-name" class="text-zinc-300 font-semibold">BarberClub</span> — Plataforma SaaS de Gestão & Agendamento</p>
-      <p class="flex items-center gap-2">
-        <span>Unidade: <code id="footer-store-id" class="text-amber-500 bg-obsidian-800 px-1.5 py-0.5 rounded">default</code></span>
-      </p>
+  <!-- ======================================================================= -->
+  <!-- RODAPÉ PRINCIPAL SEMPRE EMBAIXO COM O ACESSO DISCRETO DO PROPRIETÁRIO   -->
+  <!-- ======================================================================= -->
+  <footer id="main-app-footer" class="hidden border-t border-zinc-900 bg-obsidian-950 py-6 px-4 text-xs text-zinc-500 mt-auto">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <span id="footer-shop-name" class="text-zinc-400 font-semibold">BarberClub</span>
+        <span>•</span>
+        <span>Unidade: <code id="footer-store-id" class="text-zinc-400 bg-obsidian-900 px-1.5 py-0.5 rounded">demo</code></span>
+      </div>
+
+      <!-- Botão Discreto da Área do Proprietário Sempre no Rodapé -->
+      <div class="flex items-center gap-4">
+        <button onclick="handleAdminAccessClick()" class="text-zinc-500 hover:text-amber-400 font-semibold flex items-center gap-1.5 transition px-3 py-1.5 rounded-xl bg-obsidian-900/80 hover:bg-obsidian-800 border border-zinc-800/80">
+          <i data-lucide="lock" class="w-3.5 h-3.5 text-amber-500/80"></i>
+          <span id="footer-admin-btn-text">Área do Proprietário</span>
+        </button>
+      </div>
     </div>
   </footer>
 
@@ -479,23 +494,26 @@
   </div>
 
   <!-- ======================================================================= -->
-  <!-- MOTOR JAVASCRIPT COMPLETO + SUPABASE + SPLIT PORTAL + GESTÃO 360        -->
+  <!-- MOTOR JAVASCRIPT COMPLETO + SUPABASE + DEMO + DEV MASTER                -->
   <!-- ======================================================================= -->
   <script>
     const SUPABASE_URL = "https://yhlgptwnidtuvixcrews.supabase.co";
     const SUPABASE_KEY = "sb_publishable_P40YlOEbQcSQNLYrY43BvQ_cQog27CM";
+
+    // CREDENCIAIS DO DESENVOLVEDOR MASTER
     const DEV_MASTER_EMAIL = "desenv@rafael.com";
     const DEV_MASTER_PASS = "123";
 
+    // Por padrão, se não passar ?loja=, abre a loja "demo" (Demonstração) igual na Hamburgueria
     const urlParams = new URLSearchParams(window.location.search);
-    const rawStoreParam = urlParams.get('loja') || 'barbearia_imperial';
+    const rawStoreParam = urlParams.get('loja') || 'demo';
     const CURRENT_STORE_ID = rawStoreParam.toLowerCase().replace(/[^a-z0-9_-]/g, '_');
 
     let DB = null;
-    let portalOpen = true; // Abre sempre na Tela Inicial Dividida para impacto visual
-    let currentView = 'client'; // 'client' | 'admin'
-    let currentClientTab = 'services'; // 'services' | 'combos' | 'plans' | 'team' | 'products' | 'appointments'
-    let currentAdminTab = 'agenda'; // 'agenda' | 'team' | 'catalog' | 'inventory' | 'crm' | 'finance' | 'settings' | 'dev'
+    let portalOpen = true;
+    let currentView = 'client';
+    let currentClientTab = 'services';
+    let currentAdminTab = 'agenda';
     let loggedClient = null;
     let adminSession = null;
 
@@ -508,7 +526,6 @@
     let financeBarberFilter = 'all';
     let preselectedBarberId = null;
 
-    // Funções Utilitárias
     function getTodayISO() {
       const now = new Date();
       return `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
@@ -592,15 +609,17 @@
     }
 
     /*************************************************************************
-     * 2. SEED COMPLETO DE BARBEARIA DE ALTO PADRÃO
+     * 2. SEED COMPLETO DE BARBEARIA (INCLUI CLIENTE DEMO E PROPRIETÁRIO DEMO)
      *************************************************************************/
-    function createDefaultStoreData(storeId, customName = null, ownerEmail = 'admin@barbearia.com', ownerPass = '123456') {
+    function createDefaultStoreData(storeId, customName = null, ownerEmail = 'demo@barbearia.com', ownerPass = '123') {
       const today = getTodayISO();
-      const readableName = customName || storeId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+      const isDemo = storeId === 'demo' || storeId === 'barbearia_imperial';
+      const readableName = customName || (isDemo ? 'Dom Corleone Barber Club (Demo)' : storeId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()));
+
       return {
         storeId: storeId,
         settings: {
-          name: readableName === 'Barbearia Imperial' ? 'Dom Corleone Barber Club' : readableName,
+          name: readableName,
           slogan: 'Mais que um corte, um ritual de alto padrão. Escolha seu mestre barbeiro e reserve seu horário.',
           phone: '5548999999999',
           address: 'Av. Central, 1450 - Sala 02 (Estacionamento Privativo)',
@@ -729,7 +748,7 @@
           {
             id: 'prd_1',
             name: 'Pomada Modeladora Matte Efeito Seco 120g',
-            type: 'sale', // 'sale' (Venda ao cliente) | 'supply' (Insumo interno da barbearia)
+            type: 'sale',
             price: 49.90,
             cost: 22.00,
             stock: 14,
@@ -765,6 +784,17 @@
         ],
         clients: [
           {
+            id: 'cli_demo',
+            name: 'Cliente Demonstração VIP',
+            phone: '48999990000',
+            totalCuts: 18,
+            totalSpent: 1150,
+            lastVisitDate: addDaysISO(today, -3),
+            planId: 'plan_2',
+            planExpiresAt: addDaysISO(today, 25),
+            notes: 'Conta oficial de demonstração do sistema.'
+          },
+          {
             id: 'cli_1',
             name: 'Carlos Eduardo Martins',
             phone: '48999112233',
@@ -785,25 +815,14 @@
             planId: null,
             planExpiresAt: null,
             notes: 'Cliente fiel, mas está há mais de 30 dias sem aparecer.'
-          },
-          {
-            id: 'cli_3',
-            name: 'Henrique Vasconcelos',
-            phone: '48988776655',
-            totalCuts: 5,
-            totalSpent: 340,
-            lastVisitDate: addDaysISO(today, -52),
-            planId: null,
-            planExpiresAt: null,
-            notes: 'Sempre faz barba + cabelo.'
           }
         ],
         appointments: [
           {
             id: 'apt_1',
-            clientId: 'cli_1',
-            clientName: 'Carlos Eduardo Martins',
-            clientPhone: '48999112233',
+            clientId: 'cli_demo',
+            clientName: 'Cliente Demonstração VIP',
+            clientPhone: '48999990000',
             barberId: 'barb_1',
             serviceId: 'srv_4',
             date: today,
@@ -855,7 +874,7 @@
           {
             id: 'fin_2',
             type: 'income',
-            title: 'Assinatura Clube Imperador - Carlos Eduardo',
+            title: 'Assinatura Clube Imperador - Cliente Demo',
             category: 'Assinatura VIP',
             amount: 189.90,
             commissionAmount: 0,
@@ -1010,15 +1029,13 @@
     }
 
     /*************************************************************************
-     * 4. PORTAL SPLIT-SCREEN (TELA INICIAL DIVIDIDA EM DOIS LADOS)
+     * 4. PORTAL SPLIT-SCREEN + CLIENTE DEMO EM 1 CLIQUE
      *************************************************************************/
     function restoreClientSession() {
       const savedPhone = localStorage.getItem(CLIENT_SESSION_KEY);
       if (savedPhone) {
         const found = DB.clients.find(c => cleanPhone(c.phone) === cleanPhone(savedPhone));
-        if (found) {
-          loggedClient = found;
-        }
+        if (found) loggedClient = found;
       }
     }
 
@@ -1039,12 +1056,37 @@
       document.getElementById('portal-left-logo-box').innerHTML = renderMonochromeLogoHTML("w-full h-full", false);
       document.getElementById('portal-right-watermark').innerHTML = renderMonochromeLogoHTML("w-[420px] h-[420px]", true);
 
-      // Se o cliente já tinha sessão salva no aparelho, preenche o telefone automaticamente
       const phoneInput = document.getElementById('portal-phone-input');
       if (phoneInput && loggedClient && !phoneInput.value) {
         phoneInput.value = formatPhoneDisplay(loggedClient.phone);
         handlePortalPhoneLiveCheck(phoneInput.value);
       }
+    }
+
+    async function loginAsDemoClient() {
+      const demoPhone = '48999990000';
+      let demoClient = DB.clients.find(c => cleanPhone(c.phone) === demoPhone);
+      if (!demoClient) {
+        demoClient = {
+          id: 'cli_demo',
+          name: 'Cliente Demonstração VIP',
+          phone: demoPhone,
+          totalCuts: 18,
+          totalSpent: 1150,
+          lastVisitDate: getTodayISO(),
+          planId: DB.plans[0]?.id || null,
+          planExpiresAt: addDaysISO(getTodayISO(), 25),
+          notes: 'Conta oficial de demonstração.'
+        };
+        DB.clients.unshift(demoClient);
+        await saveStoreDatabase();
+      }
+      loggedClient = demoClient;
+      localStorage.setItem(CLIENT_SESSION_KEY, demoPhone);
+      portalOpen = false;
+      currentView = 'client';
+      renderAll();
+      showToast('Logado como Cliente Demonstração VIP!', 'success');
     }
 
     function handlePortalPhoneLiveCheck(val) {
@@ -1132,7 +1174,7 @@
     }
 
     /*************************************************************************
-     * 5. NAVEGAÇÃO PRINCIPAL & HEADER
+     * 5. NAVEGAÇÃO PRINCIPAL & HEADER/RODAPÉ
      *************************************************************************/
     function isClientVipActive(client) {
       if (!client || !client.planId || !client.planExpiresAt) return false;
@@ -1200,8 +1242,10 @@
       const authLabel = document.getElementById('client-auth-label');
       authLabel.textContent = loggedClient ? `Olá, ${loggedClient.name.split(' ')[0]}` : 'Identificar-se';
 
-      const adminBtnText = document.getElementById('admin-btn-text');
-      adminBtnText.textContent = currentView === 'admin' ? 'Ver Loja' : 'Proprietário';
+      const footerAdminText = document.getElementById('footer-admin-btn-text');
+      if (footerAdminText) {
+        footerAdminText.textContent = currentView === 'admin' ? 'Voltar para Visão do Cliente' : 'Área do Proprietário';
+      }
     }
 
     /*************************************************************************
@@ -1228,9 +1272,13 @@
           <div class="flex items-center gap-2 pt-2">
             ${loggedClient ? `
               <button onclick="logoutClient()" class="px-4 py-3 rounded-xl bg-rose-500/15 text-rose-400 text-xs font-bold">
-                Trocar Número
+                Sair / Trocar
               </button>
-            ` : ''}
+            ` : `
+              <button onclick="closeModal();loginAsDemoClient()" class="px-3.5 py-3 rounded-xl bg-amber-500/15 text-amber-300 border border-amber-500/30 text-xs font-bold">
+                ⚡ Cliente Demo
+              </button>
+            `}
             <button id="btn-confirm-client-auth" class="flex-1 py-3.5 rounded-xl gold-gradient text-black font-extrabold text-sm">
               Confirmar Acesso
             </button>
@@ -1308,7 +1356,7 @@
     }
 
     /*************************************************************************
-     * 7. VITRINE IMERSIVA DO CLIENTE (SERVIÇOS, COMBOS, PLANOS, EQUIPE, PRODUTOS)
+     * 7. VITRINE IMERSIVA DO CLIENTE
      *************************************************************************/
     function setClientTab(tab) {
       currentClientTab = tab;
@@ -1322,7 +1370,7 @@
       lucide.createIcons();
       if (preselectedBarberId) {
         const b = DB.barbers.find(x => x.id === preselectedBarberId);
-        if (b) showToast(`Profissional ${b.name} pré-selecionado! Agora escolha seu corte.`, 'info');
+        if (b) showToast(`Profissional ${b.name} selecionado! Escolha seu corte abaixo.`, 'info');
       }
     }
 
@@ -1333,7 +1381,6 @@
         <span class="inline-flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4 text-amber-500"></i> Expediente: ${s.openTime} às ${s.closeTime}</span>
       `;
 
-      // Cartão de status do cliente
       const welcomeEl = document.getElementById('client-welcome-banner');
       if (loggedClient) {
         const vip = isClientVipActive(loggedClient);
@@ -1355,24 +1402,26 @@
       } else {
         welcomeEl.innerHTML = `
           <div>
-            <p class="text-xs font-bold text-white">Você está no modo visitante</p>
-            <p class="text-[11px] text-zinc-400">Identifique seu telefone para agendar em 1 toque</p>
+            <p class="text-xs font-bold text-white">Modo Visitante</p>
+            <p class="text-[11px] text-zinc-400">Entre com seu telefone ou use o Cliente Demo</p>
           </div>
-          <button onclick="openSplitPortal()" class="shrink-0 px-3.5 py-2 rounded-xl gold-gradient text-black font-extrabold text-xs">
-            Entrar com Telefone
-          </button>
+          <div class="flex items-center gap-2">
+            <button onclick="loginAsDemoClient()" class="shrink-0 px-3 py-2 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 font-bold text-xs">
+              ⚡ Demo
+            </button>
+            <button onclick="openSplitPortal()" class="shrink-0 px-3.5 py-2 rounded-xl gold-gradient text-black font-extrabold text-xs">
+              Entrar
+            </button>
+          </div>
         `;
       }
 
-      // Abas de navegação
       ['services', 'combos', 'plans', 'team', 'products', 'appointments'].forEach(t => {
         const btn = document.getElementById(`ctab-${t}`);
         if (!btn) return;
-        if (t === currentClientTab) {
-          btn.className = 'client-tab-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold gold-gradient text-black shadow-lg transition';
-        } else {
-          btn.className = 'client-tab-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-obsidian-800 text-zinc-300 hover:bg-obsidian-700 border border-zinc-800 transition';
-        }
+        btn.className = t === currentClientTab
+          ? 'client-tab-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold gold-gradient text-black shadow-lg transition'
+          : 'client-tab-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-obsidian-800 text-zinc-300 hover:bg-obsidian-700 border border-zinc-800 transition';
       });
 
       const myConfirmedCount = loggedClient
@@ -1386,7 +1435,6 @@
         badgeEl.classList.add('hidden');
       }
 
-      // Carrossel de Barbeiros no topo
       const activeBarbers = DB.barbers.filter(b => b.active !== false);
       const barbersListEl = document.getElementById('client-barbers-list');
       barbersListEl.innerHTML = activeBarbers.map(b => {
@@ -1413,7 +1461,6 @@
 
       const contentEl = document.getElementById('client-tab-content');
 
-      // ABA 1 e 2: CORTES & COMBOS
       if (currentClientTab === 'services' || currentClientTab === 'combos') {
         const targetCategory = currentClientTab === 'combos' ? 'combo' : 'service';
         const list = DB.services.filter(s => (s.category || 'service') === targetCategory);
@@ -1459,9 +1506,7 @@
             }).join('')}
           </div>
         `;
-      }
-      // ABA 3: PLANOS DE ASSINATURA VIP
-      else if (currentClientTab === 'plans') {
+      } else if (currentClientTab === 'plans') {
         contentEl.innerHTML = `
           <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             ${DB.plans.map(plan => `
@@ -1493,9 +1538,7 @@
             `).join('')}
           </div>
         `;
-      }
-      // ABA 4: PROFISSIONAIS DA BARBEARIA
-      else if (currentClientTab === 'team') {
+      } else if (currentClientTab === 'team') {
         contentEl.innerHTML = `
           <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
             ${activeBarbers.map(b => `
@@ -1507,7 +1550,7 @@
                 <p class="text-xs text-amber-400 font-semibold mt-1">${b.specialty || 'Master Barber'}</p>
                 <div class="w-full my-4 p-3 rounded-2xl bg-obsidian-950 border border-zinc-800/80 text-xs text-zinc-400 space-y-1">
                   <p>Expediente: <strong class="text-zinc-200">${b.openTime} às ${b.closeTime}</strong></p>
-                  ${b.breakStart && b.breakEnd ? `<p>Pausa/Almoço: ${b.breakStart} às ${b.breakEnd}</p>` : ''}
+                  ${b.breakStart && b.breakEnd ? `<p>Intervalo: ${b.breakStart} às ${b.breakEnd}</p>` : ''}
                 </div>
                 <button onclick="preselectedBarberId='${b.id}';setClientTab('services')" class="w-full py-3 rounded-xl gold-gradient text-black font-extrabold text-xs">
                   Agendar com ${b.name.split(' ')[0]}
@@ -1516,9 +1559,7 @@
             `).join('')}
           </div>
         `;
-      }
-      // ABA 5: VITRINE DE PRODUTOS (POMADAS, ÓLEOS, SHAMPOOS)
-      else if (currentClientTab === 'products') {
+      } else if (currentClientTab === 'products') {
         const saleProducts = (DB.products || []).filter(p => p.type === 'sale');
         contentEl.innerHTML = `
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -1547,18 +1588,21 @@
             }).join('')}
           </div>
         `;
-      }
-      // ABA 6: MEUS AGENDAMENTOS
-      else if (currentClientTab === 'appointments') {
+      } else if (currentClientTab === 'appointments') {
         if (!loggedClient) {
           contentEl.innerHTML = `
             <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl p-8 text-center max-w-md mx-auto">
               <i data-lucide="smartphone" class="w-10 h-10 text-amber-500 mx-auto mb-3"></i>
               <h4 class="font-bold text-base text-white">Consulte seus horários em 1 toque</h4>
-              <p class="text-xs text-zinc-400 mt-1 mb-5">Identifique seu WhatsApp para visualizar e gerenciar todos os seus agendamentos.</p>
-              <button onclick="openSplitPortal()" class="px-6 py-3 rounded-xl gold-gradient text-black font-extrabold text-xs">
-                Identificar meu WhatsApp
-              </button>
+              <p class="text-xs text-zinc-400 mt-1 mb-5">Identifique seu WhatsApp ou entre com o Cliente Demo para testar.</p>
+              <div class="flex items-center justify-center gap-2">
+                <button onclick="loginAsDemoClient()" class="px-4 py-3 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 font-bold text-xs">
+                  ⚡ Entrar com Cliente Demo
+                </button>
+                <button onclick="openSplitPortal()" class="px-5 py-3 rounded-xl gold-gradient text-black font-extrabold text-xs">
+                  Digitar Telefone
+                </button>
+              </div>
             </div>
           `;
           return;
@@ -1607,7 +1651,7 @@
     }
 
     /*************************************************************************
-     * 8. MOTOR INTELIGENTE DE AGENDAMENTO (RESPEITA EXPEDIENTE + ALMOÇO + DURAÇÃO)
+     * 8. MOTOR INTELIGENTE DE AGENDAMENTO
      *************************************************************************/
     let bookingState = { serviceId: null, barberId: null, date: getTodayISO(), time: null };
 
@@ -1651,12 +1695,10 @@
         if (isToday && start < currentMinutesNow + 10) continue;
         const end = start + durationMinutes;
 
-        // Bloqueia horário de intervalo/almoço do barbeiro
         if (breakStartMins !== null && breakEndMins !== null && breakEndMins > breakStartMins) {
           if (start < breakEndMins && end > breakStartMins) continue;
         }
 
-        // Bloqueia conflito com agendamentos já existentes
         const hasConflict = dayAppointments.some(apt => {
           const aptStart = timeToMinutes(apt.time);
           const aptEnd = aptStart + Number(apt.duration || 30);
@@ -1856,7 +1898,7 @@
     }
 
     /*************************************************************************
-     * 9. LOGIN DO PROPRIETÁRIO E DESENVOLVEDOR MASTER
+     * 9. LOGIN DO PROPRIETÁRIO E DESENVOLVEDOR MASTER (SEMPRE PELO RODAPÉ)
      *************************************************************************/
     function handleAdminAccessClick() {
       if (!portalOpen && currentView === 'admin') {
@@ -1867,11 +1909,13 @@
         switchView('admin');
         return;
       }
-      openModal('Acesso do Proprietário / Gestão', `
+      const isDemoStore = CURRENT_STORE_ID === 'demo' || CURRENT_STORE_ID === 'barbearia_imperial';
+
+      openModal('Acesso Restrito — Proprietário', `
         <form onsubmit="submitAdminLogin(event)" class="space-y-4">
           <div>
-            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">E-mail</label>
-            <input id="login-admin-email" type="email" required placeholder="admin@barbearia.com"
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">E-mail do Proprietário</label>
+            <input id="login-admin-email" type="email" required placeholder="seu@email.com"
               class="w-full px-4 py-3 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
           </div>
           <div>
@@ -1879,29 +1923,48 @@
             <input id="login-admin-pass" type="password" required placeholder="••••••"
               class="w-full px-4 py-3 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
           </div>
-          <p class="text-[11px] text-zinc-500">
-            Acesso padrão desta loja: <code class="text-zinc-300">${DB.settings.ownerEmail}</code> / Senha: <code class="text-zinc-300">${DB.settings.ownerPass}</code>
-          </p>
+
+          ${isDemoStore ? `
+            <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between gap-2">
+              <div class="text-[11px] text-zinc-300">
+                <span class="font-bold text-amber-400 block">Ambiente de Demonstração</span>
+                Teste o painel de gestão completo da barbearia:
+              </div>
+              <button type="button" onclick="fillDemoOwnerLogin()" class="shrink-0 px-3 py-2 rounded-lg bg-amber-500 text-black font-extrabold text-xs">
+                Entrar Demo
+              </button>
+            </div>
+          ` : ''}
+
           <button type="submit" class="w-full py-3.5 rounded-xl gold-gradient text-black font-extrabold text-sm">
-            Entrar no Painel do Proprietário
+            Acessar Painel de Gestão
           </button>
         </form>
       `);
     }
 
+    function fillDemoOwnerLogin() {
+      document.getElementById('login-admin-email').value = DB.settings.ownerEmail || 'demo@barbearia.com';
+      document.getElementById('login-admin-pass').value = DB.settings.ownerPass || '123';
+      submitAdminLogin(new Event('submit'));
+    }
+
     function submitAdminLogin(e) {
-      e.preventDefault();
+      if (e && e.preventDefault) e.preventDefault();
       const email = document.getElementById('login-admin-email').value.trim().toLowerCase();
       const pass = document.getElementById('login-admin-pass').value.trim();
 
+      // Login Exclusivo do Desenvolvedor Master (Rafael)
       if (email === DEV_MASTER_EMAIL && pass === DEV_MASTER_PASS) {
         adminSession = { role: 'dev', email };
+        currentAdminTab = 'dev';
         closeModal();
         switchView('admin');
-        showToast('Modo Desenvolvedor Master ativado!', 'success');
+        showToast('Acesso Desenvolvedor Master liberado!', 'success');
         return;
       }
 
+      // Login do Proprietário da Barbearia
       if (email === (DB.settings.ownerEmail || '').toLowerCase() && pass === String(DB.settings.ownerPass)) {
         adminSession = { role: 'owner', email };
         if (currentAdminTab === 'dev') currentAdminTab = 'agenda';
@@ -1911,7 +1974,7 @@
         return;
       }
 
-      showToast('Credenciais inválidas.', 'error');
+      showToast('E-mail ou senha inválidos.', 'error');
     }
 
     function logoutAdmin() {
@@ -1920,7 +1983,7 @@
     }
 
     /*************************************************************************
-     * 10. PAINEL DE CONTROLE 360º DO PROPRIETÁRIO
+     * 10. PAINEL DE CONTROLE 360º DO PROPRIETÁRIO E DEV MASTER
      *************************************************************************/
     function setAdminTab(tab) {
       if (tab === 'dev' && (!adminSession || adminSession.role !== 'dev')) return;
@@ -2484,7 +2547,7 @@
       renderAll();
     }
 
-    /* 10.4 PRODUTOS PARA VENDA & INSUMOS DA BARBEARIA (ESTOQUE INTEGRADO AO FINANCEIRO) */
+    /* 10.4 PRODUTOS PARA VENDA & INSUMOS DA BARBEARIA */
     function renderAdminInventory(container) {
       const items = DB.products || [];
       container.innerHTML = `
@@ -2933,7 +2996,7 @@
       renderAll();
     }
 
-    /* 10.7 PERSONALIZAÇÃO DO PORTAL DIVIDIDO (LOGO PRETA/CINZA, IMAGEM DE FUNDO, HORÁRIOS E INTERVALO) */
+    /* 10.7 PERSONALIZAÇÃO DO PORTAL DIVIDIDO */
     function renderAdminSettings(container) {
       const s = DB.settings;
       container.innerHTML = `
@@ -3045,22 +3108,22 @@
       renderAll();
     }
 
-    /* 10.8 ABA EXCLUSIVA DO DESENVOLVEDOR MASTER */
+    /* 10.8 ABA EXCLUSIVA DO DESENVOLVEDOR MASTER (CADASTRO DE BARBEARIAS E PROPRIETÁRIOS) */
     async function renderAdminDevMaster(container) {
       container.innerHTML = `
         <div class="space-y-6">
           <div class="p-5 rounded-2xl bg-purple-950/30 border border-purple-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <span class="text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-0.5 rounded bg-purple-500 text-black">Desenvolvedor Master</span>
-              <h3 class="font-royal font-bold text-xl text-white mt-1">💻 Gerenciador de Bancos Multi-Tenant</h3>
-              <p class="text-xs text-purple-200">Visualize, crie ou edite credenciais de qualquer barbearia no Supabase.</p>
+              <span class="text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-0.5 rounded bg-purple-500 text-black">Acesso Exclusivo Rafael</span>
+              <h3 class="font-royal font-bold text-xl text-white mt-1">💻 Central do Desenvolvedor — Barbearias & Proprietários</h3>
+              <p class="text-xs text-purple-200">Cadastre novas barbearias clientes, defina o login/senha de cada proprietário e copie o link pronto para comercializar.</p>
             </div>
-            <button onclick="openCreateTenantModal()" class="px-4 py-2.5 rounded-xl bg-purple-500 text-black font-extrabold text-xs sm:text-sm">
-              + Nova Barbearia (?loja=)
+            <button onclick="openCreateTenantModal()" class="px-4 py-3 rounded-xl bg-purple-500 hover:bg-purple-400 text-black font-extrabold text-xs sm:text-sm shrink-0 shadow-lg">
+              + Cadastrar Nova Barbearia & Proprietário
             </button>
           </div>
           <div id="dev-tenants-list" class="space-y-3">
-            <div class="p-8 text-center text-zinc-400 text-sm">Carregando bancos do Supabase...</div>
+            <div class="p-8 text-center text-zinc-400 text-sm">Carregando barbearias ativas no Supabase...</div>
           </div>
         </div>
       `;
@@ -3081,13 +3144,23 @@
           return `
             <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
               <div>
-                <span class="px-2.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-mono text-xs font-bold">?loja=${r.store_id}</span>
-                <h4 class="font-bold text-base text-white mt-1">${st.name || r.store_id}</h4>
-                <p class="text-xs text-zinc-400">E-mail: <strong>${st.ownerEmail || '-'}</strong> • Senha: <code>${st.ownerPass || '-'}</code></p>
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-mono text-xs font-bold">?loja=${r.store_id}</span>
+                  <h4 class="font-bold text-base text-white">${st.name || r.store_id}</h4>
+                </div>
+                <p class="text-xs text-zinc-400 mt-1">
+                  Login Proprietário: <strong class="text-zinc-200">${st.ownerEmail || '-'}</strong> •
+                  Senha: <code class="text-amber-400 bg-obsidian-950 px-1.5 py-0.5 rounded">${st.ownerPass || '-'}</code>
+                </p>
               </div>
-              <div class="flex items-center gap-2">
-                <a href="${storeUrl}" class="px-3 py-2 rounded-xl bg-zinc-800 text-amber-400 text-xs font-bold">Abrir</a>
-                <button onclick="openEditTenantCredentialsModal('${r.store_id}', '${(st.name || '').replace(/'/g, '')}', '${(st.ownerEmail || '').replace(/'/g, '')}', '${(st.ownerPass || '').replace(/'/g, '')}')" class="px-3 py-2 rounded-xl bg-purple-500/20 text-purple-300 text-xs font-bold">Editar</button>
+              <div class="flex flex-wrap items-center gap-2">
+                <button onclick="copyStoreLink('${storeUrl}')" class="px-3 py-2 rounded-xl bg-obsidian-950 hover:bg-zinc-800 border border-zinc-700 text-zinc-200 text-xs font-bold">
+                  Copiar Link
+                </button>
+                <a href="${storeUrl}" class="px-3 py-2 rounded-xl bg-zinc-800 text-amber-400 text-xs font-bold">Abrir Loja</a>
+                <button onclick="openEditTenantCredentialsModal('${r.store_id}', '${(st.name || '').replace(/'/g, '')}', '${(st.ownerEmail || '').replace(/'/g, '')}', '${(st.ownerPass || '').replace(/'/g, '')}')" class="px-3 py-2 rounded-xl bg-purple-500/20 text-purple-300 text-xs font-bold">
+                  Editar Proprietário
+                </button>
                 <button onclick="deleteTenantDatabase('${r.store_id}')" class="px-3 py-2 rounded-xl bg-rose-500/15 text-rose-400 text-xs font-bold">Excluir</button>
               </div>
             </div>
@@ -3096,28 +3169,35 @@
       } catch (e) {}
     }
 
+    function copyStoreLink(url) {
+      navigator.clipboard.writeText(url);
+      showToast('Link da barbearia copiado para a área de transferência!', 'success');
+    }
+
     function openCreateTenantModal() {
-      openModal('Criar Nova Barbearia', `
+      openModal('Cadastrar Nova Barbearia & Proprietário', `
         <form onsubmit="createNewTenantSubmit(event)" class="space-y-4">
           <div>
-            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Slug da URL (?loja=)</label>
-            <input id="dev-new-slug" type="text" required placeholder="barbearia_centro" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm font-mono" />
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Código da URL (?loja=codigo)</label>
+            <input id="dev-new-slug" type="text" required placeholder="ex: barbearia_imperial" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm font-mono" />
           </div>
           <div>
-            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Nome da Barbearia</label>
-            <input id="dev-new-name" type="text" required class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Nome Comercial da Barbearia</label>
+            <input id="dev-new-name" type="text" required placeholder="Ex: Imperial Barber Club" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
           </div>
-          <div class="grid grid-cols-2 gap-3">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <div>
-              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">E-mail Proprietário</label>
-              <input id="dev-new-email" type="email" required class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">E-mail de Login do Proprietário</label>
+              <input id="dev-new-email" type="email" required placeholder="dono@barbearia.com" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
             </div>
             <div>
-              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Senha</label>
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Senha do Proprietário</label>
               <input id="dev-new-pass" type="text" required value="123456" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
             </div>
           </div>
-          <button type="submit" class="w-full py-3.5 rounded-xl bg-purple-500 text-black font-extrabold text-sm">Criar Banco</button>
+          <button type="submit" class="w-full py-3.5 rounded-xl bg-purple-500 hover:bg-purple-400 text-black font-extrabold text-sm">
+            Criar Barbearia e Liberar Acesso
+          </button>
         </form>
       `);
     }
@@ -3137,16 +3217,25 @@
       });
       closeModal();
       renderAll();
-      showToast(`Barbearia ?loja=${slug} criada!`, 'success');
+      showToast(`Barbearia ?loja=${slug} cadastrada com sucesso!`, 'success');
     }
 
     function openEditTenantCredentialsModal(storeId, name, email, pass) {
-      openModal(`Editar — ?loja=${storeId}`, `
+      openModal(`Editar Proprietário — ?loja=${storeId}`, `
         <form onsubmit="updateTenantCredentialsSubmit(event, '${storeId}')" class="space-y-4">
-          <input id="dev-edit-name" type="text" required value="${name}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
-          <input id="dev-edit-email" type="email" required value="${email}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
-          <input id="dev-edit-pass" type="text" required value="${pass}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
-          <button type="submit" class="w-full py-3.5 rounded-xl bg-purple-500 text-black font-extrabold text-sm">Salvar</button>
+          <div>
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Nome da Barbearia</label>
+            <input id="dev-edit-name" type="text" required value="${name}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">E-mail do Proprietário</label>
+            <input id="dev-edit-email" type="email" required value="${email}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Senha do Proprietário</label>
+            <input id="dev-edit-pass" type="text" required value="${pass}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+          </div>
+          <button type="submit" class="w-full py-3.5 rounded-xl bg-purple-500 text-black font-extrabold text-sm">Salvar Alterações</button>
         </form>
       `);
     }
@@ -3170,10 +3259,11 @@
       });
       closeModal();
       renderAll();
+      showToast('Dados do proprietário atualizados!', 'success');
     }
 
     async function deleteTenantDatabase(storeId) {
-      if (!confirm(`Excluir banco "${storeId}"?`)) return;
+      if (!confirm(`Excluir permanentemente o banco da barbearia "${storeId}"?`)) return;
       await fetch(`${SUPABASE_URL}/rest/v1/barbers_data?store_id=eq.${encodeURIComponent(storeId)}`, {
         method: 'DELETE',
         headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
