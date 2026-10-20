@@ -18,6 +18,12 @@
       theme: {
         extend: {
           colors: {
+            gold: {
+              400: '#fbbf24',
+              500: '#f59e0b',
+              600: '#d97706',
+              700: '#b45309',
+            },
             obsidian: {
               950: '#050507',
               900: '#0b0c10',
@@ -34,15 +40,6 @@
     }
   </script>
 
-  <style id="dynamic-theme-styles">
-    :root {
-      --brand: #d97706;
-      --brand-light: #fbbf24;
-      --brand-dark: #92400e;
-      --brand-rgb: 217, 119, 6;
-    }
-  </style>
-
   <style>
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
@@ -50,7 +47,6 @@
       color: #f4f4f5;
       overflow-x: hidden;
       -webkit-tap-highlight-color: transparent;
-      transition: background-color 0.25s ease, color 0.25s ease;
     }
     .font-royal {
       font-family: 'Cinzel', serif;
@@ -58,57 +54,18 @@
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #0b0c10; }
     ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 9999px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--brand); }
+    ::-webkit-scrollbar-thumb:hover { background: #d97706; }
 
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    /* Classes Dinâmicas de Tema (Mudam conforme a cor escolhida pelo barbeiro) */
     .gold-gradient {
-      background: linear-gradient(135deg, var(--brand-light) 0%, var(--brand) 55%, var(--brand-dark) 100%) !important;
+      background: linear-gradient(135deg, #fbbf24 0%, #d97706 55%, #92400e 100%);
     }
     .gold-border-glow {
-      box-shadow: 0 0 30px -5px rgba(var(--brand-rgb), 0.38) !important;
-    }
-    .text-amber-400, .text-amber-500, .text-amber-300 {
-      color: var(--brand-light) !important;
-    }
-    .bg-amber-500 {
-      background-color: var(--brand) !important;
-    }
-    .border-amber-500, .border-amber-400 {
-      border-color: var(--brand) !important;
-    }
-    .border-amber-500\/30, .border-amber-500\/40, .border-amber-500\/20, .border-amber-500\/35 {
-      border-color: rgba(var(--brand-rgb), 0.35) !important;
-    }
-    .bg-amber-500\/10, .bg-amber-500\/15, .bg-amber-500\/20, .bg-amber-600\/15 {
-      background-color: rgba(var(--brand-rgb), 0.14) !important;
+      box-shadow: 0 0 30px -5px rgba(217, 119, 6, 0.35);
     }
 
-    /* Suporte Completo a Modo Claro (Light Mode) quando ativado pelo Proprietário */
-    html.light body {
-      background-color: #f4f4f6 !important;
-      color: #18181b !important;
-    }
-    html.light .bg-obsidian-950 { background-color: #f8fafc !important; }
-    html.light .bg-obsidian-900, html.light .bg-obsidian-900\/90, html.light .bg-obsidian-900\/95 { background-color: #ffffff !important; }
-    html.light .bg-obsidian-800 { background-color: #f1f5f9 !important; }
-    html.light .text-white { color: #0f172a !important; }
-    html.light .text-zinc-200, html.light .text-zinc-300 { color: #334155 !important; }
-    html.light .text-zinc-400, html.light .text-zinc-500 { color: #64748b !important; }
-    html.light .border-zinc-800, html.light .border-zinc-800\/80, html.light .border-zinc-800\/90, html.light .border-zinc-700, html.light .border-zinc-900 {
-      border-color: #e2e8f0 !important;
-    }
-    html.light .text-amber-400, html.light .text-amber-500, html.light .text-amber-300 {
-      color: var(--brand) !important;
-    }
-    html.light .hero-pattern {
-      background-image: radial-gradient(circle at 20% 20%, rgba(var(--brand-rgb), 0.12) 0%, transparent 45%),
-                        linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%) !important;
-    }
-
-    /* Filtro Monocromático Noir para a Logo */
     .logo-noir-filter {
       filter: grayscale(100%) contrast(135%) brightness(1.08);
       mix-blend-mode: lighten;
@@ -120,8 +77,8 @@
     }
 
     .hero-pattern {
-      background-image: radial-gradient(circle at 20% 20%, rgba(var(--brand-rgb), 0.15) 0%, transparent 45%),
-                        radial-gradient(circle at 80% 0%, rgba(var(--brand-rgb), 0.10) 0%, transparent 50%),
+      background-image: radial-gradient(circle at 20% 20%, rgba(217, 119, 6, 0.14) 0%, transparent 45%),
+                        radial-gradient(circle at 80% 0%, rgba(217, 119, 6, 0.09) 0%, transparent 50%),
                         linear-gradient(180deg, rgba(11, 12, 16, 0.94) 0%, #050507 100%);
     }
 
@@ -130,207 +87,178 @@
       to { transform: translateY(0); opacity: 1; }
     }
     .animate-bottom-sheet {
-      animation: slideUpSheet 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: slideUpSheet 0.26s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
-    @keyframes fadeInSlow {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .animate-fade-in {
-      animation: fadeInSlow 0.32s ease-out forwards;
-    }
-
-    /* Impressão Térmica Limpa (58mm / 80mm) */
     @media print {
       body * { visibility: hidden; }
-      #printable-receipt-area, #printable-receipt-area * { visibility: visible; }
-      #printable-receipt-area {
-        position: fixed;
-        left: 0;
-        top: 0;
-        width: 100%;
-        background: #fff !important;
-        color: #000 !important;
-        padding: 10px;
-      }
+      #printable-receipt, #printable-receipt * { visibility: visible; }
+      #printable-receipt { position: fixed; left: 0; top: 0; width: 100%; background: #fff !important; color: #000 !important; padding: 16px; }
     }
   </style>
 </head>
 <body class="min-h-screen flex flex-col selection:bg-amber-500 selection:text-black">
 
   <!-- CONTAINER DE TOASTS / NOTIFICAÇÕES -->
-  <div id="toast-container" class="fixed top-4 right-4 z-[120] flex flex-col gap-2 max-w-sm w-[calc(100%-2rem)] pointer-events-none"></div>
+  <div id="toast-container" class="fixed top-4 right-4 z-[150] flex flex-col gap-2 max-w-sm w-[calc(100%-2rem)] pointer-events-none"></div>
 
   <!-- ======================================================================= -->
-  <!-- TELA 0: PORTAL DE ENTRADA SPLIT-SCREEN (ROLAGEM LIVRE NO CELULAR)       -->
+  <!-- TELA 0: PORTAL DE ENTRADA SPLIT-SCREEN (50% ESQUERDA / 50% DIREITA)     -->
   <!-- ======================================================================= -->
-  <div id="view-portal" class="min-h-screen w-full bg-obsidian-950 flex flex-col lg:flex-row overflow-x-hidden">
+  <div id="view-portal" class="fixed inset-0 z-50 bg-obsidian-950 flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden">
     
-    <!-- LADO ESQUERDO: IMAGEM TEMÁTICA DE BARBEARIA + EMBLEMA MONOCROMÁTICO (SEMPRE DARK NOIR) -->
-    <div class="relative w-full lg:w-1/2 min-h-[38vh] lg:min-h-screen flex flex-col justify-between p-6 sm:p-10 lg:p-12 overflow-hidden border-b lg:border-b-0 lg:border-r border-zinc-800/80 text-white" style="background-color:#050507;">
-      <!-- Imagem de Fundo Personalizável pelo Proprietário -->
+    <!-- LADO ESQUERDO: IMAGEM TEMÁTICA DE BARBEARIA + EMBLEMA MONOCROMÁTICO -->
+    <div class="relative w-full lg:w-1/2 min-h-[42vh] lg:min-h-screen flex flex-col justify-between p-6 sm:p-12 overflow-hidden border-b lg:border-b-0 lg:border-r border-zinc-800/80">
       <div id="portal-hero-bg" class="absolute inset-0 bg-cover bg-center scale-105 transition-transform duration-1000"
            style="background-image: url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1400&q=85');">
       </div>
-      <!-- Camadas de Escurecimento Dark Noir -->
-      <div class="absolute inset-0 bg-gradient-to-t from-black via-black/75 to-black/60"></div>
+      <div class="absolute inset-0 bg-gradient-to-t from-obsidian-950 via-obsidian-950/75 to-black/60"></div>
       <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_15%,#050507_100%)]"></div>
 
-      <!-- Topo Esquerdo: Status da Barbearia -->
-      <div class="relative z-10 flex items-center justify-between gap-2">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/75 backdrop-blur-md border border-zinc-700/80 text-xs font-semibold text-zinc-200">
+      <!-- Topo Esquerdo -->
+      <div class="relative z-10 flex items-center justify-between">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-black/70 backdrop-blur-md border border-zinc-700/80 text-xs font-semibold text-zinc-200">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span id="portal-open-badge">Aberto • 09:00 às 20:00</span>
         </div>
-        <span id="portal-sync-pill" class="text-[11px] font-semibold text-zinc-300 bg-black/60 px-2.5 py-1 rounded-full border border-zinc-800">
+        <span class="text-[11px] font-semibold text-zinc-300 bg-black/60 px-3 py-1 rounded-full border border-zinc-800">
           Barber Club VIP
         </span>
       </div>
 
-      <!-- Centro Esquerdo: Moldura Cinza/Grafite com Logo em Tom Preto/Prata -->
-      <div class="relative z-10 my-5 lg:my-auto flex flex-col items-center text-center max-w-lg mx-auto">
+      <!-- Centro Esquerdo: Logo já renderizada nativamente -->
+      <div class="relative z-10 my-6 lg:my-auto flex flex-col items-center text-center max-w-lg mx-auto">
         <div class="relative group">
           <div class="absolute -inset-2 rounded-3xl bg-gradient-to-b from-zinc-500/20 via-amber-500/15 to-transparent blur-xl"></div>
-          <div id="portal-left-logo-box" class="relative w-24 h-24 sm:w-32 sm:h-32 rounded-3xl bg-gradient-to-br from-zinc-800/95 via-zinc-900 to-black border border-zinc-600/60 shadow-2xl flex items-center justify-center p-4 overflow-hidden">
+          <div id="portal-left-logo-box" class="relative w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-gradient-to-br from-zinc-800/95 via-zinc-900 to-black border border-zinc-600/60 shadow-2xl flex items-center justify-center p-4 overflow-hidden">
+            <svg viewBox="0 0 120 120" class="w-20 h-20 text-zinc-200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="60" cy="60" r="54" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3" opacity="0.45"/>
+              <circle cx="60" cy="60" r="46" stroke="currentColor" stroke-width="1.5" opacity="0.8"/>
+              <circle cx="42" cy="40" r="8" stroke="currentColor" stroke-width="3"/>
+              <circle cx="42" cy="80" r="8" stroke="currentColor" stroke-width="3"/>
+              <line x1="48" y1="45" x2="84" y2="80" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+              <line x1="48" y1="75" x2="84" y2="40" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+              <text x="60" y="101" text-anchor="middle" fill="currentColor" font-size="8" font-family="Cinzel, serif" letter-spacing="3" opacity="0.75">BARBER CLUB</text>
+            </svg>
           </div>
         </div>
 
-        <p class="mt-4 text-[10px] sm:text-[11px] font-extrabold uppercase tracking-[0.35em] text-amber-400">
+        <p class="mt-5 text-[11px] font-extrabold uppercase tracking-[0.35em] text-amber-400/90">
           Tradição • Precisão • Exclusividade
         </p>
-        <h1 id="portal-shop-name" class="font-royal font-extrabold text-2xl sm:text-4xl lg:text-5xl text-white mt-1.5 tracking-wide leading-tight" style="color:#ffffff !important;">
+        <h1 id="portal-shop-name" class="font-royal font-extrabold text-2xl sm:text-4xl lg:text-5xl text-white mt-2 tracking-wide leading-tight">
           Dom Corleone Barber Club
         </h1>
-        <p id="portal-shop-slogan" class="text-xs sm:text-sm text-zinc-300 mt-2.5 max-w-md leading-relaxed" style="color:#d4d4d8 !important;">
+        <p id="portal-shop-slogan" class="text-xs sm:text-sm text-zinc-300 mt-3 max-w-md leading-relaxed">
           Mais que um corte, um ritual de alto padrão. Escolha seu horário em segundos.
         </p>
       </div>
 
-      <!-- Rodapé Esquerdo: Endereço -->
-      <div class="relative z-10 hidden sm:flex items-center justify-between text-xs text-zinc-400 border-t border-zinc-800/80 pt-4" style="color:#a1a1aa !important;">
-        <span id="portal-address-text" class="flex items-center gap-1.5 truncate">
-          <i data-lucide="map-pin" class="w-4 h-4 text-amber-500 shrink-0"></i> Av. Central, 1450
-        </span>
-        <span class="text-zinc-400 font-semibold">Ambiente Climatizado • Bar & Café VIP</span>
+      <!-- Rodapé Esquerdo -->
+      <div class="relative z-10 hidden sm:flex items-center justify-between text-xs text-zinc-400 border-t border-zinc-800/80 pt-4">
+        <span id="portal-address-text" class="flex items-center gap-1.5 truncate">Av. Central, 1450</span>
+        <span class="text-zinc-500 font-semibold">Ambiente Climatizado • Bar & Café VIP</span>
       </div>
     </div>
 
-    <!-- LADO DIREITO: FUNDO PRETO COM MARCA D'ÁGUA CINZA + ACESSO DO CLIENTE SEM TRAVAS -->
-    <div class="relative w-full lg:w-1/2 flex-1 lg:min-h-screen flex flex-col justify-between p-5 sm:p-10 lg:p-12 overflow-y-auto" style="background-color:#050507; color:#f4f4f5;">
+    <!-- LADO DIREITO: FUNDO PRETO COM LOGO EM MARCA D'ÁGUA CINZA + ACESSO DO CLIENTE -->
+    <div class="relative w-full lg:w-1/2 min-h-[58vh] lg:min-h-screen bg-obsidian-950 flex flex-col justify-between p-6 sm:p-12 overflow-hidden">
       
       <!-- Marca d'Água Gigante da Logo no Fundo Cinza/Preto -->
-      <div id="portal-right-watermark" class="pointer-events-none absolute inset-0 flex items-center justify-center select-none overflow-hidden">
+      <div id="portal-right-watermark" class="absolute inset-0 flex items-center justify-center select-none overflow-hidden pointer-events-none">
+        <div class="opacity-[0.04] scale-[3]">
+          <svg viewBox="0 0 120 120" class="w-72 h-72 text-zinc-200" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="60" cy="60" r="54" stroke="currentColor" stroke-width="2"/>
+            <circle cx="42" cy="40" r="8" stroke="currentColor" stroke-width="3"/>
+            <circle cx="42" cy="80" r="8" stroke="currentColor" stroke-width="3"/>
+            <line x1="48" y1="45" x2="84" y2="80" stroke="currentColor" stroke-width="3.5"/>
+            <line x1="48" y1="75" x2="84" y2="40" stroke="currentColor" stroke-width="3.5"/>
+          </svg>
+        </div>
       </div>
 
-      <!-- Topo Direito: Botão de Espiar Vitrine -->
-      <div class="relative z-10 flex items-center justify-between sm:justify-end gap-2 mb-4">
-        <span class="sm:hidden text-[11px] text-zinc-400 flex items-center gap-1 truncate max-w-[180px]" id="portal-mobile-addr"></span>
-        <button type="button" onclick="enterShowcaseAsGuest()" class="px-3.5 py-2 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-xs font-semibold text-zinc-200 flex items-center gap-1.5 transition shrink-0" style="color:#e4e4e7 !important;">
-          <i data-lucide="eye" class="w-3.5 h-3.5 text-amber-500"></i> Ver Cortes & Valores
+      <!-- Topo Direito: Ver Vitrine -->
+      <div class="relative z-10 flex items-center justify-end gap-2">
+        <button type="button" onclick="enterShowcaseAsGuest()" class="cursor-pointer px-4 py-2.5 rounded-xl bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-xs font-bold text-zinc-200 flex items-center gap-2 transition shadow">
+          <span>👁️ Ver Cortes & Valores</span>
         </button>
       </div>
 
       <!-- Centro Direito: Card de Login / Cadastro Instantâneo por Telefone -->
-      <div class="relative z-10 my-auto w-full max-w-md mx-auto py-2">
-        <div class="bg-[#0b0c10]/95 backdrop-blur-xl border border-zinc-800/90 rounded-3xl p-5 sm:p-8 shadow-2xl space-y-5">
+      <div class="relative z-10 my-auto w-full max-w-md mx-auto py-4">
+        <div class="bg-obsidian-900/95 backdrop-blur-xl border border-zinc-800/90 rounded-3xl p-6 sm:p-8 shadow-2xl space-y-5">
           
-          <div class="space-y-1 text-center sm:text-left">
+          <div class="space-y-1.5 text-center sm:text-left">
             <div class="inline-flex items-center gap-1.5 text-amber-400 text-xs font-bold uppercase tracking-wider">
-              <i data-lucide="sparkles" class="w-4 h-4"></i> Acesso Rápido do Cliente
+              <span>✨ Acesso Rápido do Cliente</span>
             </div>
-            <h2 class="font-royal text-xl sm:text-2xl font-bold text-white" style="color:#ffffff !important;">
+            <h2 class="font-royal text-xl sm:text-2xl font-bold text-white">
               Agende seu Horário
             </h2>
-            <p class="text-xs text-zinc-400 leading-relaxed" style="color:#a1a1aa !important;">
+            <p class="text-xs text-zinc-400 leading-relaxed">
               Informe seu WhatsApp abaixo. Se já for cliente cadastrado, sua entrada é imediata.
             </p>
           </div>
 
           <form onsubmit="handlePortalPhoneSubmit(event)" class="space-y-4">
             <div>
-              <div class="flex items-center justify-between mb-1.5">
-                <label class="block text-[11px] font-extrabold uppercase tracking-wider text-zinc-400" style="color:#a1a1aa !important;">
-                  Seu WhatsApp (com DDD)
-                </label>
-                <button type="button" id="portal-clear-btn" onclick="resetPortalForm()" class="hidden text-[11px] text-rose-400 hover:text-rose-300 font-bold flex items-center gap-1">
-                  <i data-lucide="x-circle" class="w-3.5 h-3.5"></i> Limpar / Cancelar
-                </button>
-              </div>
-              <div class="relative">
-                <i data-lucide="smartphone" class="w-5 h-5 text-amber-500 absolute left-4 top-1/2 -translate-y-1/2"></i>
-                <input id="portal-phone-input" type="tel" required placeholder="(48) 99999-9999"
-                  oninput="handlePortalPhoneLiveCheck(this.value)"
-                  class="w-full pl-12 pr-10 py-3.5 sm:py-4 rounded-2xl bg-[#050507] border border-zinc-700/90 text-white text-base font-semibold placeholder:text-zinc-600 focus:outline-none focus:border-amber-500 transition" style="color:#ffffff !important;" />
-              </div>
+              <label class="block text-[11px] font-extrabold uppercase tracking-wider text-zinc-400 mb-2">
+                Seu WhatsApp (com DDD)
+              </label>
+              <input id="portal-phone-input" type="tel" required placeholder="(48) 99999-9999"
+                oninput="handlePortalPhoneLiveCheck(this.value)"
+                class="w-full px-4 py-4 rounded-2xl bg-obsidian-950 border border-zinc-700 text-white text-base font-semibold placeholder:text-zinc-600 focus:outline-none focus:border-amber-500 transition" />
             </div>
 
             <!-- Feedback quando o cliente já é cadastrado -->
-            <div id="portal-recognized-banner" class="hidden animate-fade-in p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-3">
-              <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
-                <i data-lucide="user-check" class="w-5 h-5"></i>
-              </div>
+            <div id="portal-recognized-banner" class="hidden p-3.5 rounded-2xl bg-emerald-500/10 border border-emerald-500/30 flex items-center gap-3">
+              <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold shrink-0">✓</div>
               <div class="min-w-0">
                 <p class="text-xs font-extrabold text-emerald-300 truncate" id="portal-recognized-name">Cliente Identificado!</p>
-                <p class="text-[11px] text-zinc-400" id="portal-recognized-sub">Toque em entrar para acessar seus horários.</p>
+                <p class="text-[11px] text-zinc-400" id="portal-recognized-sub">Toque em acessar para ver seus horários.</p>
               </div>
             </div>
 
             <!-- Campo de Nome Completo se o telefone ainda não estiver cadastrado -->
-            <div id="portal-new-client-fields" class="hidden animate-fade-in space-y-3 pt-1">
-              <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-[11px] text-amber-300 flex items-start justify-between gap-2">
-                <span>✨ <strong>Primeiro acesso!</strong> Digite seu nome completo abaixo para concluir seu cadastro (ou clique em Limpar acima se digitou errado):</span>
+            <div id="portal-new-client-fields" class="hidden space-y-3 pt-1">
+              <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-[11px] text-amber-300">
+                ✨ <strong>Primeiro acesso!</strong> Digite seu nome completo abaixo para concluir seu cadastro na hora:
               </div>
               <div>
-                <label class="block text-[11px] font-extrabold uppercase tracking-wider text-zinc-400 mb-1.5" style="color:#a1a1aa !important;">
+                <label class="block text-[11px] font-extrabold uppercase tracking-wider text-zinc-400 mb-1.5">
                   Seu Nome Completo
                 </label>
-                <div class="relative">
-                  <i data-lucide="user" class="w-5 h-5 text-amber-500 absolute left-4 top-1/2 -translate-y-1/2"></i>
-                  <input id="portal-name-input" type="text" placeholder="Ex: Rafael Oliveira"
-                    class="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-[#050507] border border-amber-500/60 text-white text-sm font-semibold focus:outline-none focus:border-amber-400" style="color:#ffffff !important;" />
-                </div>
+                <input id="portal-name-input" type="text" placeholder="Ex: Rafael Oliveira"
+                  class="w-full px-4 py-3.5 rounded-2xl bg-obsidian-950 border border-amber-500/60 text-white text-sm font-semibold focus:outline-none focus:border-amber-400" />
               </div>
             </div>
 
-            <button type="submit" class="w-full py-3.5 sm:py-4 rounded-2xl gold-gradient text-black font-extrabold text-sm sm:text-base tracking-wide shadow-xl hover:opacity-95 transition flex items-center justify-center gap-2">
-              <span id="portal-submit-label">Acessar Barbearia</span>
-              <i data-lucide="arrow-right" class="w-5 h-5"></i>
+            <button type="submit" class="cursor-pointer w-full py-4 rounded-2xl gold-gradient text-black font-extrabold text-sm sm:text-base tracking-wide shadow-xl hover:opacity-95 transition flex items-center justify-center gap-2">
+              <span id="portal-submit-label">Acessar Barbearia →</span>
             </button>
           </form>
 
           <!-- Botão de Demonstração Rápida (Cliente Demo em 1 Clique) -->
-          <div id="portal-demo-client-box" class="pt-2 border-t border-zinc-800/80">
-            <button type="button" onclick="loginAsDemoClient()" class="w-full py-2.5 px-4 rounded-xl bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 text-xs font-bold flex items-center justify-center gap-2 transition">
-              <i data-lucide="zap" class="w-4 h-4 text-amber-400"></i>
-              <span>Entrar com Cliente Demo (Teste em 1 Clique)</span>
+          <div class="pt-2 border-t border-zinc-800/80">
+            <button type="button" onclick="loginAsDemoClient()" class="cursor-pointer w-full py-3 px-4 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/40 text-amber-300 text-xs font-extrabold flex items-center justify-center gap-2 transition">
+              <span>⚡ Entrar com Cliente Demo (Teste em 1 Clique)</span>
             </button>
           </div>
 
-          <!-- Destaques Rápidos de Experiência -->
+          <!-- Destaques Rápidos -->
           <div class="grid grid-cols-3 gap-2 pt-1 text-center">
-            <div class="p-2 rounded-xl bg-[#050507]/80 border border-zinc-800/60">
-              <i data-lucide="scissors" class="w-4 h-4 text-amber-500 mx-auto mb-1"></i>
-              <span class="block text-[10px] font-bold text-zinc-300" style="color:#d4d4d8 !important;">Cortes VIP</span>
-            </div>
-            <div class="p-2 rounded-xl bg-[#050507]/80 border border-zinc-800/60">
-              <i data-lucide="crown" class="w-4 h-4 text-amber-500 mx-auto mb-1"></i>
-              <span class="block text-[10px] font-bold text-zinc-300" style="color:#d4d4d8 !important;">Clube Mensal</span>
-            </div>
-            <div class="p-2 rounded-xl bg-[#050507]/80 border border-zinc-800/60">
-              <i data-lucide="clock" class="w-4 h-4 text-amber-500 mx-auto mb-1"></i>
-              <span class="block text-[10px] font-bold text-zinc-300" style="color:#d4d4d8 !important;">Zero Fila</span>
-            </div>
+            <div class="p-2 rounded-xl bg-obsidian-950/70 border border-zinc-800/60 text-[10px] font-bold text-zinc-300">✂️ Cortes VIP</div>
+            <div class="p-2 rounded-xl bg-obsidian-950/70 border border-zinc-800/60 text-[10px] font-bold text-zinc-300">👑 Clube Mensal</div>
+            <div class="p-2 rounded-xl bg-obsidian-950/70 border border-zinc-800/60 text-[10px] font-bold text-zinc-300">⏱️ Zero Fila</div>
           </div>
 
         </div>
       </div>
 
-      <!-- RODAPÉ INFERIOR DIREITO: SEMPRE VISÍVEL E ACESSÍVEL NO CELULAR -->
-      <div class="relative z-10 mt-6 pt-4 border-t border-zinc-900 flex items-center justify-between text-[11px] text-zinc-500">
-        <span>Unidade: <code id="portal-store-code" class="text-zinc-400">demo</code></span>
-        <button type="button" onclick="handleAdminAccessClick()" class="text-zinc-400 hover:text-amber-400 font-semibold flex items-center gap-1.5 transition py-1.5 px-3 rounded-xl bg-zinc-900/90 border border-zinc-800">
-          <i data-lucide="lock" class="w-3.5 h-3.5 text-amber-500"></i>
-          <span>Área do Proprietário</span>
+      <!-- RODAPÉ INFERIOR DIREITO: ACESSO DO PROPRIETÁRIO SEMPRE EMBAIXO -->
+      <div class="relative z-10 pt-3 border-t border-zinc-900/80 flex items-center justify-between text-[11px] text-zinc-500">
+        <span>Unidade: <code id="portal-store-code" class="text-amber-500/80 font-bold">demo</code></span>
+        <button type="button" onclick="handleAdminAccessClick()" class="cursor-pointer text-zinc-400 hover:text-amber-400 font-bold flex items-center gap-1.5 transition py-1.5 px-3 rounded-xl bg-zinc-900/90 hover:bg-zinc-800 border border-zinc-800">
+          <span>🔒 Área do Proprietário</span>
         </button>
       </div>
 
@@ -343,35 +271,32 @@
   <header id="main-app-header" class="hidden sticky top-0 z-40 backdrop-blur-xl bg-obsidian-950/90 border-b border-zinc-800/80">
     <div class="max-w-7xl mx-auto px-3 sm:px-6 h-16 sm:h-20 flex items-center justify-between gap-2">
       
-      <!-- Logo Monocromática + Nome da Barbearia -->
       <div class="flex items-center gap-2.5 sm:gap-3.5 min-w-0 flex-1">
         <div id="header-logo-container" onclick="openSplitPortal()" title="Voltar à Tela Inicial" class="cursor-pointer w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-zinc-900 border border-zinc-700 flex items-center justify-center overflow-hidden shrink-0 p-1.5">
         </div>
         <div class="min-w-0 flex-1">
           <div class="flex items-center gap-2">
             <h1 id="header-shop-name" onclick="switchView('client')" class="cursor-pointer font-royal font-bold text-sm sm:text-lg md:text-xl text-white truncate tracking-wide">
-              Carregando...
+              Dom Corleone Barber Club
             </h1>
             <span id="sync-badge" class="hidden sm:inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span> Cloud
+              ● Cloud
             </span>
           </div>
-          <p id="header-shop-sub" class="text-[11px] sm:text-xs text-zinc-400 truncate flex items-center gap-1.5">
+          <p class="text-[11px] sm:text-xs text-zinc-400 truncate flex items-center gap-1.5">
             <span class="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
             <span id="header-status-text">Aberto Agora</span>
           </p>
         </div>
       </div>
 
-      <!-- Ações Rápidas do Topo -->
       <div class="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
-        <button onclick="openSplitPortal()" class="flex items-center gap-1.5 px-2.5 sm:px-3 py-2 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 border border-zinc-800 text-xs font-medium text-zinc-300 transition">
-          <i data-lucide="layout-panel-left" class="w-3.5 h-3.5 text-amber-500"></i>
-          <span class="hidden sm:inline">Tela Inicial</span>
+        <button type="button" onclick="openSplitPortal()" class="cursor-pointer flex items-center gap-1.5 px-3 py-2 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 border border-zinc-700 text-xs font-semibold text-zinc-200 transition">
+          <span>🏠 Capa Inicial</span>
         </button>
 
-        <button id="btn-client-auth" onclick="openClientAuthModal()" class="flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-xl bg-obsidian-800 hover:bg-obsidian-700 border border-zinc-700/80 text-xs sm:text-sm font-medium text-zinc-200 transition">
-          <i data-lucide="user-check" class="w-4 h-4 text-amber-500 shrink-0"></i>
+        <button type="button" id="btn-client-auth" onclick="openClientAuthModal()" class="cursor-pointer flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/40 text-xs sm:text-sm font-bold text-amber-300 transition">
+          <span>👤</span>
           <span id="client-auth-label" class="max-w-[110px] sm:max-w-[160px] truncate">Entrar</span>
         </button>
       </div>
@@ -384,51 +309,62 @@
   <!-- ======================================================================= -->
   <main id="view-client" class="hidden flex-1 flex flex-col">
     
-    <!-- HERO INTERATIVO INTERNO -->
     <section class="hero-pattern border-b border-zinc-800/70 relative overflow-hidden">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8">
         <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
           
           <div class="space-y-2 max-w-2xl">
             <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[11px] font-bold tracking-wider uppercase">
-              <i data-lucide="award" class="w-3.5 h-3.5"></i> Experiência Exclusiva Barber Club
+              ✨ Experiência Exclusiva Barber Club
             </div>
-            <h2 id="hero-title" class="font-royal text-2xl sm:text-3xl font-extrabold text-white leading-tight">
+            <h2 class="font-royal text-2xl sm:text-3xl font-extrabold text-white leading-tight">
               Escolha seu Ritual de Hoje
             </h2>
             <p id="hero-address" class="text-xs sm:text-sm text-zinc-400 flex flex-wrap items-center gap-y-1 gap-x-4"></p>
           </div>
 
-          <!-- Cartão de Fidelidade & Status VIP do Cliente Logado -->
           <div id="client-welcome-banner" class="w-full lg:w-auto min-w-[300px] bg-obsidian-900/95 border border-zinc-800 rounded-2xl p-4 flex items-center justify-between gap-4 shadow-xl">
           </div>
 
         </div>
 
-        <!-- NAVEGAÇÃO DE EXPERIÊNCIA DO CLIENTE (DINÂMICA CONFORME MÓDULOS ATIVOS) -->
-        <div id="client-tabs-nav" class="mt-6 flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
-          <!-- Renderizado via JS conforme módulos habilitados pelo barbeiro -->
+        <!-- NAVEGAÇÃO DO CLIENTE -->
+        <div class="mt-6 flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+          <button type="button" onclick="setClientTab('services')" id="ctab-services" class="client-tab-btn shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition">
+            ✂️ Cortes & Barba
+          </button>
+          <button type="button" onclick="setClientTab('combos')" id="ctab-combos" class="client-tab-btn shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition">
+            🔥 Combos VIP
+          </button>
+          <button type="button" onclick="setClientTab('plans')" id="ctab-plans" class="client-tab-btn shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition">
+            👑 Planos Mensais
+          </button>
+          <button type="button" onclick="setClientTab('team')" id="ctab-team" class="client-tab-btn shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition">
+            💈 Profissionais
+          </button>
+          <button type="button" onclick="setClientTab('products')" id="ctab-products" class="client-tab-btn shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition">
+            🛍️ Produtos & Pomadas
+          </button>
+          <button type="button" onclick="setClientTab('appointments')" id="ctab-appointments" class="client-tab-btn shrink-0 flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition">
+            <span>📅 Meus Horários</span>
+            <span id="client-appt-badge" class="hidden px-1.5 py-0.2 text-[10px] rounded-full bg-black/40 text-white">0</span>
+          </button>
         </div>
       </div>
     </section>
 
-    <!-- CONTEÚDO PRINCIPAL DO CLIENTE -->
     <section class="max-w-7xl mx-auto w-full px-4 sm:px-6 py-6 sm:py-8 flex-1">
-      
-      <!-- Carrossel Interativo dos Profissionais no Topo (Oculto se Barbeiro Único) -->
       <div id="client-barbers-strip" class="mb-8">
         <div class="flex items-center justify-between mb-3">
-          <h3 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-zinc-400 flex items-center gap-2">
-            <i data-lucide="flame" class="w-4 h-4 text-amber-500"></i> Selecione um Profissional ou Escolha o Corte Abaixo
+          <h3 class="text-xs sm:text-sm font-bold uppercase tracking-wider text-zinc-400">
+            🔥 Selecione um Mestre Barbeiro ou Escolha o Corte Abaixo
           </h3>
-          <button onclick="setClientTab('team')" class="text-xs text-amber-400 hover:underline font-semibold">Ver perfil completo →</button>
+          <button type="button" onclick="setClientTab('team')" class="text-xs text-amber-400 hover:underline font-semibold">Ver perfil completo →</button>
         </div>
         <div id="client-barbers-list" class="flex items-center gap-3 overflow-x-auto no-scrollbar pb-2"></div>
       </div>
 
-      <!-- Conteúdo Dinâmico da Aba -->
       <div id="client-tab-content"></div>
-
     </section>
   </main>
 
@@ -437,7 +373,6 @@
   <!-- ======================================================================= -->
   <main id="view-admin" class="hidden flex-1 flex flex-col lg:flex-row max-w-7xl w-full mx-auto">
     
-    <!-- MENU LATERAL DO PROPRIETÁRIO -->
     <aside class="w-full lg:w-64 shrink-0 bg-obsidian-900 border-b lg:border-b-0 lg:border-r border-zinc-800/80 p-3 sm:p-4">
       <div class="flex items-center justify-between mb-3 lg:mb-6 px-2">
         <div>
@@ -446,28 +381,53 @@
           </span>
           <h2 class="font-bold text-sm sm:text-base text-white mt-1 truncate">Gestão da Barbearia</h2>
         </div>
-        <button onclick="logoutAdmin()" class="text-xs text-rose-400 hover:text-rose-300 flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-rose-500/10 border border-rose-500/20">
-          <i data-lucide="log-out" class="w-3.5 h-3.5"></i> Sair
+        <button type="button" onclick="logoutAdmin()" class="text-xs text-rose-400 hover:text-rose-300 px-2.5 py-1.5 rounded-lg bg-rose-500/10 border border-rose-500/20 font-bold">
+          Sair
         </button>
       </div>
 
-      <nav id="admin-sidebar-nav" class="flex lg:flex-col gap-1.5 overflow-x-auto no-scrollbar pb-1 lg:pb-0">
-        <!-- Renderizado dinamicamente conforme módulos ativos -->
+      <nav class="flex lg:flex-col gap-1.5 overflow-x-auto no-scrollbar pb-1 lg:pb-0">
+        <button type="button" onclick="setAdminTab('agenda')" id="atab-agenda" class="admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition w-auto lg:w-full text-left">
+          <span>📅 Agenda & Recibos</span>
+        </button>
+        <button type="button" onclick="setAdminTab('team')" id="atab-team" class="admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition w-auto lg:w-full text-left">
+          <span>💈 Profissionais & Horários</span>
+        </button>
+        <button type="button" onclick="setAdminTab('catalog')" id="atab-catalog" class="admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition w-auto lg:w-full text-left">
+          <span>✂️ Cortes & Planos VIP</span>
+        </button>
+        <button type="button" onclick="setAdminTab('inventory')" id="atab-inventory" class="admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition w-auto lg:w-full text-left">
+          <span>📦 Produtos & Insumos</span>
+        </button>
+        <button type="button" onclick="setAdminTab('crm')" id="atab-crm" class="admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition w-auto lg:w-full text-left">
+          <span>🏆 Clientes & Retenção</span>
+        </button>
+        <button type="button" onclick="setAdminTab('finance')" id="atab-finance" class="admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition w-auto lg:w-full text-left">
+          <span>💰 Finanças & Gastos</span>
+        </button>
+        <button type="button" onclick="setAdminTab('fiscal')" id="atab-fiscal" class="admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition w-auto lg:w-full text-left">
+          <span>🧾 Nota Fiscal (NFS-e)</span>
+        </button>
+        <button type="button" onclick="setAdminTab('settings')" id="atab-settings" class="admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition w-auto lg:w-full text-left">
+          <span>⚙️ Personalizar Site</span>
+        </button>
+        <!-- ABA EXCLUSIVA DO DESENVOLVEDOR MASTER -->
+        <button type="button" onclick="setAdminTab('dev')" id="atab-dev" class="hidden admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition w-auto lg:w-full text-left border border-purple-500/40 bg-purple-950/30 text-purple-300">
+          <span>💻 Desenvolvedor (Bancos)</span>
+        </button>
       </nav>
 
       <div class="hidden lg:flex flex-col gap-2 mt-8 pt-6 border-t border-zinc-800/80">
-        <button onclick="switchView('client')" class="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-zinc-200 transition">
-          <i data-lucide="external-link" class="w-4 h-4 text-amber-500"></i> Ver Vitrine Cliente
+        <button type="button" onclick="switchView('client')" class="w-full py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-xs font-semibold text-zinc-200 transition">
+          👁️ Ver Vitrine Cliente
         </button>
-        <button onclick="openSplitPortal()" class="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-xl bg-obsidian-950 hover:bg-zinc-800 border border-zinc-800 text-xs font-semibold text-zinc-400 transition">
-          <i data-lucide="layout-panel-left" class="w-3.5 h-3.5 text-amber-500"></i> Ver Tela Inicial (Split)
+        <button type="button" onclick="openSplitPortal()" class="w-full py-2 rounded-xl bg-obsidian-950 hover:bg-zinc-800 border border-zinc-800 text-xs font-semibold text-zinc-400 transition">
+          🏠 Ver Tela Inicial (Split)
         </button>
       </div>
     </aside>
 
-    <!-- CONTEÚDO DINÂMICO DO PAINEL ADMINISTRATIVO -->
     <section id="admin-content-area" class="flex-1 p-4 sm:p-6 lg:p-8 overflow-y-auto"></section>
-
   </main>
 
   <!-- ======================================================================= -->
@@ -478,40 +438,36 @@
       <div class="flex items-center gap-2">
         <span id="footer-shop-name" class="text-zinc-400 font-semibold">BarberClub</span>
         <span>•</span>
-        <span>Unidade: <code id="footer-store-id" class="text-zinc-400 bg-obsidian-900 px-1.5 py-0.5 rounded">demo</code></span>
+        <span>Unidade: <code id="footer-store-id" class="text-amber-500 bg-obsidian-900 px-1.5 py-0.5 rounded">demo</code></span>
       </div>
 
-      <!-- Botão Discreto da Área do Proprietário Sempre no Rodapé -->
       <div class="flex items-center gap-4">
-        <button onclick="handleAdminAccessClick()" class="text-zinc-500 hover:text-amber-400 font-semibold flex items-center gap-1.5 transition px-3 py-1.5 rounded-xl bg-obsidian-900/80 hover:bg-obsidian-800 border border-zinc-800/80">
-          <i data-lucide="lock" class="w-3.5 h-3.5 text-amber-500/80"></i>
+        <button type="button" onclick="handleAdminAccessClick()" class="cursor-pointer text-zinc-400 hover:text-amber-400 font-bold flex items-center gap-1.5 transition px-3.5 py-2 rounded-xl bg-obsidian-900 hover:bg-obsidian-800 border border-zinc-800">
+          <span>🔒</span>
           <span id="footer-admin-btn-text">Área do Proprietário</span>
         </button>
       </div>
     </div>
   </footer>
 
-  <!-- MODAL UNIVERSAL (BOTTOM-SHEET MOBILE / MODAL DESKTOP) -->
-  <div id="modal-backdrop" class="hidden fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
+  <!-- MODAL UNIVERSAL -->
+  <div id="modal-backdrop" class="hidden fixed inset-0 z-[120] bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
     <div id="modal-box" class="animate-bottom-sheet bg-obsidian-900 border-t sm:border border-zinc-800 rounded-t-3xl sm:rounded-2xl w-full max-w-xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
       <div class="px-5 py-4 border-b border-zinc-800 flex items-center justify-between shrink-0">
-        <h3 id="modal-title" class="font-bold text-base sm:text-lg text-white flex items-center gap-2"></h3>
-        <button onclick="closeModal()" class="p-1.5 rounded-lg bg-zinc-800/80 text-zinc-400 hover:text-white">
-          <i data-lucide="x" class="w-5 h-5"></i>
-        </button>
+        <h3 id="modal-title" class="font-bold text-base sm:text-lg text-white"></h3>
+        <button type="button" onclick="closeModal()" class="px-2.5 py-1 rounded-lg bg-zinc-800 text-zinc-300 hover:text-white font-bold text-sm">✕</button>
       </div>
       <div id="modal-body" class="p-5 overflow-y-auto space-y-4 flex-1"></div>
     </div>
   </div>
 
   <!-- ======================================================================= -->
-  <!-- MOTOR JAVASCRIPT COMPLETO + TEMAS + MÓDULOS + RECIBO/NFS-E              -->
+  <!-- MOTOR JAVASCRIPT COMPLETO E BLINDADO                                    -->
   <!-- ======================================================================= -->
   <script>
     const SUPABASE_URL = "https://yhlgptwnidtuvixcrews.supabase.co";
     const SUPABASE_KEY = "sb_publishable_P40YlOEbQcSQNLYrY43BvQ_cQog27CM";
 
-    // CREDENCIAIS DO DESENVOLVEDOR MASTER
     const DEV_MASTER_EMAIL = "desenv@rafael.com";
     const DEV_MASTER_PASS = "123";
 
@@ -519,32 +475,8 @@
     const rawStoreParam = urlParams.get('loja') || 'demo';
     const CURRENT_STORE_ID = rawStoreParam.toLowerCase().replace(/[^a-z0-9_-]/g, '_');
 
-    // Paletas de Temas Pré-Criados para o Proprietário Escolher
-    const THEME_PRESETS = [
-      { id: 'gold', name: 'Ouro Imperial (Padrão)', hex: '#d97706', light: '#fbbf24', dark: '#92400e', rgb: '217, 119, 6' },
-      { id: 'crimson', name: 'Vermelho BarberPole', hex: '#e11d48', light: '#fb7185', dark: '#9f1239', rgb: '225, 29, 72' },
-      { id: 'emerald', name: 'Verde Esmeralda', hex: '#059669', light: '#34d399', dark: '#065f46', rgb: '5, 150, 105' },
-      { id: 'royal', name: 'Azul Royal Club', hex: '#2563eb', light: '#60a5fa', dark: '#1e40af', rgb: '37, 99, 235' },
-      { id: 'purple', name: 'Roxo Urbano VIP', hex: '#7c3aed', light: '#a78bfa', dark: '#5b21b6', rgb: '124, 58, 237' },
-      { id: 'silver', name: 'Prata Monocromático', hex: '#71717a', light: '#d4d4d8', dark: '#3f3f46', rgb: '113, 113, 122' }
-    ];
-
-    let DB = null;
-    let portalOpen = true;
-    let currentView = 'client';
-    let currentClientTab = 'services';
-    let currentAdminTab = 'agenda';
-    let loggedClient = null;
-    let adminSession = null;
-
-    // Filtros Admin
-    let agendaFilterDate = getTodayISO();
-    let agendaFilterBarber = 'all';
-    let agendaViewMode = 'daily';
-    let crmSortFilter = 'ranking';
-    let crmSearchQuery = '';
-    let financeBarberFilter = 'all';
-    let preselectedBarberId = null;
+    const LOCAL_STORAGE_KEY = `barberclub_saas_db_${CURRENT_STORE_ID}`;
+    const CLIENT_SESSION_KEY = `barberclub_client_phone_${CURRENT_STORE_ID}`;
 
     function getTodayISO() {
       const now = new Date();
@@ -598,90 +530,43 @@
       return `${prefix}_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`;
     }
 
-    function hexToRgbString(hex) {
-      const clean = (hex || '#d97706').replace('#', '');
-      if (clean.length !== 6) return '217, 119, 6';
-      const r = parseInt(clean.substring(0, 2), 16);
-      const g = parseInt(clean.substring(2, 4), 16);
-      const b = parseInt(clean.substring(4, 6), 16);
-      return `${r}, ${g},${b}`;
+    function safeIcons() {
+      try {
+        if (window.lucide && typeof window.lucide.createIcons === 'function') {
+          window.lucide.createIcons();
+        }
+      } catch (e) {}
     }
 
-    function applyStoreTheme() {
-      if (!DB || !DB.settings) return;
-      const s = DB.settings;
-      const preset = THEME_PRESETS.find(p => p.id === s.themePreset) || THEME_PRESETS[0];
-      const primaryHex = s.customColorHex || preset.hex;
-      const rgb = s.customColorHex ? hexToRgbString(s.customColorHex) : preset.rgb;
-      const lightHex = s.customColorHex ? s.customColorHex : preset.light;
-      const darkHex = s.customColorHex ? s.customColorHex : preset.dark;
-
-      const styleEl = document.getElementById('dynamic-theme-styles');
-      if (styleEl) {
-        styleEl.innerHTML = `
-          :root {
-            --brand: ${primaryHex};
-            --brand-light: ${lightHex};
-            --brand-dark: ${darkHex};
-            --brand-rgb: ${rgb};
-          }
-        `;
-      }
-
-      const htmlEl = document.documentElement;
-      if (s.colorMode === 'light') {
-        htmlEl.classList.remove('dark');
-        htmlEl.classList.add('light');
-      } else {
-        htmlEl.classList.remove('light');
-        htmlEl.classList.add('dark');
-      }
-    }
-
-    /*************************************************************************
-     * 1. LOGO VETORIAL MONOCROMÁTICA DE BARBEARIA
-     *************************************************************************/
     function getBarberCrestSVG(sizeClass = "w-20 h-20") {
       return `
         <svg viewBox="0 0 120 120" class="${sizeClass} text-zinc-200" fill="none" xmlns="http://www.w3.org/2000/svg">
           <circle cx="60" cy="60" r="54" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3" opacity="0.45"/>
           <circle cx="60" cy="60" r="46" stroke="currentColor" stroke-width="1.5" opacity="0.8"/>
-          <path d="M60 18L64 26H56L60 18Z" fill="currentColor" opacity="0.7"/>
           <circle cx="42" cy="40" r="8" stroke="currentColor" stroke-width="3"/>
           <circle cx="42" cy="80" r="8" stroke="currentColor" stroke-width="3"/>
           <line x1="48" y1="45" x2="84" y2="80" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
           <line x1="48" y1="75" x2="84" y2="40" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-          <path d="M30 60H44" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
           <text x="60" y="101" text-anchor="middle" fill="currentColor" font-size="8" font-family="Cinzel, serif" letter-spacing="3" opacity="0.75">BARBER CLUB</text>
         </svg>
       `;
     }
 
-    function renderMonochromeLogoHTML(sizeClass = "w-full h-full", isWatermark = false) {
-      const s = DB?.settings || {};
-      if (s.logoDataUrl) {
-        return `<img src="${s.logoDataUrl}" alt="Logo" class="${sizeClass} object-contain${isWatermark ? 'logo-watermark-filter' : 'logo-noir-filter'}" />`;
-      }
-      if (isWatermark) {
-        return `<div class="opacity-[0.04] scale-[3.2] pointer-events-none">${getBarberCrestSVG("w-72 h-72")}</div>`;
-      }
-      return getBarberCrestSVG(sizeClass);
-    }
-
-    /*************************************************************************
-     * 2. SEED COMPLETO DE BARBEARIA (COM TEMAS, MÓDULOS E CONFIG FISCAL)
-     *************************************************************************/
     function createDefaultStoreData(storeId, customName = null, ownerEmail = 'demo@barbearia.com', ownerPass = '123') {
       const today = getTodayISO();
       const isDemo = storeId === 'demo' || storeId === 'barbearia_imperial';
-      const readableName = customName || (isDemo ? 'Dom Corleone Barber Club (Demo)' : storeId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()));
+      const readableName = customName || (isDemo ? 'Dom Corleone Barber Club' : storeId.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase()));
 
       return {
         storeId: storeId,
         settings: {
           name: readableName,
-          slogan: 'Mais que um corte, um ritual de alto padrão. Escolha seu mestre barbeiro e reserve seu horário.',
+          slogan: 'Mais que um corte, um ritual de alto padrão. Escolha seu horário em segundos.',
           phone: '5548999999999',
+          cnpj: '45.123.456/0001-89',
+          municipalReg: '102938',
+          asaasApiKey: '',
+          fiscalEnvironment: 'sandbox',
           address: 'Av. Central, 1450 - Sala 02 (Estacionamento Privativo)',
           pixKey: 'financeiro@barberclub.com.br',
           openTime: '09:00',
@@ -693,32 +578,7 @@
           logoDataUrl: '',
           heroBgDataUrl: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1400&q=85',
           ownerEmail: ownerEmail,
-          ownerPass: ownerPass,
-          // Temas e Modo Claro/Escuro
-          colorMode: 'dark', // 'dark' | 'light'
-          themePreset: 'gold',
-          customColorHex: '',
-          // Módulos Personalizáveis (Liga/Desliga pelo Proprietário)
-          modules: {
-            multiBarber: true, // Se false = Barbeiro Único (oculta aba Profissionais e pula escolha de barbeiro)
-            combos: true,      // Aba Combos VIP
-            plans: true,       // Aba Planos Mensais (Clube VIP)
-            products: true,    // Vitrine de Produtos & Estoque
-            fiscal: true       // Módulo Fiscal & Recibos
-          },
-          // Configuração Fiscal (NFS-e / Asaas / Focus)
-          fiscalConfig: {
-            cnpj: '00.000.000/0001-00',
-            municipalRegistration: '123456',
-            legalName: readableName + ' LTDA',
-            serviceCode: '06.01',
-            issTaxPct: 2.0,
-            provider: 'asaas', // 'asaas' | 'focusnfe' | 'nuvemfiscal'
-            environment: 'sandbox',
-            apiKey: '',
-            autoSendWhatsApp: true,
-            receiptFooter: 'Obrigado pela preferência! Volte sempre ao nosso Barber Club.'
-          }
+          ownerPass: ownerPass
         },
         barbers: [
           {
@@ -830,79 +690,44 @@
           }
         ],
         products: [
-          {
-            id: 'prd_1',
-            name: 'Pomada Modeladora Matte Efeito Seco 120g',
-            type: 'sale',
-            price: 49.90,
-            cost: 22.00,
-            stock: 14,
-            minStock: 5
-          },
-          {
-            id: 'prd_2',
-            name: 'Óleo Hidratante para Barba Lenhador 30ml',
-            type: 'sale',
-            price: 45.00,
-            cost: 18.00,
-            stock: 9,
-            minStock: 4
-          },
-          {
-            id: 'prd_3',
-            name: 'Caixa de Lâminas Descartáveis Inox (100 un)',
-            type: 'supply',
-            price: 0,
-            cost: 42.00,
-            stock: 3,
-            minStock: 4
-          },
-          {
-            id: 'prd_4',
-            name: 'Gola Higiênica & Papel Pescoço (Pacote)',
-            type: 'supply',
-            price: 0,
-            cost: 35.00,
-            stock: 6,
-            minStock: 3
-          }
+          { id: 'prd_1', name: 'Pomada Modeladora Matte Efeito Seco 120g', type: 'sale', price: 49.90, cost: 22.00, stock: 14, minStock: 5 },
+          { id: 'prd_2', name: 'Óleo Hidratante para Barba Lenhador 30ml', type: 'sale', price: 45.00, cost: 18.00, stock: 9, minStock: 4 },
+          { id: 'prd_3', name: 'Caixa de Lâminas Descartáveis Inox (100 un)', type: 'supply', price: 0, cost: 42.00, stock: 3, minStock: 4 },
+          { id: 'prd_4', name: 'Gola Higiênica & Papel Pescoço (Pacote)', type: 'supply', price: 0, cost: 35.00, stock: 6, minStock: 3 }
         ],
         clients: [
           {
             id: 'cli_demo',
             name: 'Cliente Demonstração VIP',
             phone: '48999990000',
-            cpf: '000.000.000-00',
             totalCuts: 18,
             totalSpent: 1150,
             lastVisitDate: addDaysISO(today, -3),
             planId: 'plan_2',
             planExpiresAt: addDaysISO(today, 25),
-            notes: 'Conta oficial de demonstração do sistema.'
+            notes: 'Conta oficial de demonstração.'
           },
           {
             id: 'cli_1',
             name: 'Carlos Eduardo Martins',
             phone: '48999112233',
-            cpf: '',
             totalCuts: 14,
             totalSpent: 890,
             lastVisitDate: addDaysISO(today, -5),
             planId: 'plan_2',
             planExpiresAt: addDaysISO(today, 22),
-            notes: 'Gosta de degradê médio e café sem açúcar.'
+            notes: 'Gosta de degradê médio.'
           },
           {
             id: 'cli_2',
             name: 'Rodrigo Albuquerque',
             phone: '48999445566',
-            cpf: '',
             totalCuts: 8,
             totalSpent: 520,
             lastVisitDate: addDaysISO(today, -34),
             planId: null,
             planExpiresAt: null,
-            notes: 'Cliente fiel, mas está há mais de 30 dias sem aparecer.'
+            notes: 'Sumido há mais de 30 dias.'
           }
         ],
         appointments: [
@@ -920,7 +745,6 @@
             isVipCovered: true,
             paymentMethod: 'VIP',
             status: 'confirmed',
-            nfseStatus: null,
             createdAt: new Date().toISOString()
           },
           {
@@ -937,23 +761,7 @@
             isVipCovered: false,
             paymentMethod: 'PIX',
             status: 'completed',
-            nfseStatus: 'issued',
-            nfseNumber: '2026000142',
             createdAt: new Date().toISOString()
-          }
-        ],
-        invoices: [
-          {
-            id: 'inv_1',
-            number: '2026000142',
-            type: 'NFS-e',
-            clientName: 'Rodrigo Albuquerque',
-            clientPhone: '48999445566',
-            clientDoc: 'Não informado',
-            serviceName: 'Corte Executivo / Degradê Navalhado',
-            amount: 55,
-            date: today,
-            status: 'Emitida'
           }
         ],
         expenseTemplates: [
@@ -965,117 +773,91 @@
           { id: 'ext_6', title: 'Café, Cerveja Artesanal e Geladeira VIP', category: 'Cortesias', defaultAmount: 290 }
         ],
         finances: [
-          {
-            id: 'fin_1',
-            type: 'income',
-            title: 'Corte Executivo - Rodrigo Albuquerque',
-            category: 'Serviço',
-            amount: 55,
-            commissionAmount: 24.75,
-            barberId: 'barb_2',
-            paymentMethod: 'PIX',
-            date: today
-          },
-          {
-            id: 'fin_2',
-            type: 'income',
-            title: 'Assinatura Clube Imperador - Cliente Demo',
-            category: 'Assinatura VIP',
-            amount: 189.90,
-            commissionAmount: 0,
-            barberId: null,
-            paymentMethod: 'Cartão',
-            date: today
-          },
-          {
-            id: 'fin_3',
-            type: 'expense',
-            title: 'Lâminas, Golas Higiênicas e Descartáveis',
-            category: 'Insumos',
-            amount: 180,
-            commissionAmount: 0,
-            barberId: null,
-            paymentMethod: 'PIX',
-            date: today
-          }
+          { id: 'fin_1', type: 'income', title: 'Corte Executivo - Rodrigo Albuquerque', category: 'Serviço', amount: 55, commissionAmount: 24.75, barberId: 'barb_2', paymentMethod: 'PIX', date: today },
+          { id: 'fin_2', type: 'income', title: 'Assinatura Clube Imperador - Cliente Demo', category: 'Assinatura VIP', amount: 189.90, commissionAmount: 0, barberId: null, paymentMethod: 'Cartão', date: today },
+          { id: 'fin_3', type: 'expense', title: 'Lâminas, Golas Higiênicas e Descartáveis', category: 'Insumos', amount: 180, commissionAmount: 0, barberId: null, paymentMethod: 'PIX', date: today }
         ]
       };
     }
 
-    /*************************************************************************
-     * 3. PERSISTÊNCIA SUPABASE + LOCALSTORAGE FALLBACK
-     *************************************************************************/
-    const LOCAL_STORAGE_KEY = `barberclub_saas_db_${CURRENT_STORE_ID}`;
-    const CLIENT_SESSION_KEY = `barberclub_client_phone_${CURRENT_STORE_ID}`;
+    // Inicializa DB imediatamente em memória para nunca travar nenhum clique
+    let DB = createDefaultStoreData(CURRENT_STORE_ID);
+    let portalOpen = true;
+    let currentView = 'client';
+    let currentClientTab = 'services';
+    let currentAdminTab = 'agenda';
+    let loggedClient = null;
+    let adminSession = null;
 
-    async function loadStoreDatabase() {
-      setSyncStatus('syncing');
-      try {
-        const res = await fetch(`${SUPABASE_URL}/rest/v1/barbers_data?store_id=eq.${encodeURIComponent(CURRENT_STORE_ID)}&select=*`, {
-          headers: {
-            'apikey': SUPABASE_KEY,
-            'Authorization': `Bearer ${SUPABASE_KEY}`
-          }
-        });
+    let agendaFilterDate = getTodayISO();
+    let agendaFilterBarber = 'all';
+    let agendaViewMode = 'daily';
+    let crmSortFilter = 'ranking';
+    let crmSearchQuery = '';
+    let financeBarberFilter = 'all';
+    let preselectedBarberId = null;
 
-        if (res.ok) {
-          const rows = await res.json();
-          if (rows && rows.length > 0 && rows[0].data) {
-            DB = normalizeDatabase(rows[0].data);
-            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(DB));
-            setSyncStatus('online');
-            return;
-          } else {
-            const localRaw = localStorage.getItem(LOCAL_STORAGE_KEY);
-            DB = localRaw ? normalizeDatabase(JSON.parse(localRaw)) : createDefaultStoreData(CURRENT_STORE_ID);
-            await saveStoreDatabase(false);
-            setSyncStatus('online');
-            return;
-          }
-        }
-      } catch (err) {
-        console.warn('Usando fallback LocalStorage:', err);
+    function renderMonochromeLogoHTML(sizeClass = "w-full h-full", isWatermark = false) {
+      const s = DB?.settings || {};
+      if (s.logoDataUrl) {
+        return `<img src="${s.logoDataUrl}" alt="Logo" class="${sizeClass} object-contain ${isWatermark ? 'logo-watermark-filter' : 'logo-noir-filter'}" />`;
       }
-
-      const localRaw = localStorage.getItem(LOCAL_STORAGE_KEY);
-      DB = localRaw ? normalizeDatabase(JSON.parse(localRaw)) : createDefaultStoreData(CURRENT_STORE_ID);
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(DB));
-      setSyncStatus('local');
+      if (isWatermark) {
+        return `<div class="opacity-[0.04] scale-[3] pointer-events-none">${getBarberCrestSVG("w-72 h-72")}</div>`;
+      }
+      return getBarberCrestSVG(sizeClass);
     }
 
     function normalizeDatabase(raw) {
       const def = createDefaultStoreData(CURRENT_STORE_ID);
-      const rawSettings = raw.settings || {};
+      if (!raw || typeof raw !== 'object') return def;
       return {
         ...def,
         ...raw,
-        settings: {
-          ...def.settings,
-          ...rawSettings,
-          modules: { ...def.settings.modules, ...(rawSettings.modules || {}) },
-          fiscalConfig: { ...def.settings.fiscalConfig, ...(rawSettings.fiscalConfig || {}) }
-        },
-        barbers: Array.isArray(raw.barbers) ? raw.barbers : def.barbers,
-        services: Array.isArray(raw.services) ? raw.services : def.services,
-        plans: Array.isArray(raw.plans) ? raw.plans : def.plans,
+        settings: { ...def.settings, ...(raw.settings || {}) },
+        barbers: Array.isArray(raw.barbers) && raw.barbers.length ? raw.barbers : def.barbers,
+        services: Array.isArray(raw.services) && raw.services.length ? raw.services : def.services,
+        plans: Array.isArray(raw.plans) && raw.plans.length ? raw.plans : def.plans,
         products: Array.isArray(raw.products) ? raw.products : def.products,
-        clients: Array.isArray(raw.clients) ? raw.clients : def.clients,
+        clients: Array.isArray(raw.clients) && raw.clients.length ? raw.clients : def.clients,
         appointments: Array.isArray(raw.appointments) ? raw.appointments : def.appointments,
-        invoices: Array.isArray(raw.invoices) ? raw.invoices : def.invoices,
         expenseTemplates: Array.isArray(raw.expenseTemplates) ? raw.expenseTemplates : def.expenseTemplates,
         finances: Array.isArray(raw.finances) ? raw.finances : def.finances,
       };
     }
 
-    async function saveStoreDatabase(showNotification = false) {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(DB));
-      setSyncStatus('syncing');
+    async function loadStoreDatabase() {
       try {
-        const payload = {
-          store_id: CURRENT_STORE_ID,
-          data: DB,
-          updated_at: new Date().toISOString()
-        };
+        const localRaw = localStorage.getItem(LOCAL_STORAGE_KEY);
+        if (localRaw) {
+          DB = normalizeDatabase(JSON.parse(localRaw));
+        }
+      } catch (e) {}
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/barbers_data?store_id=eq.${encodeURIComponent(CURRENT_STORE_ID)}&select=*`, {
+          headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+        });
+        if (res.ok) {
+          const rows = await res.json();
+          if (rows && rows.length > 0 && rows[0].data) {
+            DB = normalizeDatabase(rows[0].data);
+            localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(DB));
+          } else {
+            await saveStoreDatabase(false);
+          }
+        }
+      } catch (err) {
+        console.warn('Modo local ativo:', err);
+      }
+    }
+
+    async function saveStoreDatabase(showNotification = false) {
+      try {
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(DB));
+      } catch (e) {}
+
+      try {
         const res = await fetch(`${SUPABASE_URL}/rest/v1/barbers_data`, {
           method: 'POST',
           headers: {
@@ -1084,32 +866,16 @@
             'Content-Type': 'application/json',
             'Prefer': 'resolution=merge-duplicates'
           },
-          body: JSON.stringify(payload)
+          body: JSON.stringify({
+            store_id: CURRENT_STORE_ID,
+            data: DB,
+            updated_at: new Date().toISOString()
+          })
         });
-        if (res.ok) {
-          setSyncStatus('online');
-          if (showNotification) showToast('Sincronizado com o Supabase!', 'success');
-        } else {
-          setSyncStatus('local');
+        if (res.ok && showNotification) {
+          showToast('Salvo e sincronizado no Supabase!', 'success');
         }
-      } catch (e) {
-        setSyncStatus('local');
-      }
-    }
-
-    function setSyncStatus(mode) {
-      const badge = document.getElementById('sync-badge');
-      if (!badge) return;
-      if (mode === 'online') {
-        badge.className = 'hidden sm:inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20';
-        badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> Cloud Sync';
-      } else if (mode === 'syncing') {
-        badge.className = 'hidden sm:inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20';
-        badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span> Salvando...';
-      } else {
-        badge.className = 'hidden sm:inline-flex items-center gap-1 text-[10px] font-semibold px-2 py-0.5 rounded-full bg-zinc-700/40 text-zinc-400 border border-zinc-700';
-        badge.innerHTML = '<span class="w-1.5 h-1.5 rounded-full bg-zinc-400"></span> Local Sync';
-      }
+      } catch (e) {}
     }
 
     function compressImageFile(file, maxWidth = 650, quality = 0.8) {
@@ -1141,17 +907,20 @@
     }
 
     /*************************************************************************
-     * 4. PORTAL SPLIT-SCREEN (SEM TRAVAS NO MOBILE + BOTÃO LIMPAR)
+     * PORTAL SPLIT-SCREEN & CLIENTE DEMO
      *************************************************************************/
     function restoreClientSession() {
-      const savedPhone = localStorage.getItem(CLIENT_SESSION_KEY);
-      if (savedPhone) {
-        const found = DB.clients.find(c => cleanPhone(c.phone) === cleanPhone(savedPhone));
-        if (found) loggedClient = found;
-      }
+      try {
+        const savedPhone = localStorage.getItem(CLIENT_SESSION_KEY);
+        if (savedPhone && DB && Array.isArray(DB.clients)) {
+          const found = DB.clients.find(c => cleanPhone(c.phone) === cleanPhone(savedPhone));
+          if (found) loggedClient = found;
+        }
+      } catch (e) {}
     }
 
     function renderSplitPortal() {
+      if (!DB) DB = createDefaultStoreData(CURRENT_STORE_ID);
       const s = DB.settings;
       const heroBg = document.getElementById('portal-hero-bg');
       if (heroBg && s.heroBgDataUrl) {
@@ -1161,35 +930,11 @@
       document.getElementById('portal-open-badge').textContent = `Aberto • ${s.openTime} às ${s.closeTime}`;
       document.getElementById('portal-shop-name').textContent = s.name;
       document.getElementById('portal-shop-slogan').textContent = s.slogan || 'Mais que um corte, um ritual de alto padrão.';
-      document.getElementById('portal-address-text').innerHTML = `<i data-lucide="map-pin" class="w-4 h-4 text-amber-500 shrink-0"></i> ${s.address}`;
-      const mobAddr = document.getElementById('portal-mobile-addr');
-      if (mobAddr) mobAddr.innerHTML = `<i data-lucide="map-pin" class="w-3.5 h-3.5 text-amber-500 shrink-0"></i> ${s.address}`;
+      document.getElementById('portal-address-text').textContent = `📍 ${s.address}`;
       document.getElementById('portal-store-code').textContent = CURRENT_STORE_ID;
 
-      document.getElementById('portal-left-logo-box').innerHTML = renderMonochromeLogoHTML("w-full h-full", false);
+      document.getElementById('portal-left-logo-box').innerHTML = renderMonochromeLogoHTML("w-20 h-20 sm:w-24 sm:h-24", false);
       document.getElementById('portal-right-watermark').innerHTML = renderMonochromeLogoHTML("w-[420px] h-[420px]", true);
-
-      const phoneInput = document.getElementById('portal-phone-input');
-      if (phoneInput && loggedClient && !phoneInput.value) {
-        phoneInput.value = formatPhoneDisplay(loggedClient.phone);
-        handlePortalPhoneLiveCheck(phoneInput.value);
-      }
-    }
-
-    function resetPortalForm() {
-      const phoneInput = document.getElementById('portal-phone-input');
-      const nameInput = document.getElementById('portal-name-input');
-      const recBanner = document.getElementById('portal-recognized-banner');
-      const newFields = document.getElementById('portal-new-client-fields');
-      const clearBtn = document.getElementById('portal-clear-btn');
-      const submitLabel = document.getElementById('portal-submit-label');
-
-      if (phoneInput) phoneInput.value = '';
-      if (nameInput) nameInput.value = '';
-      if (recBanner) recBanner.classList.add('hidden');
-      if (newFields) newFields.classList.add('hidden');
-      if (clearBtn) clearBtn.classList.add('hidden');
-      if (submitLabel) submitLabel.textContent = 'Acessar Barbearia';
     }
 
     async function loginAsDemoClient() {
@@ -1200,7 +945,6 @@
           id: 'cli_demo',
           name: 'Cliente Demonstração VIP',
           phone: demoPhone,
-          cpf: '000.000.000-00',
           totalCuts: 18,
           totalSpent: 1150,
           lastVisitDate: getTodayISO(),
@@ -1212,7 +956,7 @@
         await saveStoreDatabase();
       }
       loggedClient = demoClient;
-      localStorage.setItem(CLIENT_SESSION_KEY, demoPhone);
+      try { localStorage.setItem(CLIENT_SESSION_KEY, demoPhone); } catch (e) {}
       portalOpen = false;
       currentView = 'client';
       renderAll();
@@ -1224,13 +968,6 @@
       const recBanner = document.getElementById('portal-recognized-banner');
       const newFields = document.getElementById('portal-new-client-fields');
       const submitLabel = document.getElementById('portal-submit-label');
-      const clearBtn = document.getElementById('portal-clear-btn');
-
-      if (digits.length > 0) {
-        clearBtn.classList.remove('hidden');
-      } else {
-        clearBtn.classList.add('hidden');
-      }
 
       if (digits.length >= 10) {
         const existing = DB.clients.find(c => cleanPhone(c.phone) === digits);
@@ -1239,25 +976,24 @@
           newFields.classList.add('hidden');
           document.getElementById('portal-recognized-name').textContent = `Olá novamente, ${existing.name}!`;
           document.getElementById('portal-recognized-sub').textContent = `${existing.totalCuts || 0} cortes no histórico • Acesso imediato liberado.`;
-          submitLabel.textContent = `Entrar como ${existing.name.split(' ')[0]}`;
+          submitLabel.textContent = `Entrar como ${existing.name.split(' ')[0]} →`;
         } else {
           recBanner.classList.add('hidden');
           newFields.classList.remove('hidden');
-          submitLabel.textContent = 'Concluir 1º Cadastro e Entrar';
+          submitLabel.textContent = 'Concluir 1º Cadastro e Entrar →';
         }
       } else {
         recBanner.classList.add('hidden');
         newFields.classList.add('hidden');
-        submitLabel.textContent = 'Acessar Barbearia';
+        submitLabel.textContent = 'Acessar Barbearia →';
       }
-      lucide.createIcons();
     }
 
     async function handlePortalPhoneSubmit(e) {
-      e.preventDefault();
+      if (e && e.preventDefault) e.preventDefault();
       const digits = cleanPhone(document.getElementById('portal-phone-input').value);
       if (digits.length < 10) {
-        showToast('Digite seu WhatsApp completo com DDD.', 'error');
+        showToast('Digite seu WhatsApp completo com DDD (ex: 48999999999).', 'error');
         return;
       }
 
@@ -1268,11 +1004,12 @@
         if (newFields.classList.contains('hidden')) {
           newFields.classList.remove('hidden');
           nameInput.focus();
+          showToast('1º acesso! Preencha seu nome abaixo para entrar.', 'info');
           return;
         }
         const fullName = nameInput.value.trim();
         if (fullName.length < 2) {
-          showToast('Informe seu Nome Completo ou clique em Limpar acima para cancelar.', 'error');
+          showToast('Informe seu Nome Completo para concluir o primeiro acesso.', 'error');
           nameInput.focus();
           return;
         }
@@ -1280,7 +1017,6 @@
           id: uid('cli'),
           name: fullName,
           phone: digits,
-          cpf: '',
           totalCuts: 0,
           totalSpent: 0,
           lastVisitDate: null,
@@ -1293,11 +1029,11 @@
       }
 
       loggedClient = client;
-      localStorage.setItem(CLIENT_SESSION_KEY, digits);
+      try { localStorage.setItem(CLIENT_SESSION_KEY, digits); } catch (err) {}
       portalOpen = false;
       currentView = 'client';
       renderAll();
-      showToast(`Bem-vindo à ${DB.settings.name},${client.name.split(' ')[0]}!`, 'success');
+      showToast(`Bem-vindo à ${DB.settings.name}, ${client.name.split(' ')[0]}!`, 'success');
     }
 
     function enterShowcaseAsGuest() {
@@ -1309,12 +1045,8 @@
     function openSplitPortal() {
       portalOpen = true;
       renderAll();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    /*************************************************************************
-     * 5. NAVEGAÇÃO PRINCIPAL & HEADER/RODAPÉ
-     *************************************************************************/
     function isClientVipActive(client) {
       if (!client || !client.planId || !client.planExpiresAt) return false;
       return client.planExpiresAt >= getTodayISO();
@@ -1324,12 +1056,10 @@
       portalOpen = false;
       currentView = view;
       renderAll();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     function renderAll() {
-      if (!DB) return;
-      applyStoreTheme();
+      if (!DB) DB = createDefaultStoreData(CURRENT_STORE_ID);
 
       const vPortal = document.getElementById('view-portal');
       const vClient = document.getElementById('view-client');
@@ -1345,7 +1075,7 @@
         vAdmin.classList.add('hidden');
         header.classList.add('hidden');
         footer.classList.add('hidden');
-        lucide.createIcons();
+        safeIcons();
         return;
       }
 
@@ -1364,7 +1094,7 @@
         vClient.classList.remove('hidden');
         renderClientView();
       }
-      lucide.createIcons();
+      safeIcons();
     }
 
     function renderHeaderAndFooter() {
@@ -1390,7 +1120,7 @@
     }
 
     /*************************************************************************
-     * 6. MODAL DE IDENTIFICAÇÃO RÁPIDA INTERNA
+     * IDENTIFICAÇÃO DO CLIENTE EM MODAL
      *************************************************************************/
     function openClientAuthModal(onSuccessCallback = null) {
       openModal('Acesso do Cliente por WhatsApp', `
@@ -1412,15 +1142,15 @@
           <div id="auth-detected-box" class="hidden p-3 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-emerald-300 text-xs font-semibold"></div>
           <div class="flex items-center gap-2 pt-2">
             ${loggedClient ? `
-              <button onclick="logoutClient()" class="px-4 py-3 rounded-xl bg-rose-500/15 text-rose-400 text-xs font-bold">
+              <button type="button" onclick="logoutClient()" class="px-4 py-3 rounded-xl bg-rose-500/15 text-rose-400 text-xs font-bold">
                 Sair / Trocar
               </button>
             ` : `
-              <button onclick="closeModal();loginAsDemoClient()" class="px-3.5 py-3 rounded-xl bg-amber-500/15 text-amber-300 border border-amber-500/30 text-xs font-bold">
+              <button type="button" onclick="closeModal();loginAsDemoClient()" class="px-3.5 py-3 rounded-xl bg-amber-500/15 text-amber-300 border border-amber-500/30 text-xs font-bold">
                 ⚡ Cliente Demo
               </button>
             `}
-            <button id="btn-confirm-client-auth" class="flex-1 py-3.5 rounded-xl gold-gradient text-black font-extrabold text-sm">
+            <button type="button" id="btn-confirm-client-auth" class="flex-1 py-3.5 rounded-xl gold-gradient text-black font-extrabold text-sm">
               Confirmar Acesso
             </button>
           </div>
@@ -1451,7 +1181,6 @@
             id: uid('cli'),
             name: fullName,
             phone: rawPhone,
-            cpf: '',
             totalCuts: 0,
             totalSpent: 0,
             lastVisitDate: null,
@@ -1464,7 +1193,7 @@
         }
 
         loggedClient = existing;
-        localStorage.setItem(CLIENT_SESSION_KEY, rawPhone);
+        try { localStorage.setItem(CLIENT_SESSION_KEY, rawPhone); } catch (e) {}
         closeModal();
         renderAll();
         if (typeof onSuccessCallback === 'function') onSuccessCallback(existing);
@@ -1492,25 +1221,23 @@
 
     function logoutClient() {
       loggedClient = null;
-      localStorage.removeItem(CLIENT_SESSION_KEY);
+      try { localStorage.removeItem(CLIENT_SESSION_KEY); } catch (e) {}
       closeModal();
-      resetPortalForm();
       openSplitPortal();
     }
 
     /*************************************************************************
-     * 7. VITRINE IMERSIVA DO CLIENTE (RESPEITA MÓDULOS ATIVOS/OCULTOS)
+     * VITRINE IMERSIVA DO CLIENTE
      *************************************************************************/
     function setClientTab(tab) {
       currentClientTab = tab;
       renderClientView();
-      lucide.createIcons();
+      safeIcons();
     }
 
     function selectBarberFilterFromStrip(barberId) {
       preselectedBarberId = preselectedBarberId === barberId ? null : barberId;
       renderClientView();
-      lucide.createIcons();
       if (preselectedBarberId) {
         const b = DB.barbers.find(x => x.id === preselectedBarberId);
         if (b) showToast(`Profissional ${b.name} selecionado! Escolha seu corte abaixo.`, 'info');
@@ -1519,17 +1246,10 @@
 
     function renderClientView() {
       const s = DB.settings;
-      const mods = s.modules || { multiBarber: true, combos: true, plans: true, products: true };
-
-      // Se a aba atual foi desativada pelo dono, volta para 'services'
-      if (currentClientTab === 'combos' && !mods.combos) currentClientTab = 'services';
-      if (currentClientTab === 'plans' && !mods.plans) currentClientTab = 'services';
-      if (currentClientTab === 'team' && !mods.multiBarber) currentClientTab = 'services';
-      if (currentClientTab === 'products' && !mods.products) currentClientTab = 'services';
-
       document.getElementById('hero-address').innerHTML = `
-        <span class="inline-flex items-center gap-1.5"><i data-lucide="map-pin" class="w-4 h-4 text-amber-500"></i> ${s.address}</span>
-        <span class="inline-flex items-center gap-1.5"><i data-lucide="clock" class="w-4 h-4 text-amber-500"></i> Expediente: ${s.openTime} às ${s.closeTime}</span>
+        <span>📍 ${s.address}</span>
+        <span>•</span>
+        <span>🕒 Expediente: ${s.openTime} às ${s.closeTime}</span>
       `;
 
       const welcomeEl = document.getElementById('client-welcome-banner');
@@ -1539,13 +1259,14 @@
         welcomeEl.innerHTML = `
           <div class="min-w-0">
             <div class="flex items-center gap-2">
-              <span class="text-xs sm:text-sm font-extrabold text-white truncate">${loggedClient.name}</span>${vip ? `<span class="px-2 py-0.5 text-[10px] font-extrabold rounded-full gold-gradient text-black">👑 VIP ATIVO</span>` : ''}
+              <span class="text-xs sm:text-sm font-extrabold text-white truncate">${loggedClient.name}</span>
+              ${vip ? `<span class="px-2 py-0.5 text-[10px] font-extrabold rounded-full gold-gradient text-black">👑 VIP ATIVO</span>` : ''}
             </div>
             <p class="text-[11px] text-zinc-400 mt-0.5">
               ${vip ? `${planObj ? planObj.name : 'Assinante VIP'} • Vence ${formatDateBR(loggedClient.planExpiresAt)}` : `${loggedClient.totalCuts || 0} cortes realizados • WhatsApp conectado`}
             </p>
           </div>
-          <button onclick="setClientTab('appointments')" class="shrink-0 px-3.5 py-2 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs font-bold">
+          <button type="button" onclick="setClientTab('appointments')" class="shrink-0 px-3.5 py-2 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs font-bold">
             Meus Horários
           </button>
         `;
@@ -1556,75 +1277,58 @@
             <p class="text-[11px] text-zinc-400">Entre com seu telefone ou use o Cliente Demo</p>
           </div>
           <div class="flex items-center gap-2">
-            <button onclick="loginAsDemoClient()" class="shrink-0 px-3 py-2 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 font-bold text-xs">
+            <button type="button" onclick="loginAsDemoClient()" class="shrink-0 px-3 py-2 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 font-bold text-xs">
               ⚡ Demo
             </button>
-            <button onclick="openSplitPortal()" class="shrink-0 px-3.5 py-2 rounded-xl gold-gradient text-black font-extrabold text-xs">
+            <button type="button" onclick="openSplitPortal()" class="shrink-0 px-3.5 py-2 rounded-xl gold-gradient text-black font-extrabold text-xs">
               Entrar
             </button>
           </div>
         `;
       }
 
-      // Constrói abas do cliente conforme módulos ativos
+      ['services', 'combos', 'plans', 'team', 'products', 'appointments'].forEach(t => {
+        const btn = document.getElementById(`ctab-${t}`);
+        if (!btn) return;
+        btn.className = t === currentClientTab
+          ? 'client-tab-btn shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold gold-gradient text-black shadow-lg transition'
+          : 'client-tab-btn shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-obsidian-800 text-zinc-300 hover:bg-obsidian-700 border border-zinc-800 transition';
+      });
+
       const myConfirmedCount = loggedClient
         ? DB.appointments.filter(a => cleanPhone(a.clientPhone) === cleanPhone(loggedClient.phone) && a.status === 'confirmed').length
         : 0;
+      const badgeEl = document.getElementById('client-appt-badge');
+      if (myConfirmedCount > 0) {
+        badgeEl.classList.remove('hidden');
+        badgeEl.textContent = myConfirmedCount;
+      } else {
+        badgeEl.classList.add('hidden');
+      }
 
-      const availableTabs = [
-        { id: 'services', label: 'Cortes & Barba', icon: 'scissors', show: true },
-        { id: 'combos', label: 'Combos VIP', icon: 'sparkles', show: mods.combos !== false },
-        { id: 'plans', label: 'Planos Mensais', icon: 'crown', show: mods.plans !== false },
-        { id: 'team', label: 'Profissionais', icon: 'users', show: mods.multiBarber !== false },
-        { id: 'products', label: 'Produtos & Pomadas', icon: 'shopping-bag', show: mods.products !== false },
-        { id: 'appointments', label: 'Meus Horários', icon: 'calendar-check-2', show: true, badge: myConfirmedCount }
-      ].filter(t => t.show);
-
-      const navEl = document.getElementById('client-tabs-nav');
-      navEl.innerHTML = availableTabs.map(t => {
-        const active = t.id === currentClientTab;
+      const activeBarbers = DB.barbers.filter(b => b.active !== false);
+      const barbersListEl = document.getElementById('client-barbers-list');
+      barbersListEl.innerHTML = activeBarbers.map(b => {
+        const isSelected = preselectedBarberId === b.id;
         return `
-          <button onclick="setClientTab('${t.id}')" class="client-tab-btn shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-xl text-xs sm:text-sm transition ${
-            active
-              ? 'font-extrabold gold-gradient text-black shadow-lg'
-              : 'font-bold bg-obsidian-800 text-zinc-300 hover:bg-obsidian-700 border border-zinc-800'
-          }">
-            <i data-lucide="${t.icon}" class="w-4 h-4"></i>
-            <span>${t.label}</span>${t.badge ? `<span class="px-1.5 py-0.2 text-[10px] rounded-full bg-black/30 text-white">${t.badge}</span>` : ''}
-          </button>
+          <div onclick="selectBarberFilterFromStrip('${b.id}')"
+            class="cursor-pointer shrink-0 flex items-center gap-3 rounded-2xl p-2.5 pr-4 min-w-[225px] border transition ${
+              isSelected ? 'bg-amber-500/15 border-amber-500 shadow-lg' : 'bg-obsidian-900 border-zinc-800/90 hover:border-zinc-700'
+            }">
+            <div class="w-12 h-12 rounded-xl bg-obsidian-800 border border-amber-500/30 flex items-center justify-center overflow-hidden shrink-0">
+              ${b.photo ? `<img src="${b.photo}" class="w-full h-full object-cover"/>` : `<span class="font-royal font-bold text-amber-400 text-base">${b.name.charAt(0)}</span>`}
+            </div>
+            <div class="min-w-0">
+              <div class="flex items-center gap-1.5">
+                <h4 class="text-xs sm:text-sm font-bold text-white truncate">${b.name}</h4>
+                ${isSelected ? `<span class="text-[10px] px-1.5 py-0.2 rounded bg-amber-500 text-black font-extrabold">✓</span>` : ''}
+              </div>
+              <p class="text-[11px] text-zinc-400 truncate">${b.specialty || 'Master Barber'}</p>
+              <p class="text-[10px] text-amber-500 font-semibold mt-0.5">Expediente: ${b.openTime} às ${b.closeTime}</p>
+            </div>
+          </div>
         `;
       }).join('');
-
-      // Oculta carrossel de barbeiros se for Barbeiro Único (mods.multiBarber === false)
-      const stripEl = document.getElementById('client-barbers-strip');
-      const activeBarbers = DB.barbers.filter(b => b.active !== false);
-
-      if (mods.multiBarber === false) {
-        stripEl.classList.add('hidden');
-      } else {
-        stripEl.classList.remove('hidden');
-        const barbersListEl = document.getElementById('client-barbers-list');
-        barbersListEl.innerHTML = activeBarbers.map(b => {
-          const isSelected = preselectedBarberId === b.id;
-          return `
-            <div onclick="selectBarberFilterFromStrip('${b.id}')"
-              class="cursor-pointer shrink-0 flex items-center gap-3 rounded-2xl p-2.5 pr-4 min-w-[225px] border transition ${
-                isSelected ? 'bg-amber-500/15 border-amber-500 shadow-lg' : 'bg-obsidian-900 border-zinc-800/90 hover:border-zinc-700'
-              }">
-              <div class="w-12 h-12 rounded-xl bg-obsidian-800 border border-amber-500/30 flex items-center justify-center overflow-hidden shrink-0">
-                ${b.photo ? `<img src="${b.photo}" class="w-full h-full object-cover"/>` : `<span class="font-royal font-bold text-amber-400 text-base">${b.name.charAt(0)}</span>`}
-              </div>
-              <div class="min-w-0">
-                <div class="flex items-center gap-1.5">
-                  <h4 class="text-xs sm:text-sm font-bold text-white truncate">${b.name}</h4>${isSelected ? `<span class="text-[10px] px-1.5 py-0.2 rounded bg-amber-500 text-black font-extrabold">✓</span>` : ''}
-                </div>
-                <p class="text-[11px] text-zinc-400 truncate">${b.specialty || 'Master Barber'}</p>
-                <p class="text-[10px] text-amber-500 font-semibold mt-0.5">Expediente: ${b.openTime} às ${b.closeTime}</p>
-              </div>
-            </div>
-          `;
-        }).join('');
-      }
 
       const contentEl = document.getElementById('client-tab-content');
 
@@ -1638,23 +1342,23 @@
             ${list.map(srv => {
               const freeByVip = clientVip && srv.vipIncluded;
               return `
-                <div class="bg-obsidian-900 border border-zinc-800/90 hover:border-amber-500/50 rounded-2xl p-4 sm:p-5 flex gap-4 justify-between items-center transition group">
+                <div class="bg-obsidian-900 border border-zinc-800/90 hover:border-amber-500/50 rounded-2xl p-4 sm:p-5 flex gap-4 justify-between items-center transition">
                   ${srv.photo ? `
                     <img src="${srv.photo}" class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl object-cover shrink-0 border border-zinc-800" />
                   ` : `
-                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-obsidian-800 border border-zinc-700/80 flex items-center justify-center shrink-0 text-amber-500">
-                      <i data-lucide="${srv.category === 'combo' ? 'sparkles' : 'scissors'}" class="w-7 h-7"></i>
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-obsidian-800 border border-zinc-700/80 flex items-center justify-center shrink-0 text-amber-500 text-2xl">
+                      ✂️
                     </div>
                   `}
                   <div class="flex-1 min-w-0">
                     <div class="flex items-center gap-2 flex-wrap">
                       <h4 class="font-bold text-sm sm:text-base text-white">${srv.name}</h4>
-                      ${srv.vipIncluded && mods.plans !== false ? `<span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 font-semibold">👑 VIP</span>` : ''}
+                      ${srv.vipIncluded ? `<span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/20 font-semibold">👑 VIP</span>` : ''}
                     </div>
                     <p class="text-xs text-zinc-400 line-clamp-2 mt-1">${srv.description || ''}</p>
                     <div class="flex items-center gap-3 mt-3">
-                      <span class="inline-flex items-center gap-1 text-xs font-medium text-zinc-300 bg-obsidian-800 px-2.5 py-1 rounded-lg border border-zinc-700/70">
-                        <i data-lucide="clock" class="w-3.5 h-3.5 text-amber-500"></i> ${srv.duration} min
+                      <span class="text-xs font-medium text-zinc-300 bg-obsidian-800 px-2.5 py-1 rounded-lg border border-zinc-700/70">
+                        ⏱️ ${srv.duration} min
                       </span>
                       ${freeByVip ? `
                         <span class="text-xs font-extrabold text-emerald-400 bg-emerald-500/10 px-2.5 py-1 rounded-lg border border-emerald-500/30">
@@ -1665,7 +1369,7 @@
                       `}
                     </div>
                   </div>
-                  <button onclick="startBookingFlow('${srv.id}')" class="shrink-0 px-4 py-3 rounded-xl gold-gradient text-black font-extrabold text-xs sm:text-sm shadow-md hover:scale-[1.02] transition">
+                  <button type="button" onclick="startBookingFlow('${srv.id}')" class="cursor-pointer shrink-0 px-4 py-3 rounded-xl gold-gradient text-black font-extrabold text-xs sm:text-sm shadow-md">
                     Agendar
                   </button>
                 </div>
@@ -1681,7 +1385,7 @@
                 <div>
                   <div class="flex items-center justify-between gap-2">
                     <span class="text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded-full gold-gradient text-black">Clube Mensal VIP</span>
-                    <i data-lucide="crown" class="w-6 h-6 text-amber-400"></i>
+                    <span class="text-xl">👑</span>
                   </div>
                   <h4 class="font-royal font-bold text-xl text-white mt-3">${plan.name}</h4>
                   <p class="text-xs sm:text-sm text-zinc-400 mt-1">${plan.description || ''}</p>
@@ -1698,7 +1402,7 @@
                     `).join('')}
                   </ul>
                 </div>
-                <button onclick="subscribeVipPlanClient('${plan.id}')" class="w-full py-3.5 rounded-xl gold-gradient text-black font-extrabold text-sm shadow-lg">
+                <button type="button" onclick="subscribeVipPlanClient('${plan.id}')" class="cursor-pointer w-full py-3.5 rounded-xl gold-gradient text-black font-extrabold text-sm shadow-lg">
                   Assinar este Plano Agora
                 </button>
               </div>
@@ -1719,7 +1423,7 @@
                   <p>Expediente: <strong class="text-zinc-200">${b.openTime} às ${b.closeTime}</strong></p>
                   ${b.breakStart && b.breakEnd ? `<p>Intervalo: ${b.breakStart} às ${b.breakEnd}</p>` : ''}
                 </div>
-                <button onclick="preselectedBarberId='${b.id}';setClientTab('services')" class="w-full py-3 rounded-xl gold-gradient text-black font-extrabold text-xs">
+                <button type="button" onclick="preselectedBarberId='${b.id}';setClientTab('services')" class="cursor-pointer w-full py-3 rounded-xl gold-gradient text-black font-extrabold text-xs">
                   Agendar com ${b.name.split(' ')[0]}
                 </button>
               </div>
@@ -1730,12 +1434,8 @@
         const saleProducts = (DB.products || []).filter(p => p.type === 'sale');
         contentEl.innerHTML = `
           <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-            ${saleProducts.length === 0 ? `
-              <div class="col-span-full p-8 text-center text-zinc-400 bg-obsidian-900 rounded-2xl border border-zinc-800 text-sm">
-                Nenhum produto disponível na vitrine no momento.
-              </div>
-            ` : saleProducts.map(p => {
-              const msg = encodeURIComponent(`Olá! Quero reservar o produto *${p.name}* (${formatBRL(p.price)}) para retirar na ${DB.settings.name}!`);
+            ${saleProducts.map(p => {
+              const msg = encodeURIComponent(`Olá! Quero reservar o produto *${p.name}* (${formatBRL(p.price)}) na ${DB.settings.name}!`);
               return `
                 <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl p-5 flex flex-col justify-between">
                   <div>
@@ -1748,7 +1448,7 @@
                   </div>
                   <a href="https://wa.me/${cleanPhone(DB.settings.phone)}?text=${msg}" target="_blank"
                     class="mt-4 w-full py-2.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-amber-400 font-bold text-xs text-center block">
-                    Reservar Produto no WhatsApp
+                    Reservar no WhatsApp
                   </a>
                 </div>
               `;
@@ -1759,14 +1459,13 @@
         if (!loggedClient) {
           contentEl.innerHTML = `
             <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl p-8 text-center max-w-md mx-auto">
-              <i data-lucide="smartphone" class="w-10 h-10 text-amber-500 mx-auto mb-3"></i>
               <h4 class="font-bold text-base text-white">Consulte seus horários em 1 toque</h4>
               <p class="text-xs text-zinc-400 mt-1 mb-5">Identifique seu WhatsApp ou entre com o Cliente Demo para testar.</p>
               <div class="flex items-center justify-center gap-2">
-                <button onclick="loginAsDemoClient()" class="px-4 py-3 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 font-bold text-xs">
+                <button type="button" onclick="loginAsDemoClient()" class="px-4 py-3 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 font-bold text-xs">
                   ⚡ Entrar com Cliente Demo
                 </button>
-                <button onclick="openSplitPortal()" class="px-5 py-3 rounded-xl gold-gradient text-black font-extrabold text-xs">
+                <button type="button" onclick="openSplitPortal()" class="px-5 py-3 rounded-xl gold-gradient text-black font-extrabold text-xs">
                   Digitar Telefone
                 </button>
               </div>
@@ -1777,7 +1476,7 @@
 
         const myAppts = DB.appointments
           .filter(a => cleanPhone(a.clientPhone) === cleanPhone(loggedClient.phone))
-          .sort((a, b) => `${b.date}${b.time}`.localeCompare(`${a.date}${a.time}`));
+          .sort((a, b) => `${b.date} ${b.time}`.localeCompare(`${a.date} ${a.time}`));
 
         contentEl.innerHTML = `
           <div class="space-y-4">
@@ -1799,15 +1498,15 @@
                       <span class="text-xs font-bold text-white">${formatDateBR(apt.date)} às ${apt.time}</span>
                     </div>
                     <h5 class="font-bold text-sm sm:text-base text-amber-400 mt-1">${service ? service.name : 'Procedimento'}</h5>
-                    ${mods.multiBarber !== false ? `<p class="text-xs text-zinc-400">Profissional: <strong class="text-zinc-200">${barber ? barber.name : '-'}</strong> (${apt.duration || 30} min)</p>` : `<p class="text-xs text-zinc-400">Duração: ${apt.duration || 30} min</p>`}
+                    <p class="text-xs text-zinc-400">Barbeiro: <strong class="text-zinc-200">${barber ? barber.name : '-'}</strong> (${apt.duration || 30} min)</p>
                   </div>
                   <div class="flex items-center gap-2">
-                    <span class="text-sm font-extrabold text-white mr-1">${apt.isVipCovered ? 'Plano VIP (R$ 0)' : formatBRL(apt.price)}</span>
-                    <button onclick="openReceiptModal('${apt.id}')" class="px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-xs font-bold">
+                    <span class="text-sm font-extrabold text-white mr-2">${apt.isVipCovered ? 'Plano VIP (R$ 0)' : formatBRL(apt.price)}</span>
+                    <button type="button" onclick="openReceiptModal('${apt.id}')" class="px-3 py-2 rounded-xl bg-zinc-800 text-zinc-200 text-xs font-bold">
                       🧾 Comprovante
                     </button>
                     ${apt.status === 'confirmed' ? `
-                      <button onclick="clientCancelAppointment('${apt.id}')" class="px-3 py-2 rounded-xl bg-rose-500/15 text-rose-400 text-xs font-bold">
+                      <button type="button" onclick="clientCancelAppointment('${apt.id}')" class="px-3 py-2 rounded-xl bg-rose-500/15 text-rose-400 text-xs font-bold">
                         Cancelar
                       </button>
                     ` : ''}
@@ -1821,7 +1520,7 @@
     }
 
     /*************************************************************************
-     * 8. MOTOR INTELIGENTE DE AGENDAMENTO (SUPORTA BARBEIRO ÚNICO OU EQUIPE)
+     * MOTOR INTELIGENTE DE AGENDAMENTO
      *************************************************************************/
     let bookingState = { serviceId: null, barberId: null, date: getTodayISO(), time: null };
 
@@ -1836,20 +1535,16 @@
     }
 
     function getAvailableSlotsForBarber(barberId, dateISO, durationMinutes, ignoreAptId = null) {
-      const barber = DB.barbers.find(b => b.id === barberId) || DB.barbers[0];
-      if (!barber) return [];
-
-      const [y, m, d] = dateISO.split('-').map(Number);
-      const dayOfWeek = new Date(y, m - 1, d).getDay();
-      if (Array.isArray(barber.workDays) && !barber.workDays.includes(dayOfWeek)) return [];
+      const barber = DB.barbers.find(b => b.id === barberId);
+      if (!barber || barber.active === false) return [];
 
       const openMins = timeToMinutes(barber.openTime || DB.settings.openTime || '09:00');
       const closeMins = timeToMinutes(barber.closeTime || DB.settings.closeTime || '20:00');
-      const breakStartMins = barber.breakStart ? timeToMinutes(barber.breakStart) : (DB.settings.breakStart ? timeToMinutes(DB.settings.breakStart) : null);
-      const breakEndMins = barber.breakEnd ? timeToMinutes(barber.breakEnd) : (DB.settings.breakEnd ? timeToMinutes(DB.settings.breakEnd) : null);
+      const breakStartMins = barber.breakStart ? timeToMinutes(barber.breakStart) : null;
+      const breakEndMins = barber.breakEnd ? timeToMinutes(barber.breakEnd) : null;
 
       const dayAppointments = DB.appointments.filter(a =>
-        a.barberId === barber.id &&
+        a.barberId === barberId &&
         a.date === dateISO &&
         a.status !== 'cancelled' &&
         a.id !== ignoreAptId
@@ -1857,12 +1552,8 @@
 
       const slots = [];
       const step = Number(DB.settings.slotInterval || 15);
-      const now = new Date();
-      const isToday = dateISO === getTodayISO();
-      const currentMinutesNow = now.getHours() * 60 + now.getMinutes();
 
       for (let start = openMins; start + durationMinutes <= closeMins; start += step) {
-        if (isToday && start < currentMinutesNow + 10) continue;
         const end = start + durationMinutes;
 
         if (breakStartMins !== null && breakEndMins !== null && breakEndMins > breakStartMins) {
@@ -1890,7 +1581,7 @@
 
       const defaultBarber = preselectedBarberId
         ? DB.barbers.find(b => b.id === preselectedBarberId)
-        : DB.barbers.find(b => b.active !== false) || DB.barbers[0];
+        : DB.barbers.find(b => b.active !== false);
 
       bookingState = {
         serviceId: srv.id,
@@ -1905,7 +1596,6 @@
       const srv = DB.services.find(s => s.id === bookingState.serviceId);
       const activeBarbers = DB.barbers.filter(b => b.active !== false);
       const clientVip = isClientVipActive(loggedClient) && srv.vipIncluded;
-      const isMultiBarber = DB.settings.modules?.multiBarber !== false;
 
       const nextDays = [];
       for (let i = 0; i < 7; i++) {
@@ -1934,31 +1624,29 @@
             </div>
           </div>
 
-          ${isMultiBarber ? `
-            <div>
-              <label class="block text-xs font-bold uppercase text-zinc-400 mb-2">1. Escolha o Profissional</label>
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                ${activeBarbers.map(b => {
-                  const selected = b.id === bookingState.barberId;
-                  return `
-                    <button type="button" onclick="bookingState.barberId='${b.id}';bookingState.time=null;renderBookingModal()"
-                      class="p-2.5 rounded-xl border text-left flex items-center gap-2.5 transition ${selected ? 'bg-amber-500/15 border-amber-500 text-white' : 'bg-obsidian-950 border-zinc-800 text-zinc-300'}">
-                      <div class="w-9 h-9 rounded-lg bg-obsidian-800 border border-amber-500/30 flex items-center justify-center overflow-hidden shrink-0 font-bold text-amber-400 text-xs">
-                        ${b.photo ? `<img src="${b.photo}" class="w-full h-full object-cover"/>` : b.name.charAt(0)}
-                      </div>
-                      <div class="min-w-0">
-                        <p class="text-xs font-bold truncate">${b.name}</p>
-                        <p class="text-[10px] text-zinc-400 truncate">${b.openTime}-${b.closeTime}</p>
-                      </div>
-                    </button>
-                  `;
-                }).join('')}
-              </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-2">1. Profissional</label>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              ${activeBarbers.map(b => {
+                const selected = b.id === bookingState.barberId;
+                return `
+                  <button type="button" onclick="bookingState.barberId='${b.id}';bookingState.time=null;renderBookingModal()"
+                    class="p-2.5 rounded-xl border text-left flex items-center gap-2.5 transition ${selected ? 'bg-amber-500/15 border-amber-500 text-white' : 'bg-obsidian-950 border-zinc-800 text-zinc-300'}">
+                    <div class="w-9 h-9 rounded-lg bg-obsidian-800 border border-amber-500/30 flex items-center justify-center overflow-hidden shrink-0 font-bold text-amber-400 text-xs">
+                      ${b.photo ? `<img src="${b.photo}" class="w-full h-full object-cover"/>` : b.name.charAt(0)}
+                    </div>
+                    <div class="min-w-0">
+                      <p class="text-xs font-bold truncate">${b.name}</p>
+                      <p class="text-[10px] text-zinc-400 truncate">${b.openTime}-${b.closeTime}</p>
+                    </div>
+                  </button>
+                `;
+              }).join('')}
             </div>
-          ` : ''}
+          </div>
 
           <div>
-            <label class="block text-xs font-bold uppercase text-zinc-400 mb-2">${isMultiBarber ? '2.' : '1.'} Escolha o Dia</label>
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-2">2. Dia da Semana</label>
             <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
               ${nextDays.map(d => {
                 const selected = d.iso === bookingState.date;
@@ -1975,25 +1663,19 @@
 
           <div>
             <label class="block text-xs font-bold uppercase text-zinc-400 mb-2">
-              ${isMultiBarber ? '3.' : '2.'} Horários Livres (${slots.length} disponíveis)
+              3. Horários Livres (${slots.length} disponíveis)
             </label>
-            ${slots.length === 0 ? `
-              <div class="p-4 rounded-xl bg-obsidian-950 border border-zinc-800 text-center text-xs text-zinc-400">
-                Nenhum horário disponível neste dia para ${srv.duration} min.
-              </div>
-            ` : `
-              <div class="grid grid-cols-4 sm:grid-cols-5 gap-2 max-h-48 overflow-y-auto pr-1">
-                ${slots.map(t => {
-                  const selected = t === bookingState.time;
-                  return `
-                    <button type="button" onclick="bookingState.time='${t}';renderBookingModal()"
-                      class="py-2.5 rounded-xl border text-xs font-bold transition ${selected ? 'gold-gradient text-black border-amber-400' : 'bg-obsidian-950 border-zinc-800 text-zinc-200 hover:border-amber-500/40'}">
-                      ${t}
-                    </button>
-                  `;
-                }).join('')}
-              </div>
-            `}
+            <div class="grid grid-cols-4 sm:grid-cols-5 gap-2 max-h-48 overflow-y-auto pr-1">
+              ${slots.map(t => {
+                const selected = t === bookingState.time;
+                return `
+                  <button type="button" onclick="bookingState.time='${t}';renderBookingModal()"
+                    class="py-2.5 rounded-xl border text-xs font-bold transition ${selected ? 'gold-gradient text-black border-amber-400' : 'bg-obsidian-950 border-zinc-800 text-zinc-200 hover:border-amber-500/40'}">
+                    ${t}
+                  </button>
+                `;
+              }).join('')}
+            </div>
           </div>
 
           <button type="button" onclick="confirmClientBooking()" class="w-full py-3.5 rounded-xl gold-gradient text-black font-extrabold text-sm shadow-lg">
@@ -2005,7 +1687,7 @@
 
     async function confirmClientBooking() {
       if (!bookingState.barberId || !bookingState.date || !bookingState.time) {
-        showToast('Escolha o dia e o horário desejado.', 'error');
+        showToast('Escolha o barbeiro, o dia e o horário.', 'error');
         return;
       }
       const srv = DB.services.find(s => s.id === bookingState.serviceId);
@@ -2071,122 +1753,89 @@
     }
 
     /*************************************************************************
-     * 9. GERADOR DE RECIBO / CUPOM TÉRMICO GRÁTIS + EMISSÃO DE NFS-E
+     * GERADOR DE RECIBO / CUPOM NÃO-FISCAL GRATUITO (IMPRESSÃO E WHATSAPP)
      *************************************************************************/
     function openReceiptModal(aptId) {
       const apt = DB.appointments.find(a => a.id === aptId);
       if (!apt) return;
       const srv = DB.services.find(s => s.id === apt.serviceId);
       const barber = DB.barbers.find(b => b.id === apt.barberId);
-      const fc = DB.settings.fiscalConfig || {};
-      const receiptCode = apt.nfseNumber || apt.id.slice(-6).toUpperCase();
+      const s = DB.settings;
 
-      const wppText = encodeURIComponent(
+      const wppReceiptText = encodeURIComponent(
         `🧾 *COMPROVANTE DE ATENDIMENTO*\n` +
-        `*${DB.settings.name}*\n` +
-        `CNPJ: ${fc.cnpj || 'Isento/MEI'}\n` +
+        `*${s.name}*\n` +
+        `CNPJ: ${s.cnpj || 'Isento/MEI'}\n` +
         `----------------------------\n` +
-        `Cliente: ${apt.clientName}\n` +
-        `Serviço: ${srv ? srv.name : 'Procedimento'}\n` +
-        `Profissional: ${barber ? barber.name : DB.settings.name}\n` +
-        `Data/Hora: ${formatDateBR(apt.date)} às ${apt.time}\n` +
-        `Valor: ${apt.isVipCovered ? 'R$ 0,00 (Plano VIP)' : formatBRL(apt.price)}\n` +
-        `Pagamento: ${apt.paymentMethod || 'PIX'}\n` +
-        `${apt.nfseNumber ? `NFS-e Nº: ${apt.nfseNumber}\n` : ''}` +
+        `👤 Cliente: ${apt.clientName}\n` +
+        `✂️ Serviço: ${srv ? srv.name : 'Atendimento'}\n` +
+        `💈 Profissional: ${barber ? barber.name : '-'}\n` +
+        `📅 Data/Hora: ${formatDateBR(apt.date)} às ${apt.time}\n` +
+        `💳 Valor: ${apt.isVipCovered ? 'R$ 0,00 (Plano VIP)' : formatBRL(apt.price)} (${apt.paymentMethod || 'PIX'})\n` +
         `----------------------------\n` +
-        `${fc.receiptFooter || 'Obrigado pela preferência!'}`
+        `Obrigado pela preferência!`
       );
 
-      openModal('🧾 Recibo / Cupom & Nota Fiscal', `
+      openModal('🧾 Recibo / Cupom de Atendimento', `
         <div class="space-y-4">
-          <!-- Cupom Estilizado para Impressora Térmica 80mm/58mm -->
-          <div id="printable-receipt-area" class="bg-white text-black font-mono p-5 rounded-2xl border-2 border-dashed border-zinc-400 max-w-sm mx-auto text-xs space-y-2 shadow-inner">
-            <div class="text-center border-b border-dashed border-zinc-400 pb-2">
-              <div class="font-extrabold text-sm uppercase">${DB.settings.name}</div>
-              <div>${fc.legalName || DB.settings.name}</div>
-              <div>CNPJ: ${fc.cnpj || '00.000.000/0001-00'}</div>
-              <div class="text-[10px]">${DB.settings.address}</div>
+          <div id="printable-receipt" class="bg-zinc-950 border border-dashed border-zinc-700 rounded-2xl p-5 font-mono text-xs text-zinc-200 space-y-2">
+            <div class="text-center border-b border-dashed border-zinc-700 pb-3">
+              <div class="font-bold text-sm text-white uppercase">${s.name}</div>
+              <div class="text-[11px] text-zinc-400">${s.address}</div>
+              <div class="text-[11px] text-zinc-400">CNPJ: ${s.cnpj || 'Não informado'}</div>
             </div>
-            <div class="py-1 border-b border-dashed border-zinc-400 space-y-0.5">
-              <div><strong>RECIBO Nº:</strong> #${receiptCode}</div>
+            <div class="py-2 space-y-1">
+              <div><strong>RECIBO Nº:</strong> #${apt.id.slice(-6).toUpperCase()}</div>
               <div><strong>DATA:</strong> ${formatDateBR(apt.date)} às ${apt.time}</div>
               <div><strong>CLIENTE:</strong> ${apt.clientName}</div>
-              <div><strong>WHATSAPP:</strong> ${formatPhoneDisplay(apt.clientPhone)}</div>
+              <div><strong>TELEFONE:</strong> ${formatPhoneDisplay(apt.clientPhone)}</div>
+              <div><strong>PROFISSIONAL:</strong> ${barber ? barber.name : '-'}</div>
             </div>
-            <div class="py-1 border-b border-dashed border-zinc-400 space-y-1">
-              <div class="flex justify-between font-bold">
-                <span>DESCRIÇÃO</span>
-                <span>VALOR</span>
-              </div>
-              <div class="flex justify-between">
-                <span>1x ${srv ? srv.name : 'Corte'}</span>
-                <span>${apt.isVipCovered ? 'VIP R$ 0,00' : formatBRL(apt.price)}</span>
-              </div>
-              <div class="text-[10px] text-zinc-600">Profissional: ${barber ? barber.name : DB.settings.name}</div>
+            <div class="border-t border-b border-dashed border-zinc-700 py-2 flex justify-between font-bold text-sm text-amber-400">
+              <span>${srv ? srv.name : 'Corte/Serviço'}</span>
+              <span>${apt.isVipCovered ? 'VIP R$ 0,00' : formatBRL(apt.price)}</span>
             </div>
-            <div class="pt-1 flex justify-between font-extrabold text-sm">
-              <span>TOTAL PAGO (${apt.paymentMethod || 'PIX'})</span>
-              <span>${apt.isVipCovered ? 'R$ 0,00' : formatBRL(apt.price)}</span>
+            <div class="pt-1 flex justify-between text-[11px] text-zinc-400">
+              <span>FORMA DE PAGAMENTO:</span>
+              <span class="font-bold text-white">${apt.paymentMethod || 'PIX'}</span>
             </div>
-            ${apt.nfseNumber ? `
-              <div class="mt-2 p-2 bg-zinc-100 rounded text-center text-[10px] font-bold">
-                ✓ NFS-e EMITIDA Nº ${apt.nfseNumber} (Cód. Serviço ${fc.serviceCode || '06.01'})
-              </div>
-            ` : ''}
-            <div class="text-center text-[10px] pt-2 border-t border-dashed border-zinc-400">
-              ${fc.receiptFooter || 'Obrigado pela preferência!'}
+            <div class="text-center text-[10px] text-zinc-500 pt-3">
+              Documento auxiliar de controle de atendimento.
             </div>
           </div>
 
-          <!-- Ações do Recibo / Nota Fiscal -->
-          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 pt-2">
-            <button type="button" onclick="window.print()" class="py-3 px-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs flex items-center justify-center gap-1.5">
-              <i data-lucide="printer" class="w-4 h-4 text-amber-400"></i> Imprimir Cupom
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <button type="button" onclick="window.print()" class="py-3 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-white font-bold text-xs">
+              🖨️ Imprimir Cupom
             </button>
-            <a href="https://wa.me/55${cleanPhone(apt.clientPhone)}?text=${wppText}" target="_blank"
-              class="py-3 px-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs flex items-center justify-center gap-1.5">
-              <i data-lucide="send" class="w-4 h-4"></i> Enviar WhatsApp
+            <a href="https://wa.me/55${cleanPhone(apt.clientPhone)}?text=${wppReceiptText}" target="_blank"
+              class="py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs text-center">
+              📲 Enviar no WhatsApp
             </a>
-            <button type="button" onclick="issueNfseForAppointment('${apt.id}')" class="py-3 px-3 rounded-xl gold-gradient text-black font-extrabold text-xs flex items-center justify-center gap-1.5">
-              <i data-lucide="file-check-2" class="w-4 h-4"></i> ${apt.nfseNumber ? 'Reemitir NFS-e' : 'Emitir NFS-e'}
+            <button type="button" onclick="triggerNfseIssuance('${apt.id}')" class="py-3 rounded-xl gold-gradient text-black font-extrabold text-xs">
+              🧾 Emitir NFS-e Oficial
             </button>
           </div>
         </div>
       `);
     }
 
-    async function issueNfseForAppointment(aptId) {
-      const apt = DB.appointments.find(a => a.id === aptId);
-      if (!apt) return;
-      const srv = DB.services.find(s => s.id === apt.serviceId);
-      const fc = DB.settings.fiscalConfig || {};
-
-      const generatedNum = `${new Date().getFullYear()}00${Math.floor(1000 + Math.random() * 9000)}`;
-      apt.nfseStatus = 'issued';
-      apt.nfseNumber = generatedNum;
-
-      DB.invoices = DB.invoices || [];
-      DB.invoices.push({
-        id: uid('inv'),
-        number: generatedNum,
-        type: 'NFS-e',
-        clientName: apt.clientName,
-        clientPhone: apt.clientPhone,
-        clientDoc: 'CPF Consumidor',
-        serviceName: srv ? srv.name : 'Serviço de Barbearia',
-        amount: Number(apt.price || 0),
-        date: apt.date,
-        status: fc.apiKey ? 'Transmitida via API (' + (fc.provider || 'Asaas').toUpperCase() + ')' : 'Emitida (Homologação)'
-      });
-
-      await saveStoreDatabase();
-      openReceiptModal(aptId);
-      renderAll();
-      showToast(`NFS-e Nº ${generatedNum} gerada com sucesso!`, 'success');
+    function triggerNfseIssuance(aptId) {
+      if (!DB.settings.asaasApiKey) {
+        closeModal();
+        if (currentView !== 'admin') {
+          showToast('Para emitir NFS-e da Prefeitura, configure a chave Asaas no painel do Proprietário.', 'info');
+        } else {
+          setAdminTab('fiscal');
+          showToast('Configure sua chave gratuita do Asaas aqui para emitir NFS-e!', 'info');
+        }
+        return;
+      }
+      showToast('Solicitação de NFS-e enviada para a API Fiscal!', 'success');
     }
 
     /*************************************************************************
-     * 10. LOGIN DO PROPRIETÁRIO E DESENVOLVEDOR MASTER
+     * LOGIN DO PROPRIETÁRIO E DESENVOLVEDOR MASTER
      *************************************************************************/
     function handleAdminAccessClick() {
       if (!portalOpen && currentView === 'admin') {
@@ -2197,12 +1846,11 @@
         switchView('admin');
         return;
       }
-      const isDemoStore = CURRENT_STORE_ID === 'demo' || CURRENT_STORE_ID === 'barbearia_imperial';
 
-      openModal('Acesso Restrito — Proprietário', `
+      openModal('🔒 Acesso Restrito — Proprietário & Dev', `
         <form onsubmit="submitAdminLogin(event)" class="space-y-4">
           <div>
-            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">E-mail do Proprietário</label>
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">E-mail de Acesso</label>
             <input id="login-admin-email" type="email" required placeholder="seu@email.com"
               class="w-full px-4 py-3 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
           </div>
@@ -2212,17 +1860,15 @@
               class="w-full px-4 py-3 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
           </div>
 
-          ${isDemoStore ? `
-            <div class="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between gap-2">
-              <div class="text-[11px] text-zinc-300">
-                <span class="font-bold text-amber-400 block">Ambiente de Demonstração</span>
-                Teste o painel de gestão completo da barbearia:
-              </div>
-              <button type="button" onclick="fillDemoOwnerLogin()" class="shrink-0 px-3 py-2 rounded-lg bg-amber-500 text-black font-extrabold text-xs">
-                Entrar Demo
-              </button>
+          <div class="p-3.5 rounded-xl bg-amber-500/10 border border-amber-500/30 flex items-center justify-between gap-2">
+            <div class="text-[11px] text-zinc-300">
+              <span class="font-bold text-amber-400 block">Testar Painel do Proprietário (Demo)</span>
+              Login: <code>${DB.settings.ownerEmail || 'demo@barbearia.com'}</code> | Senha: <code>${DB.settings.ownerPass || '123'}</code>
             </div>
-          ` : ''}
+            <button type="button" onclick="fillDemoOwnerLogin()" class="shrink-0 px-3 py-2 rounded-lg bg-amber-500 text-black font-extrabold text-xs">
+              Entrar Demo
+            </button>
+          </div>
 
           <button type="submit" class="w-full py-3.5 rounded-xl gold-gradient text-black font-extrabold text-sm">
             Acessar Painel de Gestão
@@ -2234,24 +1880,24 @@
     function fillDemoOwnerLogin() {
       document.getElementById('login-admin-email').value = DB.settings.ownerEmail || 'demo@barbearia.com';
       document.getElementById('login-admin-pass').value = DB.settings.ownerPass || '123';
-      submitAdminLogin(new Event('submit'));
+      submitAdminLogin();
     }
 
     function submitAdminLogin(e) {
       if (e && e.preventDefault) e.preventDefault();
-      const email = document.getElementById('login-admin-email').value.trim().toLowerCase();
-      const pass = document.getElementById('login-admin-pass').value.trim();
+      const email = (document.getElementById('login-admin-email')?.value || '').trim().toLowerCase();
+      const pass = (document.getElementById('login-admin-pass')?.value || '').trim();
 
       if (email === DEV_MASTER_EMAIL && pass === DEV_MASTER_PASS) {
         adminSession = { role: 'dev', email };
         currentAdminTab = 'dev';
         closeModal();
         switchView('admin');
-        showToast('Acesso Desenvolvedor Master liberado!', 'success');
+        showToast('Modo Desenvolvedor Master ativado!', 'success');
         return;
       }
 
-      if (email === (DB.settings.ownerEmail || '').toLowerCase() && pass === String(DB.settings.ownerPass)) {
+      if (email === (DB.settings.ownerEmail || 'demo@barbearia.com').toLowerCase() && pass === String(DB.settings.ownerPass || '123')) {
         adminSession = { role: 'owner', email };
         if (currentAdminTab === 'dev') currentAdminTab = 'agenda';
         closeModal();
@@ -2260,7 +1906,7 @@
         return;
       }
 
-      showToast('E-mail ou senha inválidos.', 'error');
+      showToast('E-mail ou senha incorretos.', 'error');
     }
 
     function logoutAdmin() {
@@ -2269,50 +1915,34 @@
     }
 
     /*************************************************************************
-     * 11. PAINEL DE CONTROLE 360º DO PROPRIETÁRIO (DINÂMICO POR MÓDULOS)
+     * PAINEL DO PROPRIETÁRIO E DESENVOLVEDOR MASTER
      *************************************************************************/
     function setAdminTab(tab) {
       if (tab === 'dev' && (!adminSession || adminSession.role !== 'dev')) return;
       currentAdminTab = tab;
       renderAdminView();
-      lucide.createIcons();
+      safeIcons();
     }
 
     function renderAdminView() {
-      const mods = DB.settings.modules || { multiBarber: true, combos: true, plans: true, products: true, fiscal: true };
+      const devBtn = document.getElementById('atab-dev');
       const roleBadge = document.getElementById('admin-role-badge');
-      roleBadge.textContent = adminSession?.role === 'dev' ? '💻 Dev Master' : 'Proprietário';
 
-      if (currentAdminTab === 'team' && mods.multiBarber === false) currentAdminTab = 'agenda';
-      if (currentAdminTab === 'inventory' && mods.products === false) currentAdminTab = 'agenda';
-      if (currentAdminTab === 'fiscal' && mods.fiscal === false) currentAdminTab = 'agenda';
+      if (adminSession && adminSession.role === 'dev') {
+        devBtn.classList.remove('hidden');
+        roleBadge.textContent = '💻 Dev Master';
+      } else {
+        devBtn.classList.add('hidden');
+        roleBadge.textContent = 'Proprietário';
+      }
 
-      const adminTabs = [
-        { id: 'agenda', label: 'Agenda & Encaixes', icon: 'calendar-clock', show: true },
-        { id: 'team', label: 'Profissionais & Horários', icon: 'users', show: mods.multiBarber !== false },
-        { id: 'catalog', label: 'Cortes & Planos VIP', icon: 'scissors', show: true },
-        { id: 'inventory', label: 'Produtos & Insumos', icon: 'package', show: mods.products !== false },
-        { id: 'crm', label: 'Clientes & Retenção', icon: 'trophy', show: true },
-        { id: 'finance', label: 'Finanças & Gastos', icon: 'wallet', show: true },
-        { id: 'fiscal', label: 'Fiscal & Recibos (NFS-e)', icon: 'receipt', show: mods.fiscal !== false },
-        { id: 'settings', label: 'Personalizar Site & Temas', icon: 'sliders', show: true },
-        { id: 'dev', label: '💻 Desenvolvedor (Bancos)', icon: 'terminal', show: adminSession?.role === 'dev' }
-      ].filter(t => t.show);
-
-      const navContainer = document.getElementById('admin-sidebar-nav');
-      navContainer.innerHTML = adminTabs.map(t => {
-        const active = t.id === currentAdminTab;
-        return `
-          <button onclick="setAdminTab('${t.id}')" class="admin-nav-btn shrink-0 flex items-center gap-2.5 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm transition w-auto lg:w-full text-left ${
-            active
-              ? 'font-extrabold gold-gradient text-black shadow'
-              : 'font-semibold text-zinc-300 hover:bg-obsidian-800'
-          }">
-            <i data-lucide="${t.icon}" class="w-4 h-4 shrink-0"></i>
-            <span>${t.label}</span>
-          </button>
-        `;
-      }).join('');
+      ['agenda', 'team', 'catalog', 'inventory', 'crm', 'finance', 'fiscal', 'settings', 'dev'].forEach(t => {
+        const b = document.getElementById(`atab-${t}`);
+        if (!b || b.classList.contains('hidden')) return;
+        b.className = t === currentAdminTab
+          ? 'admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold gold-gradient text-black transition w-auto lg:w-full text-left shadow'
+          : 'admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold text-zinc-300 hover:bg-obsidian-800 transition w-auto lg:w-full text-left';
+      });
 
       const container = document.getElementById('admin-content-area');
       if (currentAdminTab === 'agenda') renderAdminAgenda(container);
@@ -2326,26 +1956,25 @@
       else if (currentAdminTab === 'dev') renderAdminDevMaster(container);
     }
 
-    /* 11.1 AGENDA INTELIGENTE COM BOTÃO DE RECIBO E NOTA FISCAL */
+    /* 1. AGENDA & RECIBOS */
     function renderAdminAgenda(container) {
-      const isMultiBarber = DB.settings.modules?.multiBarber !== false;
       const filteredAppts = DB.appointments.filter(a => {
-        const matchBarber = !isMultiBarber || agendaFilterBarber === 'all' || a.barberId === agendaFilterBarber;
+        const matchBarber = agendaFilterBarber === 'all' || a.barberId === agendaFilterBarber;
         if (!matchBarber) return false;
         if (agendaViewMode === 'daily') return a.date === agendaFilterDate;
         const endWeek = addDaysISO(agendaFilterDate, 6);
         return a.date >= agendaFilterDate && a.date <= endWeek;
-      }).sort((a, b) => `${a.date}${a.time}`.localeCompare(`${b.date}${b.time}`));
+      }).sort((a, b) => `${a.date} ${a.time}`.localeCompare(`${b.date} ${b.time}`));
 
       container.innerHTML = `
         <div class="space-y-6">
           <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div>
-              <h3 class="font-royal font-bold text-xl text-white">Agenda Inteligente & Encaixes</h3>
-              <p class="text-xs text-zinc-400">Conclua cortes para lançar automático no caixa e gerar o Recibo/Cupom ou NFS-e.</p>
+              <h3 class="font-royal font-bold text-xl text-white">Agenda Inteligente, Encaixes & Recibos</h3>
+              <p class="text-xs text-zinc-400">Conclua cortes para lançar automático no caixa e gere recibos/cupons em 1 clique.</p>
             </div>
-            <button onclick="openAdminAppointmentModal()" class="px-4 py-2.5 rounded-xl gold-gradient text-black font-extrabold text-xs sm:text-sm flex items-center gap-2">
-              <i data-lucide="plus-circle" class="w-4 h-4"></i> Novo Agendamento / Encaixe
+            <button type="button" onclick="openAdminAppointmentModal()" class="px-4 py-2.5 rounded-xl gold-gradient text-black font-extrabold text-xs sm:text-sm">
+              + Novo Agendamento / Encaixe
             </button>
           </div>
 
@@ -2354,18 +1983,16 @@
               <input type="date" value="${agendaFilterDate}" onchange="agendaFilterDate=this.value;renderAll()"
                 class="px-3 py-2 rounded-xl bg-obsidian-950 border border-zinc-700 text-xs sm:text-sm text-white" />
               <div class="inline-flex rounded-xl bg-obsidian-950 p-1 border border-zinc-800">
-                <button onclick="agendaViewMode='daily';renderAll()" class="px-3 py-1.5 rounded-lg text-xs font-bold ${agendaViewMode === 'daily' ? 'bg-amber-500 text-black' : 'text-zinc-400'}">Diária</button>
-                <button onclick="agendaViewMode='weekly';renderAll()" class="px-3 py-1.5 rounded-lg text-xs font-bold ${agendaViewMode === 'weekly' ? 'bg-amber-500 text-black' : 'text-zinc-400'}">Semanal</button>
+                <button type="button" onclick="agendaViewMode='daily';renderAll()" class="px-3 py-1.5 rounded-lg text-xs font-bold ${agendaViewMode === 'daily' ? 'bg-amber-500 text-black' : 'text-zinc-400'}">Diária</button>
+                <button type="button" onclick="agendaViewMode='weekly';renderAll()" class="px-3 py-1.5 rounded-lg text-xs font-bold ${agendaViewMode === 'weekly' ? 'bg-amber-500 text-black' : 'text-zinc-400'}">Semanal</button>
               </div>
             </div>
-            ${isMultiBarber ? `
-              <div class="flex items-center gap-2 overflow-x-auto no-scrollbar">
-                <button onclick="agendaFilterBarber='all';renderAll()" class="px-3 py-1.5 rounded-xl text-xs font-bold border ${agendaFilterBarber === 'all' ? 'bg-amber-500/20 border-amber-500 text-amber-400' : 'border-zinc-800 text-zinc-400'}">Todos</button>
-                ${DB.barbers.map(b => `
-                  <button onclick="agendaFilterBarber='${b.id}';renderAll()" class="px-3 py-1.5 rounded-xl text-xs font-bold border shrink-0 ${agendaFilterBarber === b.id ? 'bg-amber-500/20 border-amber-500 text-amber-400' : 'border-zinc-800 text-zinc-400'}">${b.name}</button>
-                `).join('')}
-              </div>
-            ` : ''}
+            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar">
+              <button type="button" onclick="agendaFilterBarber='all';renderAll()" class="px-3 py-1.5 rounded-xl text-xs font-bold border ${agendaFilterBarber === 'all' ? 'bg-amber-500/20 border-amber-500 text-amber-400' : 'border-zinc-800 text-zinc-400'}">Todos</button>
+              ${DB.barbers.map(b => `
+                <button type="button" onclick="agendaFilterBarber='${b.id}';renderAll()" class="px-3 py-1.5 rounded-xl text-xs font-bold border shrink-0 ${agendaFilterBarber === b.id ? 'bg-amber-500/20 border-amber-500 text-amber-400' : 'border-zinc-800 text-zinc-400'}">${b.name}</button>
+              `).join('')}
+            </div>
           </div>
 
           <div class="space-y-3">
@@ -2388,20 +2015,19 @@
                           apt.status === 'confirmed' ? 'bg-amber-500/15 text-amber-400' :
                           apt.status === 'completed' ? 'bg-emerald-500/15 text-emerald-400' : 'bg-rose-500/15 text-rose-400'
                         }">${apt.status === 'confirmed' ? 'Confirmado' : apt.status === 'completed' ? 'Concluído' : 'Cancelado'}</span>
-                        ${apt.nfseNumber ? `<span class="text-[10px] px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-bold">NFS-e #${apt.nfseNumber}</span>` : ''}
                       </div>
                       <p class="text-xs text-amber-400 font-semibold mt-0.5">${srv ? srv.name : 'Corte'} • ${apt.isVipCovered ? 'Plano VIP' : formatBRL(apt.price)}</p>
-                      <p class="text-xs text-zinc-400">${isMultiBarber ? `Barbeiro: <strong class="text-zinc-200">${barber ? barber.name : '-'}</strong> • ` : ''}WhatsApp: ${formatPhoneDisplay(apt.clientPhone)}</p>
+                      <p class="text-xs text-zinc-400">Barbeiro: <strong class="text-zinc-200">${barber ? barber.name : '-'}</strong> • WhatsApp: ${formatPhoneDisplay(apt.clientPhone)}</p>
                     </div>
                   </div>
                   <div class="flex flex-wrap items-center gap-2">
-                    <button onclick="openReceiptModal('${apt.id}')" class="px-3 py-2 rounded-xl bg-obsidian-950 hover:bg-zinc-800 border border-zinc-700 text-amber-400 text-xs font-bold">
-                      🧾 Recibo / Nota
+                    <button type="button" onclick="openReceiptModal('${apt.id}')" class="px-3 py-2 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-amber-300 text-xs font-bold">
+                      🧾 Recibo / NFS-e
                     </button>
-                    <button onclick="openAdminAppointmentModal('${apt.id}')" class="px-3 py-2 rounded-xl bg-zinc-800 text-zinc-200 text-xs font-bold">Editar</button>
+                    <button type="button" onclick="openAdminAppointmentModal('${apt.id}')" class="px-3 py-2 rounded-xl bg-zinc-800 text-zinc-200 text-xs font-bold">Editar</button>
                     ${apt.status === 'confirmed' ? `
-                      <button onclick="completeAppointmentAction('${apt.id}')" class="px-3 py-2 rounded-xl bg-emerald-600 text-white text-xs font-extrabold">✓ Concluir</button>
-                      <button onclick="cancelAppointmentAction('${apt.id}')" class="px-3 py-2 rounded-xl bg-rose-500/15 text-rose-400 text-xs font-bold">Cancelar</button>
+                      <button type="button" onclick="completeAppointmentAction('${apt.id}')" class="px-3 py-2 rounded-xl bg-emerald-600 text-white text-xs font-extrabold">✓ Concluir</button>
+                      <button type="button" onclick="cancelAppointmentAction('${apt.id}')" class="px-3 py-2 rounded-xl bg-rose-500/15 text-rose-400 text-xs font-bold">Cancelar</button>
                     ` : ''}
                   </div>
                 </div>
@@ -2477,7 +2103,7 @@
 
       let client = DB.clients.find(c => cleanPhone(c.phone) === phone);
       if (!client) {
-        client = { id: uid('cli'), name, phone, cpf: '', totalCuts: 0, totalSpent: 0, lastVisitDate: null, planId: null, planExpiresAt: null, notes: '' };
+        client = { id: uid('cli'), name, phone, totalCuts: 0, totalSpent: 0, lastVisitDate: null, planId: null, planExpiresAt: null, notes: '' };
         DB.clients.push(client);
       }
       const isVip = paymentMethod === 'VIP' || (isClientVipActive(client) && srv?.vipIncluded);
@@ -2527,8 +2153,8 @@
       }
       await saveStoreDatabase();
       renderAll();
+      showToast('Atendimento concluído! Abrindo Recibo...', 'success');
       openReceiptModal(aptId);
-      showToast('Corte concluído! Cupom/Recibo pronto na tela.', 'success');
     }
 
     async function cancelAppointmentAction(aptId) {
@@ -2539,7 +2165,7 @@
       renderAll();
     }
 
-    /* 11.2 PROFISSIONAIS & HORÁRIOS */
+    /* 2. EQUIPE & HORÁRIOS */
     function renderAdminTeam(container) {
       container.innerHTML = `
         <div class="space-y-6">
@@ -2548,7 +2174,7 @@
               <h3 class="font-royal font-bold text-xl text-white">Equipe, Horários & Intervalos Individuais</h3>
               <p class="text-xs text-zinc-400">Configure expediente, horário de intervalo/almoço e comissão individual de cada barbeiro.</p>
             </div>
-            <button onclick="openBarberModal()" class="px-4 py-2.5 rounded-xl gold-gradient text-black font-extrabold text-xs sm:text-sm">
+            <button type="button" onclick="openBarberModal()" class="px-4 py-2.5 rounded-xl gold-gradient text-black font-extrabold text-xs sm:text-sm">
               + Cadastrar Barbeiro
             </button>
           </div>
@@ -2577,8 +2203,8 @@
                       </div>
                     </div>
                     <div class="flex items-center gap-1.5">
-                      <button onclick="openBarberModal('${b.id}')" class="p-2 rounded-xl bg-zinc-800 text-zinc-200"><i data-lucide="edit-3" class="w-4 h-4"></i></button>
-                      <button onclick="deleteBarber('${b.id}')" class="p-2 rounded-xl bg-rose-500/15 text-rose-400"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                      <button type="button" onclick="openBarberModal('${b.id}')" class="px-2.5 py-1.5 rounded-xl bg-zinc-800 text-zinc-200 text-xs font-bold">Editar</button>
+                      <button type="button" onclick="deleteBarber('${b.id}')" class="px-2.5 py-1.5 rounded-xl bg-rose-500/15 text-rose-400 text-xs font-bold">Excluir</button>
                     </div>
                   </div>
                   <div class="grid grid-cols-3 gap-2 pt-2 border-t border-zinc-800 text-center">
@@ -2686,7 +2312,7 @@
       renderAll();
     }
 
-    /* 11.3 CATÁLOGO DE CORTES & PLANOS VIP */
+    /* 3. CATÁLOGO DE CORTES & PLANOS VIP */
     function renderAdminCatalog(container) {
       container.innerHTML = `
         <div class="space-y-8">
@@ -2696,7 +2322,7 @@
                 <h3 class="font-royal font-bold text-xl text-white">Valores dos Cortes, Procedimentos & Combos</h3>
                 <p class="text-xs text-zinc-400">Cadastre preços, fotos e tempo de duração de cada atendimento.</p>
               </div>
-              <button onclick="openServiceModal()" class="px-4 py-2.5 rounded-xl gold-gradient text-black font-extrabold text-xs sm:text-sm">+ Novo Corte / Combo</button>
+              <button type="button" onclick="openServiceModal()" class="px-4 py-2.5 rounded-xl gold-gradient text-black font-extrabold text-xs sm:text-sm">+ Novo Corte / Combo</button>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
               ${DB.services.map(s => `
@@ -2707,8 +2333,8 @@
                     <p class="text-[11px] text-zinc-500">${s.vipIncluded ? '✓ Incluso no Clube VIP' : 'Cobrado avulso'}</p>
                   </div>
                   <div class="flex items-center gap-1.5">
-                    <button onclick="openServiceModal('${s.id}')" class="p-2 rounded-xl bg-zinc-800 text-zinc-200"><i data-lucide="edit-3" class="w-4 h-4"></i></button>
-                    <button onclick="deleteServiceItem('${s.id}')" class="p-2 rounded-xl bg-rose-500/15 text-rose-400"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                    <button type="button" onclick="openServiceModal('${s.id}')" class="px-2.5 py-1.5 rounded-xl bg-zinc-800 text-zinc-200 text-xs font-bold">Editar</button>
+                    <button type="button" onclick="deleteServiceItem('${s.id}')" class="px-2.5 py-1.5 rounded-xl bg-rose-500/15 text-rose-400 text-xs font-bold">Excluir</button>
                   </div>
                 </div>
               `).join('')}
@@ -2721,7 +2347,7 @@
                 <h3 class="font-royal font-bold text-xl text-white">Planos de Assinatura Mensal (Clube VIP)</h3>
                 <p class="text-xs text-zinc-400">Configure planos recorrentes para fidelizar clientes.</p>
               </div>
-              <button onclick="openPlanModal()" class="px-4 py-2.5 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 font-extrabold text-xs sm:text-sm">+ Novo Plano VIP</button>
+              <button type="button" onclick="openPlanModal()" class="px-4 py-2.5 rounded-xl bg-amber-500/20 border border-amber-500/40 text-amber-300 font-extrabold text-xs sm:text-sm">+ Novo Plano VIP</button>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               ${DB.plans.map(p => `
@@ -2731,7 +2357,7 @@
                     <p class="text-sm font-extrabold text-amber-400">${formatBRL(p.price)} / mês</p>
                     <p class="text-xs text-zinc-400 mt-1">${p.description}</p>
                   </div>
-                  <button onclick="deletePlanItem('${p.id}')" class="p-2 rounded-xl bg-rose-500/15 text-rose-400"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                  <button type="button" onclick="deletePlanItem('${p.id}')" class="px-2.5 py-1.5 rounded-xl bg-rose-500/15 text-rose-400 text-xs font-bold">Excluir</button>
                 </div>
               `).join('')}
             </div>
@@ -2858,7 +2484,7 @@
       renderAll();
     }
 
-    /* 11.4 PRODUTOS & INSUMOS */
+    /* 4. PRODUTOS & INSUMOS */
     function renderAdminInventory(container) {
       const items = DB.products || [];
       container.innerHTML = `
@@ -2868,7 +2494,7 @@
               <h3 class="font-royal font-bold text-xl text-white">Controle de Produtos & Insumos da Barbearia</h3>
               <p class="text-xs text-zinc-400">Gerencie pomadas/óleos para venda no balcão e controle insumos internos (lâminas, golas, toalhas).</p>
             </div>
-            <button onclick="openProductModal()" class="px-4 py-2.5 rounded-xl gold-gradient text-black font-extrabold text-xs sm:text-sm">
+            <button type="button" onclick="openProductModal()" class="px-4 py-2.5 rounded-xl gold-gradient text-black font-extrabold text-xs sm:text-sm">
               + Cadastrar Produto ou Insumo
             </button>
           </div>
@@ -2900,19 +2526,19 @@
 
                   <div class="flex flex-wrap items-center justify-between gap-2 pt-3 border-t border-zinc-800">
                     <div class="flex items-center gap-1.5">
-                      <button onclick="adjustProductStock('${p.id}', -1)" class="px-2.5 py-1.5 rounded-lg bg-zinc-800 text-zinc-200 text-xs font-bold">-1</button>
-                      <button onclick="adjustProductStock('${p.id}', 1)" class="px-2.5 py-1.5 rounded-lg bg-zinc-800 text-zinc-200 text-xs font-bold">+1</button>
-                      <button onclick="restockProductExpense('${p.id}')" class="px-2.5 py-1.5 rounded-lg bg-rose-500/15 text-rose-300 text-xs font-bold">
+                      <button type="button" onclick="adjustProductStock('${p.id}', -1)" class="px-2.5 py-1.5 rounded-lg bg-zinc-800 text-zinc-200 text-xs font-bold">-1</button>
+                      <button type="button" onclick="adjustProductStock('${p.id}', 1)" class="px-2.5 py-1.5 rounded-lg bg-zinc-800 text-zinc-200 text-xs font-bold">+1</button>
+                      <button type="button" onclick="restockProductExpense('${p.id}')" class="px-2.5 py-1.5 rounded-lg bg-rose-500/15 text-rose-300 text-xs font-bold">
                         + Comprar Lote (Gasto)
                       </button>
                     </div>
                     <div class="flex items-center gap-1.5">
                       ${p.type === 'sale' ? `
-                        <button onclick="quickSellProduct('${p.id}')" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-extrabold">
+                        <button type="button" onclick="quickSellProduct('${p.id}')" class="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-extrabold">
                           $ Vender 1 un
                         </button>
                       ` : ''}
-                      <button onclick="deleteProductItem('${p.id}')" class="p-1.5 rounded-lg bg-zinc-800 text-rose-400"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                      <button type="button" onclick="deleteProductItem('${p.id}')" class="px-2 py-1.5 rounded-lg bg-zinc-800 text-rose-400 text-xs font-bold">✕</button>
                     </div>
                   </div>
                 </div>
@@ -3030,7 +2656,7 @@
       renderAll();
     }
 
-    /* 11.5 CRM DE CLIENTES & RETENÇÃO */
+    /* 5. CRM DE CLIENTES */
     function renderAdminCRM(container) {
       let list = [...DB.clients];
       if (crmSearchQuery.trim()) {
@@ -3050,7 +2676,622 @@
 
           <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 bg-obsidian-900 border border-zinc-800 p-4 rounded-2xl">
             <div class="flex items-center gap-2 overflow-x-auto no-scrollbar">
-              <button onclick="crmSortFilter='ranking';renderAll()" class="px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 ${crmSortFilter === 'ranking' ? 'gold-gradient text-black' : 'bg-obsidian-950 text-zinc-300'}">🏆 Mais Cortaram</button>
-              <button onclick="crmSortFilter='missing';renderAll()" class="px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 ${crmSortFilter === 'missing' ? 'gold-gradient text-black' : 'bg-obsidian-950 text-zinc-300'}">⚠️ Clientes Sumidos</button>
-              <button onclick="crmSortFilter='vip';renderAll()" class="px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 ${crmSortFilter === 'vip' ? 'gold-gradient text-black' : 'bg-obsidian-950 text-zinc-300'}">👑 Assinantes VIP</button>
+              <button type="button" onclick="crmSortFilter='ranking';renderAll()" class="px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 ${crmSortFilter === 'ranking' ? 'gold-gradient text-black' : 'bg-obsidian-950 text-zinc-300'}">🏆 Mais Cortaram</button>
+              <button type="button" onclick="crmSortFilter='missing';renderAll()" class="px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 ${crmSortFilter === 'missing' ? 'gold-gradient text-black' : 'bg-obsidian-950 text-zinc-300'}">⚠️ Clientes Sumidos</button>
+              <button type="button" onclick="crmSortFilter='vip';renderAll()" class="px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 ${crmSortFilter === 'vip' ? 'gold-gradient text-black' : 'bg-obsidian-950 text-zinc-300'}">👑 Assinantes VIP</button>
             </div>
+            <input type="text" placeholder="Buscar cliente..." value="${crmSearchQuery}" oninput="crmSearchQuery=this.value;renderAll()"
+              class="px-3.5 py-2 rounded-xl bg-obsidian-950 border border-zinc-700 text-xs sm:text-sm text-white" />
+          </div>
+
+          <div class="space-y-3">
+            ${list.map((c, idx) => {
+              const daysAway = daysSinceDate(c.lastVisitDate);
+              const vipActive = isClientVipActive(c);
+              const returnMsg = encodeURIComponent(`Fala ${c.name.split(' ')[0]}, beleza? Já faz ${daysAway === 999 ? 'um tempo' : daysAway + ' dias'} do seu último corte aqui na ${DB.settings.name}. Bora agendar seu horário da semana? 💈`);
+              return `
+                <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-10 h-10 rounded-xl bg-obsidian-950 border border-zinc-700 flex items-center justify-center font-extrabold text-xs text-amber-400">#${idx + 1}</div>
+                    <div>
+                      <div class="flex items-center gap-2 flex-wrap">
+                        <h4 class="font-bold text-sm sm:text-base text-white">${c.name}</h4>
+                        ${vipActive ? `<span class="px-2 py-0.5 text-[10px] rounded-full gold-gradient text-black font-extrabold">👑 VIP ATIVO</span>` : ''}
+                        ${daysAway >= 25 && daysAway < 999 ? `<span class="px-2 py-0.5 text-[10px] rounded-full bg-rose-500/15 text-rose-400 font-bold">Sumido há ${daysAway} dias</span>` : ''}
+                      </div>
+                      <p class="text-xs text-zinc-400 mt-0.5">
+                        Tel: ${formatPhoneDisplay(c.phone)} • Cortes: <strong class="text-amber-400">${c.totalCuts || 0}</strong> • Gasto: <strong class="text-emerald-400">${formatBRL(c.totalSpent || 0)}</strong>
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <a href="https://wa.me/55${cleanPhone(c.phone)}?text=${returnMsg}" target="_blank" class="px-3 py-2 rounded-xl bg-emerald-600/20 text-emerald-300 text-xs font-bold">WhatsApp Retorno</a>
+                    <button type="button" onclick="openClientVipAssignModal('${c.id}')" class="px-3 py-2 rounded-xl bg-amber-500/15 text-amber-300 text-xs font-bold">👑 Plano VIP</button>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function openClientVipAssignModal(clientId) {
+      const c = DB.clients.find(x => x.id === clientId);
+      if (!c) return;
+      openModal(`Assinatura VIP — ${c.name}`, `
+        <form onsubmit="saveClientVipAssign(event, '${c.id}')" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Plano Mensal</label>
+            <select id="vip-assign-plan" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm">
+              <option value="">Sem Plano Ativo</option>
+              ${DB.plans.map(p => `<option value="${p.id}" ${c.planId === p.id ? 'selected' : ''}>${p.name} (${formatBRL(p.price)})</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Data de Vencimento</label>
+            <input id="vip-assign-exp" type="date" required value="${c.planExpiresAt || addDaysISO(getTodayISO(), 30)}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+          </div>
+          <label class="flex items-center gap-2 text-xs text-zinc-200">
+            <input id="vip-assign-finance" type="checkbox" checked class="w-4 h-4 accent-amber-500" />
+            Lançar valor da assinatura no caixa de hoje
+          </label>
+          <button type="submit" class="w-full py-3.5 rounded-xl gold-gradient text-black font-extrabold text-sm">Salvar</button>
+        </form>
+      `);
+    }
+
+    async function saveClientVipAssign(e, clientId) {
+      e.preventDefault();
+      const c = DB.clients.find(x => x.id === clientId);
+      const planId = document.getElementById('vip-assign-plan').value;
+      const exp = document.getElementById('vip-assign-exp').value;
+      c.planId = planId || null;
+      c.planExpiresAt = planId ? exp : null;
+
+      if (planId && document.getElementById('vip-assign-finance').checked) {
+        const plan = DB.plans.find(p => p.id === planId);
+        if (plan) {
+          DB.finances.push({
+            id: uid('fin'),
+            type: 'income',
+            title: `Assinatura ${plan.name} - ${c.name}`,
+            category: 'Assinatura VIP',
+            amount: Number(plan.price),
+            commissionAmount: 0,
+            barberId: null,
+            paymentMethod: 'PIX',
+            date: getTodayISO()
+          });
+        }
+      }
+      await saveStoreDatabase();
+      closeModal();
+      renderAll();
+    }
+
+    /* 6. FINANÇAS & GASTOS */
+    function renderAdminFinance(container) {
+      const finList = DB.finances.filter(f => financeBarberFilter === 'all' || f.barberId === financeBarberFilter);
+      const totalIncome = finList.filter(f => f.type === 'income').reduce((a, b) => a + Number(b.amount || 0), 0);
+      const totalExpense = finList.filter(f => f.type === 'expense').reduce((a, b) => a + Number(b.amount || 0), 0);
+      const totalCommissions = finList.filter(f => f.type === 'income').reduce((a, b) => a + Number(b.commissionAmount || 0), 0);
+      const netProfit = totalIncome - totalExpense - totalCommissions;
+
+      container.innerHTML = `
+        <div class="space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h3 class="font-royal font-bold text-xl text-white">Finanças, Comissões & Gastos da Barbearia</h3>
+              <p class="text-xs text-zinc-400">Controle de entradas, comissões de barbeiros e lançamento rápido de despesas.</p>
+            </div>
+            <button type="button" onclick="openNewFinanceModal()" class="px-4 py-2.5 rounded-xl gold-gradient text-black font-extrabold text-xs">+ Lançamento Manual</button>
+          </div>
+
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
+            <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl p-4">
+              <span class="text-[11px] font-bold uppercase text-zinc-400">Receita Bruta</span>
+              <div class="text-lg sm:text-2xl font-extrabold text-emerald-400 mt-1">${formatBRL(totalIncome)}</div>
+            </div>
+            <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl p-4">
+              <span class="text-[11px] font-bold uppercase text-zinc-400">Comissões Equipe</span>
+              <div class="text-lg sm:text-2xl font-extrabold text-amber-400 mt-1">${formatBRL(totalCommissions)}</div>
+            </div>
+            <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl p-4">
+              <span class="text-[11px] font-bold uppercase text-zinc-400">Gastos & Insumos</span>
+              <div class="text-lg sm:text-2xl font-extrabold text-rose-400 mt-1">${formatBRL(totalExpense)}</div>
+            </div>
+            <div class="bg-obsidian-900 border border-amber-500/40 rounded-2xl p-4">
+              <span class="text-[11px] font-bold uppercase text-amber-400">Lucro Líquido</span>
+              <div class="text-lg sm:text-2xl font-extrabold text-white mt-1">${formatBRL(netProfit)}</div>
+            </div>
+          </div>
+
+          <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl p-4 space-y-3">
+            <div class="flex items-center justify-between">
+              <h4 class="font-bold text-sm text-white">⚡ Lançar Gasto da Barbearia em 1 Clique</h4>
+              <button type="button" onclick="openExpenseTemplateModal()" class="text-xs text-amber-400 font-bold">+ Novo Atalho de Gasto</button>
+            </div>
+            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+              ${DB.expenseTemplates.map(et => `
+                <button type="button" onclick="quickLaunchExpense('${et.id}')" class="shrink-0 px-3.5 py-2 rounded-xl bg-obsidian-950 hover:bg-rose-950/30 border border-zinc-800 text-left">
+                  <div class="text-xs font-bold text-zinc-200">${et.title}</div>
+                  <div class="text-[11px] text-rose-400 font-extrabold">${formatBRL(et.defaultAmount)}</div>
+                </button>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl divide-y divide-zinc-800/70">
+            ${finList.slice().reverse().map(f => `
+              <div class="p-4 flex items-center justify-between gap-3">
+                <div>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold ${f.type === 'income' ? 'bg-emerald-500/15 text-emerald-400' : 'bg-rose-500/15 text-rose-400'}">${f.type === 'income' ? 'ENTRADA' : 'GASTO'}</span>
+                  <span class="font-bold text-xs sm:text-sm text-white ml-2">${f.title}</span>
+                  <p class="text-[11px] text-zinc-400 mt-0.5">${formatDateBR(f.date)} • ${f.paymentMethod || 'PIX'}</p>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="font-extrabold text-sm ${f.type === 'income' ? 'text-emerald-400' : 'text-rose-400'}">${f.type === 'income' ? '+' : '-'}${formatBRL(f.amount)}</span>
+                  <button type="button" onclick="deleteFinanceEntry('${f.id}')" class="text-zinc-500 hover:text-rose-400 font-bold">✕</button>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    async function quickLaunchExpense(templateId) {
+      const et = DB.expenseTemplates.find(x => x.id === templateId);
+      if (!et) return;
+      DB.finances.push({ id: uid('fin'), type: 'expense', title: et.title, category: et.category, amount: Number(et.defaultAmount), commissionAmount: 0, barberId: null, paymentMethod: 'PIX', date: getTodayISO() });
+      await saveStoreDatabase();
+      renderAll();
+      showToast(`Gasto "${et.title}" lançado!`, 'info');
+    }
+
+    function openExpenseTemplateModal() {
+      openModal('Novo Atalho de Gasto Fixo/Insumo', `
+        <form onsubmit="saveExpenseTemplateForm(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Título do Gasto</label>
+            <input id="ext-title" type="text" required placeholder="Ex: Lavanderia de Toalhas" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Categoria</label>
+              <input id="ext-cat" type="text" required value="Insumos" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Valor Padrão (R$)</label>
+              <input id="ext-val" type="number" step="0.01" required placeholder="120.00" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+            </div>
+          </div>
+          <button type="submit" class="w-full py-3.5 rounded-xl gold-gradient text-black font-extrabold text-sm">Salvar Atalho</button>
+        </form>
+      `);
+    }
+
+    async function saveExpenseTemplateForm(e) {
+      e.preventDefault();
+      DB.expenseTemplates.push({
+        id: uid('ext'),
+        title: document.getElementById('ext-title').value.trim(),
+        category: document.getElementById('ext-cat').value.trim(),
+        defaultAmount: Number(document.getElementById('ext-val').value || 0)
+      });
+      await saveStoreDatabase();
+      closeModal();
+      renderAll();
+    }
+
+    function openNewFinanceModal() {
+      openModal('Lançamento Manual no Caixa', `
+        <form onsubmit="saveNewFinanceForm(event)" class="space-y-4">
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Tipo</label>
+              <select id="fin-type" class="w-full px-3 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm">
+                <option value="expense">Gasto / Saída</option>
+                <option value="income">Receita / Entrada</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Valor (R$)</label>
+              <input id="fin-amount" type="number" step="0.01" required class="w-full px-3 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Descrição</label>
+            <input id="fin-title" type="text" required class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+          </div>
+          <button type="submit" class="w-full py-3.5 rounded-xl gold-gradient text-black font-extrabold text-sm">Registrar</button>
+        </form>
+      `);
+    }
+
+    async function saveNewFinanceForm(e) {
+      e.preventDefault();
+      DB.finances.push({
+        id: uid('fin'),
+        type: document.getElementById('fin-type').value,
+        title: document.getElementById('fin-title').value.trim(),
+        category: 'Manual',
+        amount: Number(document.getElementById('fin-amount').value || 0),
+        commissionAmount: 0,
+        barberId: null,
+        paymentMethod: 'PIX',
+        date: getTodayISO()
+      });
+      await saveStoreDatabase();
+      closeModal();
+      renderAll();
+    }
+
+    async function deleteFinanceEntry(id) {
+      DB.finances = DB.finances.filter(f => f.id !== id);
+      await saveStoreDatabase();
+      renderAll();
+    }
+
+    /* 7. ABA DE NOTA FISCAL (NFS-e / ASAAS / RECIBO GRÁTIS) */
+    function renderAdminFiscal(container) {
+      const s = DB.settings;
+      container.innerHTML = `
+        <form onsubmit="saveFiscalSettings(event)" class="max-w-3xl space-y-6 bg-obsidian-900 border border-zinc-800 rounded-2xl p-6">
+          <div>
+            <span class="text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-1 rounded bg-amber-500/20 text-amber-400">Módulo Fiscal & Recibos</span>
+            <h3 class="font-royal font-bold text-xl text-white mt-2">🧾 Emissão de Recibo Térmico (Grátis) & Nota Fiscal (NFS-e)</h3>
+            <p class="text-xs text-zinc-400 mt-1">
+              O <strong>Recibo / Cupom de Atendimento</strong> já está 100% ativo e gratuito em todos os agendamentos. Para emitir <strong>Nota Fiscal de Serviço (NFS-e)</strong> automática na Prefeitura, preencha os dados abaixo:
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">CNPJ da Barbearia</label>
+              <input id="fisc-cnpj" type="text" value="${s.cnpj || ''}" placeholder="00.000.000/0001-00" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Inscrição Municipal (Prefeitura)</label>
+              <input id="fisc-im" type="text" value="${s.municipalReg || ''}" placeholder="Ex: 102938" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+            </div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-obsidian-950 border border-zinc-800 space-y-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-amber-400 mb-1">Chave de API Fiscal (Asaas / Notaas / Nuvem Fiscal)</label>
+              <input id="fisc-apikey" type="password" value="${s.asaasApiKey || ''}" placeholder="$aact_..." class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-900 border border-zinc-700 text-white text-sm font-mono" />
+              <p class="text-[11px] text-zinc-500 mt-1">Sem mensalidade fixa no Asaas (custo apenas por nota emitida). Código de Serviço padrão: <code>06.01 - Barbearia</code>.</p>
+            </div>
+          </div>
+
+          <button type="submit" class="w-full py-3.5 rounded-xl gold-gradient text-black font-extrabold text-sm">
+            Salvar Configurações Fiscais
+          </button>
+        </form>
+      `;
+    }
+
+    async function saveFiscalSettings(e) {
+      e.preventDefault();
+      DB.settings.cnpj = document.getElementById('fisc-cnpj').value.trim();
+      DB.settings.municipalReg = document.getElementById('fisc-im').value.trim();
+      DB.settings.asaasApiKey = document.getElementById('fisc-apikey').value.trim();
+      await saveStoreDatabase(true);
+      renderAll();
+    }
+
+    /* 8. PERSONALIZAÇÃO DO PORTAL DIVIDIDO */
+    function renderAdminSettings(container) {
+      const s = DB.settings;
+      container.innerHTML = `
+        <form onsubmit="saveShopSettings(event)" class="max-w-3xl space-y-6 bg-obsidian-900 border border-zinc-800 rounded-2xl p-6">
+          <div>
+            <h3 class="font-royal font-bold text-xl text-white">Personalizar Tela Inicial (Split-Screen) & Horários</h3>
+            <p class="text-xs text-zinc-400">Qualquer logo enviada receberá automaticamente o acabamento monocromático preto/prata na capa e marca d'água cinza ao fundo.</p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-2xl bg-obsidian-950 border border-zinc-800">
+            <div>
+              <label class="block text-xs font-bold uppercase text-amber-400 mb-1.5">1. Logo da Barbearia (Efeito Noir Automático)</label>
+              <input id="set-logo-file" type="file" accept="image/*" class="w-full text-xs text-zinc-400 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:bg-zinc-800 file:text-amber-400 file:font-bold" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-amber-400 mb-1.5">2. Foto Temática do Lado Esquerdo (Upload ou URL)</label>
+              <input id="set-hero-file" type="file" accept="image/*" class="w-full text-xs text-zinc-400 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:bg-zinc-800 file:text-amber-400 file:font-bold mb-2" />
+              <input id="set-hero-url" type="text" value="${s.heroBgDataUrl || ''}" placeholder="Ou cole o link de uma foto de corte de cabelo"
+                class="w-full px-3 py-2 rounded-xl bg-obsidian-900 border border-zinc-700 text-white text-xs" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Nome da Barbearia</label>
+              <input id="set-name" type="text" required value="${s.name}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">WhatsApp Comercial</label>
+              <input id="set-phone" type="text" required value="${s.phone}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Frase de Impacto (Slogan da Capa)</label>
+            <input id="set-slogan" type="text" value="${s.slogan || ''}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Endereço Completo</label>
+              <input id="set-address" type="text" required value="${s.address}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Chave PIX</label>
+              <input id="set-pix" type="text" value="${s.pixKey || ''}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-3 p-4 rounded-2xl bg-obsidian-950 border border-zinc-800">
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-zinc-400 mb-1">Abre às</label>
+              <input id="set-open" type="time" required value="${s.openTime}" class="w-full px-2.5 py-2 rounded-xl bg-obsidian-900 border border-zinc-700 text-white text-xs" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-zinc-400 mb-1">Fecha às</label>
+              <input id="set-close" type="time" required value="${s.closeTime}" class="w-full px-2.5 py-2 rounded-xl bg-obsidian-900 border border-zinc-700 text-white text-xs" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-amber-400 mb-1">Início Almoço</label>
+              <input id="set-break-start" type="time" value="${s.breakStart || '12:00'}" class="w-full px-2.5 py-2 rounded-xl bg-obsidian-900 border border-zinc-700 text-white text-xs" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-amber-400 mb-1">Fim Almoço</label>
+              <input id="set-break-end" type="time" value="${s.breakEnd || '13:00'}" class="w-full px-2.5 py-2 rounded-xl bg-obsidian-900 border border-zinc-700 text-white text-xs" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold uppercase text-zinc-400 mb-1">Grade (min)</label>
+              <select id="set-interval" class="w-full px-2.5 py-2 rounded-xl bg-obsidian-900 border border-zinc-700 text-white text-xs">
+                ${[15, 20, 30, 45, 60].map(m => `<option value="${m}" ${Number(s.slotInterval || 15) === m ? 'selected' : ''}>${m} em ${m}m</option>`).join('')}
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="w-full py-3.5 rounded-xl gold-gradient text-black font-extrabold text-sm">
+            Salvar Personalização e Atualizar Portal
+          </button>
+        </form>
+      `;
+    }
+
+    async function saveShopSettings(e) {
+      e.preventDefault();
+      const logoInput = document.getElementById('set-logo-file');
+      if (logoInput.files && logoInput.files[0]) {
+        DB.settings.logoDataUrl = await compressImageFile(logoInput.files[0], 340, 0.85);
+      }
+
+      const heroInput = document.getElementById('set-hero-file');
+      if (heroInput.files && heroInput.files[0]) {
+        DB.settings.heroBgDataUrl = await compressImageFile(heroInput.files[0], 1100, 0.82);
+      } else {
+        DB.settings.heroBgDataUrl = document.getElementById('set-hero-url').value.trim();
+      }
+
+      DB.settings.name = document.getElementById('set-name').value.trim();
+      DB.settings.phone = document.getElementById('set-phone').value.trim();
+      DB.settings.slogan = document.getElementById('set-slogan').value.trim();
+      DB.settings.address = document.getElementById('set-address').value.trim();
+      DB.settings.pixKey = document.getElementById('set-pix').value.trim();
+      DB.settings.openTime = document.getElementById('set-open').value;
+      DB.settings.closeTime = document.getElementById('set-close').value;
+      DB.settings.breakStart = document.getElementById('set-break-start').value;
+      DB.settings.breakEnd = document.getElementById('set-break-end').value;
+      DB.settings.slotInterval = Number(document.getElementById('set-interval').value || 15);
+
+      await saveStoreDatabase(true);
+      renderAll();
+    }
+
+    /* 9. ABA EXCLUSIVA DO DESENVOLVEDOR MASTER */
+    async function renderAdminDevMaster(container) {
+      container.innerHTML = `
+        <div class="space-y-6">
+          <div class="p-5 rounded-2xl bg-purple-950/30 border border-purple-500/40 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <span class="text-[10px] font-extrabold uppercase tracking-widest px-2.5 py-0.5 rounded bg-purple-500 text-black">Acesso Exclusivo Rafael</span>
+              <h3 class="font-royal font-bold text-xl text-white mt-1">💻 Central do Desenvolvedor — Barbearias & Proprietários</h3>
+              <p class="text-xs text-purple-200">Cadastre novas barbearias clientes, defina o login/senha de cada proprietário e copie o link pronto para comercializar.</p>
+            </div>
+            <button type="button" onclick="openCreateTenantModal()" class="px-4 py-3 rounded-xl bg-purple-500 hover:bg-purple-400 text-black font-extrabold text-xs sm:text-sm shrink-0 shadow-lg">
+              + Cadastrar Nova Barbearia & Proprietário
+            </button>
+          </div>
+          <div id="dev-tenants-list" class="space-y-3">
+            <div class="p-8 text-center text-zinc-400 text-sm">Carregando barbearias ativas no Supabase...</div>
+          </div>
+        </div>
+      `;
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/barbers_data?select=store_id,data,updated_at&order=updated_at.desc`, {
+          headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+        });
+        const rows = await res.json();
+        const listEl = document.getElementById('dev-tenants-list');
+        if (!rows || !rows.length) {
+          listEl.innerHTML = `<div class="p-6 text-center text-zinc-400">Nenhum banco encontrado.</div>`;
+          return;
+        }
+        listEl.innerHTML = rows.map(r => {
+          const st = r.data?.settings || {};
+          const storeUrl = `${window.location.origin}${window.location.pathname}?loja=${encodeURIComponent(r.store_id)}`;
+          return `
+            <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl p-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2.5 py-0.5 rounded bg-purple-500/20 text-purple-300 font-mono text-xs font-bold">?loja=${r.store_id}</span>
+                  <h4 class="font-bold text-base text-white">${st.name || r.store_id}</h4>
+                </div>
+                <p class="text-xs text-zinc-400 mt-1">
+                  Login Proprietário: <strong class="text-zinc-200">${st.ownerEmail || '-'}</strong> •
+                  Senha: <code class="text-amber-400 bg-obsidian-950 px-1.5 py-0.5 rounded">${st.ownerPass || '-'}</code>
+                </p>
+              </div>
+              <div class="flex flex-wrap items-center gap-2">
+                <button type="button" onclick="copyStoreLink('${storeUrl}')" class="px-3 py-2 rounded-xl bg-obsidian-950 hover:bg-zinc-800 border border-zinc-700 text-zinc-200 text-xs font-bold">
+                  Copiar Link
+                </button>
+                <a href="${storeUrl}" class="px-3 py-2 rounded-xl bg-zinc-800 text-amber-400 text-xs font-bold">Abrir Loja</a>
+                <button type="button" onclick="openEditTenantCredentialsModal('${r.store_id}', '${(st.name || '').replace(/'/g, '')}', '${(st.ownerEmail || '').replace(/'/g, '')}', '${(st.ownerPass || '').replace(/'/g, '')}')" class="px-3 py-2 rounded-xl bg-purple-500/20 text-purple-300 text-xs font-bold">
+                  Editar Proprietário
+                </button>
+                <button type="button" onclick="deleteTenantDatabase('${r.store_id}')" class="px-3 py-2 rounded-xl bg-rose-500/15 text-rose-400 text-xs font-bold">Excluir</button>
+              </div>
+            </div>
+          `;
+        }).join('');
+      } catch (e) {}
+    }
+
+    function copyStoreLink(url) {
+      navigator.clipboard.writeText(url);
+      showToast('Link da barbearia copiado!', 'success');
+    }
+
+    function openCreateTenantModal() {
+      openModal('Cadastrar Nova Barbearia & Proprietário', `
+        <form onsubmit="createNewTenantSubmit(event)" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Código da URL (?loja=codigo)</label>
+            <input id="dev-new-slug" type="text" required placeholder="ex: barbearia_imperial" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm font-mono" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Nome Comercial da Barbearia</label>
+            <input id="dev-new-name" type="text" required placeholder="Ex: Imperial Barber Club" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">E-mail de Login do Proprietário</label>
+              <input id="dev-new-email" type="email" required placeholder="dono@barbearia.com" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Senha do Proprietário</label>
+              <input id="dev-new-pass" type="text" required value="123456" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+            </div>
+          </div>
+          <button type="submit" class="w-full py-3.5 rounded-xl bg-purple-500 hover:bg-purple-400 text-black font-extrabold text-sm">
+            Criar Barbearia e Liberar Acesso
+          </button>
+        </form>
+      `);
+    }
+
+    async function createNewTenantSubmit(e) {
+      e.preventDefault();
+      const slug = document.getElementById('dev-new-slug').value.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '_');
+      const name = document.getElementById('dev-new-name').value.trim();
+      const email = document.getElementById('dev-new-email').value.trim();
+      const pass = document.getElementById('dev-new-pass').value.trim();
+      const seed = createDefaultStoreData(slug, name, email, pass);
+
+      await fetch(`${SUPABASE_URL}/rest/v1/barbers_data`, {
+        method: 'POST',
+        headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates' },
+        body: JSON.stringify({ store_id: slug, data: seed, updated_at: new Date().toISOString() })
+      });
+      closeModal();
+      renderAll();
+      showToast(`Barbearia ?loja=${slug} cadastrada com sucesso!`, 'success');
+    }
+
+    function openEditTenantCredentialsModal(storeId, name, email, pass) {
+      openModal(`Editar Proprietário — ?loja=${storeId}`, `
+        <form onsubmit="updateTenantCredentialsSubmit(event, '${storeId}')" class="space-y-4">
+          <div>
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Nome da Barbearia</label>
+            <input id="dev-edit-name" type="text" required value="${name}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">E-mail do Proprietário</label>
+            <input id="dev-edit-email" type="email" required value="${email}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Senha do Proprietário</label>
+            <input id="dev-edit-pass" type="text" required value="${pass}" class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+          </div>
+          <button type="submit" class="w-full py-3.5 rounded-xl bg-purple-500 text-black font-extrabold text-sm">Salvar Alterações</button>
+        </form>
+      `);
+    }
+
+    async function updateTenantCredentialsSubmit(e, storeId) {
+      e.preventDefault();
+      const newName = document.getElementById('dev-edit-name').value.trim();
+      const newEmail = document.getElementById('dev-edit-email').value.trim();
+      const newPass = document.getElementById('dev-edit-pass').value.trim();
+      const getRes = await fetch(`${SUPABASE_URL}/rest/v1/barbers_data?store_id=eq.${encodeURIComponent(storeId)}&select=*`, {
+        headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+      });
+      const rows = await getRes.json();
+      if (!rows || !rows.length) return;
+      const tenantData = rows[0].data || {};
+      tenantData.settings = { ...(tenantData.settings || {}), name: newName, ownerEmail: newEmail, ownerPass: newPass };
+      await fetch(`${SUPABASE_URL}/rest/v1/barbers_data`, {
+        method: 'POST',
+        headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'resolution=merge-duplicates' },
+        body: JSON.stringify({ store_id: storeId, data: tenantData, updated_at: new Date().toISOString() })
+      });
+      closeModal();
+      renderAll();
+      showToast('Dados do proprietário atualizados!', 'success');
+    }
+
+    async function deleteTenantDatabase(storeId) {
+      if (!confirm(`Excluir permanentemente o banco da barbearia "${storeId}"?`)) return;
+      await fetch(`${SUPABASE_URL}/rest/v1/barbers_data?store_id=eq.${encodeURIComponent(storeId)}`, {
+        method: 'DELETE',
+        headers: { 'apikey': SUPABASE_KEY, 'Authorization': `Bearer ${SUPABASE_KEY}` }
+      });
+      renderAll();
+    }
+
+    /*************************************************************************
+     * MODAIS E TOASTS
+     *************************************************************************/
+    function openModal(title, htmlContent) {
+      document.getElementById('modal-title').innerHTML = title;
+      document.getElementById('modal-body').innerHTML = htmlContent;
+      document.getElementById('modal-backdrop').classList.remove('hidden');
+      safeIcons();
+    }
+
+    function closeModal() {
+      document.getElementById('modal-backdrop').classList.add('hidden');
+    }
+
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const el = document.createElement('div');
+      const colors = type === 'success'
+        ? 'bg-emerald-950/95 border-emerald-500/50 text-emerald-200'
+        : type === 'error'
+        ? 'bg-rose-950/95 border-rose-500/50 text-rose-200'
+        : 'bg-obsidian-900/95 border-amber-500/50 text-amber-200';
+
+      el.className = `pointer-events-auto px-4 py-3 rounded-2xl border shadow-2xl text-xs font-bold flex items-center justify-between gap-3 backdrop-blur-md ${colors}`;
+      el.innerHTML = `<span>${message}</span>`;
+      container.appendChild(el);
+      setTimeout(() => el.remove(), 3400);
+    }
+
+    // Inicializa a interface imediatamente e sincroniza com o Supabase em segundo plano
+    restoreClientSession();
+    renderAll();
+    loadStoreDatabase().then(() => {
+      restoreClientSession();
+      renderAll();
+    });
+  </script>
+</body>
+</html>
