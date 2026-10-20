@@ -18,12 +18,6 @@
       theme: {
         extend: {
           colors: {
-            gold: {
-              400: '#fbbf24',
-              500: '#f59e0b',
-              600: '#d97706',
-              700: '#b45309',
-            },
             obsidian: {
               950: '#050507',
               900: '#0b0c10',
@@ -41,6 +35,14 @@
   </script>
 
   <style>
+    :root {
+      --accent-light: #fbbf24;
+      --accent-main: #d97706;
+      --accent-dark: #92400e;
+      --accent-glow: rgba(217, 119, 6, 0.35);
+      --accent-soft: rgba(245, 158, 11, 0.14);
+    }
+
     body {
       font-family: 'Plus Jakarta Sans', sans-serif;
       background-color: #050507;
@@ -54,16 +56,17 @@
     ::-webkit-scrollbar { width: 6px; height: 6px; }
     ::-webkit-scrollbar-track { background: #0b0c10; }
     ::-webkit-scrollbar-thumb { background: #27272a; border-radius: 9999px; }
-    ::-webkit-scrollbar-thumb:hover { background: #d97706; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent-main); }
 
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-    .gold-gradient {
-      background: linear-gradient(135deg, #fbbf24 0%, #d97706 55%, #92400e 100%);
+    /* Classes Dinâmicas de Tema */
+    .gold-gradient, .theme-gradient {
+      background: linear-gradient(135deg, var(--accent-light) 0%, var(--accent-main) 55%, var(--accent-dark) 100%);
     }
-    .gold-border-glow {
-      box-shadow: 0 0 30px -5px rgba(217, 119, 6, 0.35);
+    .gold-border-glow, .theme-glow {
+      box-shadow: 0 0 30px -5px var(--accent-glow);
     }
 
     .logo-noir-filter {
@@ -77,8 +80,8 @@
     }
 
     .hero-pattern {
-      background-image: radial-gradient(circle at 20% 20%, rgba(217, 119, 6, 0.14) 0%, transparent 45%),
-                        radial-gradient(circle at 80% 0%, rgba(217, 119, 6, 0.09) 0%, transparent 50%),
+      background-image: radial-gradient(circle at 20% 20%, var(--accent-soft) 0%, transparent 45%),
+                        radial-gradient(circle at 80% 0%, var(--accent-soft) 0%, transparent 50%),
                         linear-gradient(180deg, rgba(11, 12, 16, 0.94) 0%, #050507 100%);
     }
 
@@ -106,7 +109,7 @@
   <!-- ======================================================================= -->
   <div id="view-portal" class="fixed inset-0 z-50 bg-obsidian-950 flex flex-col lg:flex-row overflow-y-auto lg:overflow-hidden">
     
-    <!-- LADO ESQUERDO: IMAGEM TEMÁTICA DE BARBEARIA + EMBLEMA MONOCROMÁTICO -->
+    <!-- LADO ESQUERDO: IMAGEM TEMÁTICA DE BARBEARIA + EMBLEMA -->
     <div class="relative w-full lg:w-1/2 min-h-[42vh] lg:min-h-screen flex flex-col justify-between p-6 sm:p-12 overflow-hidden border-b lg:border-b-0 lg:border-r border-zinc-800/80">
       <div id="portal-hero-bg" class="absolute inset-0 bg-cover bg-center scale-105 transition-transform duration-1000"
            style="background-image: url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1400&q=85');">
@@ -125,20 +128,11 @@
         </span>
       </div>
 
-      <!-- Centro Esquerdo: Logo já renderizada nativamente -->
+      <!-- Centro Esquerdo: Logo -->
       <div class="relative z-10 my-6 lg:my-auto flex flex-col items-center text-center max-w-lg mx-auto">
         <div class="relative group">
           <div class="absolute -inset-2 rounded-3xl bg-gradient-to-b from-zinc-500/20 via-amber-500/15 to-transparent blur-xl"></div>
           <div id="portal-left-logo-box" class="relative w-28 h-28 sm:w-36 sm:h-36 rounded-3xl bg-gradient-to-br from-zinc-800/95 via-zinc-900 to-black border border-zinc-600/60 shadow-2xl flex items-center justify-center p-4 overflow-hidden">
-            <svg viewBox="0 0 120 120" class="w-20 h-20 text-zinc-200" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="60" cy="60" r="54" stroke="currentColor" stroke-width="2" stroke-dasharray="4 3" opacity="0.45"/>
-              <circle cx="60" cy="60" r="46" stroke="currentColor" stroke-width="1.5" opacity="0.8"/>
-              <circle cx="42" cy="40" r="8" stroke="currentColor" stroke-width="3"/>
-              <circle cx="42" cy="80" r="8" stroke="currentColor" stroke-width="3"/>
-              <line x1="48" y1="45" x2="84" y2="80" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-              <line x1="48" y1="75" x2="84" y2="40" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
-              <text x="60" y="101" text-anchor="middle" fill="currentColor" font-size="8" font-family="Cinzel, serif" letter-spacing="3" opacity="0.75">BARBER CLUB</text>
-            </svg>
           </div>
         </div>
 
@@ -164,17 +158,7 @@
     <div class="relative w-full lg:w-1/2 min-h-[58vh] lg:min-h-screen bg-obsidian-950 flex flex-col justify-between p-6 sm:p-12 overflow-hidden">
       
       <!-- Marca d'Água Gigante da Logo no Fundo Cinza/Preto -->
-      <div id="portal-right-watermark" class="absolute inset-0 flex items-center justify-center select-none overflow-hidden pointer-events-none">
-        <div class="opacity-[0.04] scale-[3]">
-          <svg viewBox="0 0 120 120" class="w-72 h-72 text-zinc-200" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="60" cy="60" r="54" stroke="currentColor" stroke-width="2"/>
-            <circle cx="42" cy="40" r="8" stroke="currentColor" stroke-width="3"/>
-            <circle cx="42" cy="80" r="8" stroke="currentColor" stroke-width="3"/>
-            <line x1="48" y1="45" x2="84" y2="80" stroke="currentColor" stroke-width="3.5"/>
-            <line x1="48" y1="75" x2="84" y2="40" stroke="currentColor" stroke-width="3.5"/>
-          </svg>
-        </div>
-      </div>
+      <div id="portal-right-watermark" class="absolute inset-0 flex items-center justify-center select-none overflow-hidden pointer-events-none"></div>
 
       <!-- Topo Direito: Ver Vitrine -->
       <div class="relative z-10 flex items-center justify-end gap-2">
@@ -237,8 +221,8 @@
             </button>
           </form>
 
-          <!-- Botão de Demonstração Rápida (Cliente Demo em 1 Clique) -->
-          <div class="pt-2 border-t border-zinc-800/80">
+          <!-- Botão de Demonstração Rápida (Controlado por Módulo Personalizável) -->
+          <div id="portal-demo-btn-wrapper" class="pt-2 border-t border-zinc-800/80">
             <button type="button" onclick="loginAsDemoClient()" class="cursor-pointer w-full py-3 px-4 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 border border-amber-500/40 text-amber-300 text-xs font-extrabold flex items-center justify-center gap-2 transition">
               <span>⚡ Entrar com Cliente Demo (Teste em 1 Clique)</span>
             </button>
@@ -328,8 +312,8 @@
 
         </div>
 
-        <!-- NAVEGAÇÃO DO CLIENTE -->
-        <div class="mt-6 flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
+        <!-- NAVEGAÇÃO DO CLIENTE (CONTROLADA PELOS MÓDULOS PERSONALIZÁVEIS) -->
+        <div id="client-nav-tabs" class="mt-6 flex items-center gap-2 overflow-x-auto no-scrollbar pb-1">
           <button type="button" onclick="setClientTab('services')" id="ctab-services" class="client-tab-btn shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition">
             ✂️ Cortes & Barba
           </button>
@@ -390,6 +374,12 @@
         <button type="button" onclick="setAdminTab('agenda')" id="atab-agenda" class="admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition w-auto lg:w-full text-left">
           <span>📅 Agenda & Recibos</span>
         </button>
+        <button type="button" onclick="setAdminTab('clients_directory')" id="atab-clients_directory" class="admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition w-auto lg:w-full text-left">
+          <span>👥 Cadastro de Clientes</span>
+        </button>
+        <button type="button" onclick="setAdminTab('crm')" id="atab-crm" class="admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition w-auto lg:w-full text-left">
+          <span>🏆 CRM & Retenção</span>
+        </button>
         <button type="button" onclick="setAdminTab('team')" id="atab-team" class="admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition w-auto lg:w-full text-left">
           <span>💈 Profissionais & Horários</span>
         </button>
@@ -399,9 +389,6 @@
         <button type="button" onclick="setAdminTab('inventory')" id="atab-inventory" class="admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition w-auto lg:w-full text-left">
           <span>📦 Produtos & Insumos</span>
         </button>
-        <button type="button" onclick="setAdminTab('crm')" id="atab-crm" class="admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition w-auto lg:w-full text-left">
-          <span>🏆 Clientes & Retenção</span>
-        </button>
         <button type="button" onclick="setAdminTab('finance')" id="atab-finance" class="admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition w-auto lg:w-full text-left">
           <span>💰 Finanças & Gastos</span>
         </button>
@@ -409,7 +396,7 @@
           <span>🧾 Nota Fiscal (NFS-e)</span>
         </button>
         <button type="button" onclick="setAdminTab('settings')" id="atab-settings" class="admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition w-auto lg:w-full text-left">
-          <span>⚙️ Personalizar Site</span>
+          <span>⚙️ Personalizar Site & Temas</span>
         </button>
         <!-- ABA EXCLUSIVA DO DESENVOLVEDOR MASTER -->
         <button type="button" onclick="setAdminTab('dev')" id="atab-dev" class="hidden admin-nav-btn shrink-0 flex items-center gap-2 px-3.5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition w-auto lg:w-full text-left border border-purple-500/40 bg-purple-950/30 text-purple-300">
@@ -452,7 +439,7 @@
 
   <!-- MODAL UNIVERSAL -->
   <div id="modal-backdrop" class="hidden fixed inset-0 z-[120] bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4">
-    <div id="modal-box" class="animate-bottom-sheet bg-obsidian-900 border-t sm:border border-zinc-800 rounded-t-3xl sm:rounded-2xl w-full max-w-xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
+    <div id="modal-box" class="animate-bottom-sheet bg-obsidian-900 border-t sm:border border-zinc-800 rounded-t-3xl sm:rounded-2xl w-full max-w-2xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
       <div class="px-5 py-4 border-b border-zinc-800 flex items-center justify-between shrink-0">
         <h3 id="modal-title" class="font-bold text-base sm:text-lg text-white"></h3>
         <button type="button" onclick="closeModal()" class="px-2.5 py-1 rounded-lg bg-zinc-800 text-zinc-300 hover:text-white font-bold text-sm">✕</button>
@@ -462,7 +449,7 @@
   </div>
 
   <!-- ======================================================================= -->
-  <!-- MOTOR JAVASCRIPT COMPLETO E BLINDADO                                    -->
+  <!-- MOTOR JAVASCRIPT COMPLETO + TEMAS + MÓDULOS + FICHA DE CLIENTES         -->
   <!-- ======================================================================= -->
   <script>
     const SUPABASE_URL = "https://yhlgptwnidtuvixcrews.supabase.co";
@@ -477,6 +464,60 @@
 
     const LOCAL_STORAGE_KEY = `barberclub_saas_db_${CURRENT_STORE_ID}`;
     const CLIENT_SESSION_KEY = `barberclub_client_phone_${CURRENT_STORE_ID}`;
+
+    // Paletas do Motor de Temas
+    const THEME_PRESETS = {
+      gold: {
+        name: 'Dourado Imperial (Padrão)',
+        light: '#fbbf24',
+        main: '#d97706',
+        dark: '#92400e',
+        glow: 'rgba(217, 119, 6, 0.35)',
+        soft: 'rgba(245, 158, 11, 0.14)'
+      },
+      silver: {
+        name: 'Prata & Platina (Noir)',
+        light: '#f4f4f5',
+        main: '#a1a1aa',
+        dark: '#52525b',
+        glow: 'rgba(161, 161, 170, 0.35)',
+        soft: 'rgba(212, 212, 216, 0.12)'
+      },
+      emerald: {
+        name: 'Esmeralda British Club',
+        light: '#34d399',
+        main: '#10b981',
+        dark: '#065f46',
+        glow: 'rgba(16, 185, 129, 0.35)',
+        soft: 'rgba(16, 185, 129, 0.14)'
+      },
+      crimson: {
+        name: 'Rubi Barber Vintage',
+        light: '#fb7185',
+        main: '#e11d48',
+        dark: '#881337',
+        glow: 'rgba(225, 29, 72, 0.35)',
+        soft: 'rgba(225, 29, 72, 0.14)'
+      },
+      royal: {
+        name: 'Azul Royal Executivo',
+        light: '#60a5fa',
+        main: '#2563eb',
+        dark: '#1e3a8a',
+        glow: 'rgba(37, 99, 235, 0.35)',
+        soft: 'rgba(59, 130, 246, 0.14)'
+      }
+    };
+
+    function applyThemePreset(themeKey = 'gold') {
+      const preset = THEME_PRESETS[themeKey] || THEME_PRESETS.gold;
+      const root = document.documentElement;
+      root.style.setProperty('--accent-light', preset.light);
+      root.style.setProperty('--accent-main', preset.main);
+      root.style.setProperty('--accent-dark', preset.dark);
+      root.style.setProperty('--accent-glow', preset.glow);
+      root.style.setProperty('--accent-soft', preset.soft);
+    }
 
     function getTodayISO() {
       const now = new Date();
@@ -523,7 +564,7 @@
       const d = cleanPhone(phone);
       if (d.length === 11) return `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}`;
       if (d.length === 10) return `(${d.slice(0, 2)}) ${d.slice(2, 6)}-${d.slice(6)}`;
-      return phone;
+      return phone || '-';
     }
 
     function uid(prefix = 'id') {
@@ -561,12 +602,11 @@
         storeId: storeId,
         settings: {
           name: readableName,
-          slogan: 'Mais que um corte, um ritual de alto padrão. Escolha seu horário em segundos.',
+          slogan: 'Mais que um corte, um ritual de alto padrão. Escolha seu mestre barbeiro e reserve seu horário.',
           phone: '5548999999999',
           cnpj: '45.123.456/0001-89',
           municipalReg: '102938',
           asaasApiKey: '',
-          fiscalEnvironment: 'sandbox',
           address: 'Av. Central, 1450 - Sala 02 (Estacionamento Privativo)',
           pixKey: 'financeiro@barberclub.com.br',
           openTime: '09:00',
@@ -576,7 +616,16 @@
           slotInterval: 15,
           workDays: [1, 2, 3, 4, 5, 6],
           logoDataUrl: '',
+          logoNoirEffect: true,
           heroBgDataUrl: 'https://images.unsplash.com/photo-1585747860715-2ba37e788b70?auto=format&fit=crop&w=1400&q=85',
+          themePreset: 'gold',
+          modules: {
+            combos: true,
+            plans: true,
+            products: true,
+            team: true,
+            demoButton: true
+          },
           ownerEmail: ownerEmail,
           ownerPass: ownerPass
         },
@@ -698,43 +747,55 @@
         clients: [
           {
             id: 'cli_demo',
-            name: 'Cliente Demonstração VIP',
+            name: 'Rafael (Cliente Demo VIP)',
             phone: '48999990000',
+            cpf: '098.765.432-10',
+            birthDate: '1996-05-14',
+            email: 'rafael@cliente.com',
+            createdAt: addDaysISO(today, -120),
             totalCuts: 18,
             totalSpent: 1150,
             lastVisitDate: addDaysISO(today, -3),
             planId: 'plan_2',
             planExpiresAt: addDaysISO(today, 25),
-            notes: 'Conta oficial de demonstração.'
+            notes: 'Prefere degradê navalhado mid-fade e pomada matte.'
           },
           {
             id: 'cli_1',
             name: 'Carlos Eduardo Martins',
             phone: '48999112233',
+            cpf: '123.456.789-00',
+            birthDate: '1990-08-22',
+            email: 'carlos@email.com',
+            createdAt: addDaysISO(today, -90),
             totalCuts: 14,
             totalSpent: 890,
             lastVisitDate: addDaysISO(today, -5),
-            planId: 'plan_2',
+            planId: 'plan_1',
             planExpiresAt: addDaysISO(today, 22),
-            notes: 'Gosta de degradê médio.'
+            notes: 'Gosta de degradê médio e café sem açúcar.'
           },
           {
             id: 'cli_2',
             name: 'Rodrigo Albuquerque',
             phone: '48999445566',
+            cpf: '321.654.987-11',
+            birthDate: '1988-11-03',
+            email: 'rodrigo@email.com',
+            createdAt: addDaysISO(today, -180),
             totalCuts: 8,
             totalSpent: 520,
             lastVisitDate: addDaysISO(today, -34),
             planId: null,
             planExpiresAt: null,
-            notes: 'Sumido há mais de 30 dias.'
+            notes: 'Sumido há mais de 30 dias. Costuma fazer barba e cabelo.'
           }
         ],
         appointments: [
           {
             id: 'apt_1',
             clientId: 'cli_demo',
-            clientName: 'Cliente Demonstração VIP',
+            clientName: 'Rafael (Cliente Demo VIP)',
             clientPhone: '48999990000',
             barberId: 'barb_1',
             serviceId: 'srv_4',
@@ -745,6 +806,22 @@
             isVipCovered: true,
             paymentMethod: 'VIP',
             status: 'confirmed',
+            createdAt: new Date().toISOString()
+          },
+          {
+            id: 'apt_demo_past1',
+            clientId: 'cli_demo',
+            clientName: 'Rafael (Cliente Demo VIP)',
+            clientPhone: '48999990000',
+            barberId: 'barb_1',
+            serviceId: 'srv_1',
+            date: addDaysISO(today, -12),
+            time: '16:00',
+            duration: 45,
+            price: 0,
+            isVipCovered: true,
+            paymentMethod: 'VIP',
+            status: 'completed',
             createdAt: new Date().toISOString()
           },
           {
@@ -774,13 +851,12 @@
         ],
         finances: [
           { id: 'fin_1', type: 'income', title: 'Corte Executivo - Rodrigo Albuquerque', category: 'Serviço', amount: 55, commissionAmount: 24.75, barberId: 'barb_2', paymentMethod: 'PIX', date: today },
-          { id: 'fin_2', type: 'income', title: 'Assinatura Clube Imperador - Cliente Demo', category: 'Assinatura VIP', amount: 189.90, commissionAmount: 0, barberId: null, paymentMethod: 'Cartão', date: today },
+          { id: 'fin_2', type: 'income', title: 'Assinatura Clube Imperador - Rafael Demo', category: 'Assinatura VIP', amount: 189.90, commissionAmount: 0, barberId: null, paymentMethod: 'Cartão', date: today },
           { id: 'fin_3', type: 'expense', title: 'Lâminas, Golas Higiênicas e Descartáveis', category: 'Insumos', amount: 180, commissionAmount: 0, barberId: null, paymentMethod: 'PIX', date: today }
         ]
       };
     }
 
-    // Inicializa DB imediatamente em memória para nunca travar nenhum clique
     let DB = createDefaultStoreData(CURRENT_STORE_ID);
     let portalOpen = true;
     let currentView = 'client';
@@ -794,13 +870,16 @@
     let agendaViewMode = 'daily';
     let crmSortFilter = 'ranking';
     let crmSearchQuery = '';
+    let directorySearchQuery = '';
+    let directoryFilterPlan = 'all'; // 'all' | 'vip' | 'avulso'
     let financeBarberFilter = 'all';
     let preselectedBarberId = null;
 
     function renderMonochromeLogoHTML(sizeClass = "w-full h-full", isWatermark = false) {
       const s = DB?.settings || {};
+      const useNoir = s.logoNoirEffect !== false;
       if (s.logoDataUrl) {
-        return `<img src="${s.logoDataUrl}" alt="Logo" class="${sizeClass} object-contain ${isWatermark ? 'logo-watermark-filter' : 'logo-noir-filter'}" />`;
+        return `<img src="${s.logoDataUrl}" alt="Logo" class="${sizeClass} object-contain ${isWatermark ? 'logo-watermark-filter' : (useNoir ? 'logo-noir-filter' : '')}" />`;
       }
       if (isWatermark) {
         return `<div class="opacity-[0.04] scale-[3] pointer-events-none">${getBarberCrestSVG("w-72 h-72")}</div>`;
@@ -811,10 +890,18 @@
     function normalizeDatabase(raw) {
       const def = createDefaultStoreData(CURRENT_STORE_ID);
       if (!raw || typeof raw !== 'object') return def;
+      const mergedSettings = {
+        ...def.settings,
+        ...(raw.settings || {}),
+        modules: {
+          ...def.settings.modules,
+          ...(raw.settings?.modules || {})
+        }
+      };
       return {
         ...def,
         ...raw,
-        settings: { ...def.settings, ...(raw.settings || {}) },
+        settings: mergedSettings,
         barbers: Array.isArray(raw.barbers) && raw.barbers.length ? raw.barbers : def.barbers,
         services: Array.isArray(raw.services) && raw.services.length ? raw.services : def.services,
         plans: Array.isArray(raw.plans) && raw.plans.length ? raw.plans : def.plans,
@@ -907,6 +994,38 @@
     }
 
     /*************************************************************************
+     * CÁLCULO DE MÉTRICAS REAIS POR CLIENTE (CORTES NO MÊS, ANO, TOTAL E HISTÓRICO)
+     *************************************************************************/
+    function getClientDetailedMetrics(client) {
+      const now = new Date();
+      const currentYear = String(now.getFullYear());
+      const currentYearMonth = `${currentYear}-${String(now.getMonth() + 1).padStart(2, '0')}`;
+
+      const clientAppts = (DB.appointments || []).filter(a =>
+        a.clientId === client.id || cleanPhone(a.clientPhone) === cleanPhone(client.phone)
+      ).sort((a, b) => `${b.date} ${b.time}`.localeCompare(`${a.date} ${a.time}`));
+
+      const completedAppts = clientAppts.filter(a => a.status === 'completed');
+      const cutsThisMonth = completedAppts.filter(a => (a.date || '').startsWith(currentYearMonth)).length;
+      const cutsThisYear = completedAppts.filter(a => (a.date || '').startsWith(currentYear)).length;
+      const totalCutsEver = Math.max(Number(client.totalCuts || 0), completedAppts.length);
+      const calculatedSpent = completedAppts.reduce((acc, a) => acc + Number(a.price || 0), 0);
+      const totalSpentEver = Math.max(Number(client.totalSpent || 0), calculatedSpent);
+
+      const lastCompleted = completedAppts[0]?.date || client.lastVisitDate || null;
+
+      return {
+        allAppointments: clientAppts,
+        completedAppointments: completedAppts,
+        cutsThisMonth,
+        cutsThisYear,
+        totalCutsEver,
+        totalSpentEver,
+        lastVisitDate: lastCompleted
+      };
+    }
+
+    /*************************************************************************
      * PORTAL SPLIT-SCREEN & CLIENTE DEMO
      *************************************************************************/
     function restoreClientSession() {
@@ -922,6 +1041,10 @@
     function renderSplitPortal() {
       if (!DB) DB = createDefaultStoreData(CURRENT_STORE_ID);
       const s = DB.settings;
+      const mods = s.modules || {};
+
+      applyThemePreset(s.themePreset || 'gold');
+
       const heroBg = document.getElementById('portal-hero-bg');
       if (heroBg && s.heroBgDataUrl) {
         heroBg.style.backgroundImage = `url('${s.heroBgDataUrl}')`;
@@ -935,6 +1058,12 @@
 
       document.getElementById('portal-left-logo-box').innerHTML = renderMonochromeLogoHTML("w-20 h-20 sm:w-24 sm:h-24", false);
       document.getElementById('portal-right-watermark').innerHTML = renderMonochromeLogoHTML("w-[420px] h-[420px]", true);
+
+      const demoWrapper = document.getElementById('portal-demo-btn-wrapper');
+      if (demoWrapper) {
+        if (mods.demoButton === false) demoWrapper.classList.add('hidden');
+        else demoWrapper.classList.remove('hidden');
+      }
     }
 
     async function loginAsDemoClient() {
@@ -943,8 +1072,12 @@
       if (!demoClient) {
         demoClient = {
           id: 'cli_demo',
-          name: 'Cliente Demonstração VIP',
+          name: 'Rafael (Cliente Demo VIP)',
           phone: demoPhone,
+          cpf: '098.765.432-10',
+          birthDate: '1996-05-14',
+          email: 'rafael@cliente.com',
+          createdAt: getTodayISO(),
           totalCuts: 18,
           totalSpent: 1150,
           lastVisitDate: getTodayISO(),
@@ -960,7 +1093,7 @@
       portalOpen = false;
       currentView = 'client';
       renderAll();
-      showToast('Logado como Cliente Demonstração VIP!', 'success');
+      showToast('Logado como Rafael (Cliente Demo VIP)!', 'success');
     }
 
     function handlePortalPhoneLiveCheck(val) {
@@ -1017,6 +1150,10 @@
           id: uid('cli'),
           name: fullName,
           phone: digits,
+          cpf: '',
+          birthDate: '',
+          email: '',
+          createdAt: getTodayISO(),
           totalCuts: 0,
           totalSpent: 0,
           lastVisitDate: null,
@@ -1060,6 +1197,7 @@
 
     function renderAll() {
       if (!DB) DB = createDefaultStoreData(CURRENT_STORE_ID);
+      applyThemePreset(DB.settings?.themePreset || 'gold');
 
       const vPortal = document.getElementById('view-portal');
       const vClient = document.getElementById('view-client');
@@ -1181,6 +1319,10 @@
             id: uid('cli'),
             name: fullName,
             phone: rawPhone,
+            cpf: '',
+            birthDate: '',
+            email: '',
+            createdAt: getTodayISO(),
             totalCuts: 0,
             totalSpent: 0,
             lastVisitDate: null,
@@ -1227,7 +1369,7 @@
     }
 
     /*************************************************************************
-     * VITRINE IMERSIVA DO CLIENTE
+     * VITRINE IMERSIVA DO CLIENTE (RESPEITA MÓDULOS ATIVOS/DESATIVADOS)
      *************************************************************************/
     function setClientTab(tab) {
       currentClientTab = tab;
@@ -1246,16 +1388,52 @@
 
     function renderClientView() {
       const s = DB.settings;
+      const mods = s.modules || {};
+
       document.getElementById('hero-address').innerHTML = `
         <span>📍 ${s.address}</span>
         <span>•</span>
         <span>🕒 Expediente: ${s.openTime} às ${s.closeTime}</span>
       `;
 
+      // Mostra/Oculta abas de acordo com os módulos personalizáveis
+      const tabVisibility = {
+        services: true,
+        combos: mods.combos !== false,
+        plans: mods.plans !== false,
+        team: mods.team !== false,
+        products: mods.products !== false,
+        appointments: true
+      };
+
+      if (!tabVisibility[currentClientTab]) {
+        currentClientTab = 'services';
+      }
+
+      Object.keys(tabVisibility).forEach(t => {
+        const btn = document.getElementById(`ctab-${t}`);
+        if (!btn) return;
+        if (!tabVisibility[t]) {
+          btn.classList.add('hidden');
+          return;
+        }
+        btn.classList.remove('hidden');
+        btn.className = t === currentClientTab
+          ? 'client-tab-btn shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold gold-gradient text-black shadow-lg transition'
+          : 'client-tab-btn shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-obsidian-800 text-zinc-300 hover:bg-obsidian-700 border border-zinc-800 transition';
+      });
+
+      const stripEl = document.getElementById('client-barbers-strip');
+      if (stripEl) {
+        if (mods.team === false) stripEl.classList.add('hidden');
+        else stripEl.classList.remove('hidden');
+      }
+
       const welcomeEl = document.getElementById('client-welcome-banner');
       if (loggedClient) {
         const vip = isClientVipActive(loggedClient);
         const planObj = vip ? DB.plans.find(p => p.id === loggedClient.planId) : null;
+        const metrics = getClientDetailedMetrics(loggedClient);
         welcomeEl.innerHTML = `
           <div class="min-w-0">
             <div class="flex items-center gap-2">
@@ -1263,7 +1441,7 @@
               ${vip ? `<span class="px-2 py-0.5 text-[10px] font-extrabold rounded-full gold-gradient text-black">👑 VIP ATIVO</span>` : ''}
             </div>
             <p class="text-[11px] text-zinc-400 mt-0.5">
-              ${vip ? `${planObj ? planObj.name : 'Assinante VIP'} • Vence ${formatDateBR(loggedClient.planExpiresAt)}` : `${loggedClient.totalCuts || 0} cortes realizados • WhatsApp conectado`}
+              ${vip ? `${planObj ? planObj.name : 'Assinante VIP'} • Vence ${formatDateBR(loggedClient.planExpiresAt)}` : `${metrics.totalCutsEver} cortes no histórico • ${metrics.cutsThisMonth} neste mês`}
             </p>
           </div>
           <button type="button" onclick="setClientTab('appointments')" class="shrink-0 px-3.5 py-2 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-400 text-xs font-bold">
@@ -1274,26 +1452,20 @@
         welcomeEl.innerHTML = `
           <div>
             <p class="text-xs font-bold text-white">Modo Visitante</p>
-            <p class="text-[11px] text-zinc-400">Entre com seu telefone ou use o Cliente Demo</p>
+            <p class="text-[11px] text-zinc-400">Entre com seu telefone para agendar</p>
           </div>
           <div class="flex items-center gap-2">
-            <button type="button" onclick="loginAsDemoClient()" class="shrink-0 px-3 py-2 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 font-bold text-xs">
-              ⚡ Demo
-            </button>
+            ${mods.demoButton !== false ? `
+              <button type="button" onclick="loginAsDemoClient()" class="shrink-0 px-3 py-2 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-300 font-bold text-xs">
+                ⚡ Demo
+              </button>
+            ` : ''}
             <button type="button" onclick="openSplitPortal()" class="shrink-0 px-3.5 py-2 rounded-xl gold-gradient text-black font-extrabold text-xs">
               Entrar
             </button>
           </div>
         `;
       }
-
-      ['services', 'combos', 'plans', 'team', 'products', 'appointments'].forEach(t => {
-        const btn = document.getElementById(`ctab-${t}`);
-        if (!btn) return;
-        btn.className = t === currentClientTab
-          ? 'client-tab-btn shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-extrabold gold-gradient text-black shadow-lg transition'
-          : 'client-tab-btn shrink-0 px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold bg-obsidian-800 text-zinc-300 hover:bg-obsidian-700 border border-zinc-800 transition';
-      });
 
       const myConfirmedCount = loggedClient
         ? DB.appointments.filter(a => cleanPhone(a.clientPhone) === cleanPhone(loggedClient.phone) && a.status === 'confirmed').length
@@ -1474,12 +1646,31 @@
           return;
         }
 
-        const myAppts = DB.appointments
-          .filter(a => cleanPhone(a.clientPhone) === cleanPhone(loggedClient.phone))
-          .sort((a, b) => `${b.date} ${b.time}`.localeCompare(`${a.date} ${a.time}`));
+        const metrics = getClientDetailedMetrics(loggedClient);
+        const myAppts = metrics.allAppointments;
 
         contentEl.innerHTML = `
           <div class="space-y-4">
+            <!-- Resumo do Cliente na Aba de Horários -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl p-3.5">
+                <span class="text-[10px] uppercase text-zinc-400 font-bold">Cortes no Mês</span>
+                <div class="text-lg font-extrabold text-amber-400 mt-0.5">${metrics.cutsThisMonth}</div>
+              </div>
+              <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl p-3.5">
+                <span class="text-[10px] uppercase text-zinc-400 font-bold">Cortes no Ano</span>
+                <div class="text-lg font-extrabold text-white mt-0.5">${metrics.cutsThisYear}</div>
+              </div>
+              <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl p-3.5">
+                <span class="text-[10px] uppercase text-zinc-400 font-bold">Total Histórico</span>
+                <div class="text-lg font-extrabold text-emerald-400 mt-0.5">${metrics.totalCutsEver} cortes</div>
+              </div>
+              <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl p-3.5">
+                <span class="text-[10px] uppercase text-zinc-400 font-bold">Status Assinatura</span>
+                <div class="text-xs font-extrabold text-amber-300 mt-1">${isClientVipActive(loggedClient) ? '👑 VIP Ativo' : 'Cliente Avulso'}</div>
+              </div>
+            </div>
+
             ${myAppts.length === 0 ? `
               <div class="text-center py-12 bg-obsidian-900 rounded-2xl border border-zinc-800 text-zinc-400 text-sm">
                 Você ainda não possui agendamentos registrados.
@@ -1503,7 +1694,7 @@
                   <div class="flex items-center gap-2">
                     <span class="text-sm font-extrabold text-white mr-2">${apt.isVipCovered ? 'Plano VIP (R$ 0)' : formatBRL(apt.price)}</span>
                     <button type="button" onclick="openReceiptModal('${apt.id}')" class="px-3 py-2 rounded-xl bg-zinc-800 text-zinc-200 text-xs font-bold">
-                      🧾 Comprovante
+                      🧾 Recibo
                     </button>
                     ${apt.status === 'confirmed' ? `
                       <button type="button" onclick="clientCancelAppointment('${apt.id}')" class="px-3 py-2 rounded-xl bg-rose-500/15 text-rose-400 text-xs font-bold">
@@ -1753,7 +1944,7 @@
     }
 
     /*************************************************************************
-     * GERADOR DE RECIBO / CUPOM NÃO-FISCAL GRATUITO (IMPRESSÃO E WHATSAPP)
+     * GERADOR DE RECIBO / CUPOM NÃO-FISCAL GRATUITO
      *************************************************************************/
     function openReceiptModal(aptId) {
       const apt = DB.appointments.find(a => a.id === aptId);
@@ -1936,7 +2127,7 @@
         roleBadge.textContent = 'Proprietário';
       }
 
-      ['agenda', 'team', 'catalog', 'inventory', 'crm', 'finance', 'fiscal', 'settings', 'dev'].forEach(t => {
+      ['agenda', 'clients_directory', 'crm', 'team', 'catalog', 'inventory', 'finance', 'fiscal', 'settings', 'dev'].forEach(t => {
         const b = document.getElementById(`atab-${t}`);
         if (!b || b.classList.contains('hidden')) return;
         b.className = t === currentAdminTab
@@ -1946,14 +2137,364 @@
 
       const container = document.getElementById('admin-content-area');
       if (currentAdminTab === 'agenda') renderAdminAgenda(container);
+      else if (currentAdminTab === 'clients_directory') renderAdminClientsDirectory(container);
+      else if (currentAdminTab === 'crm') renderAdminCRM(container);
       else if (currentAdminTab === 'team') renderAdminTeam(container);
       else if (currentAdminTab === 'catalog') renderAdminCatalog(container);
       else if (currentAdminTab === 'inventory') renderAdminInventory(container);
-      else if (currentAdminTab === 'crm') renderAdminCRM(container);
       else if (currentAdminTab === 'finance') renderAdminFinance(container);
       else if (currentAdminTab === 'fiscal') renderAdminFiscal(container);
       else if (currentAdminTab === 'settings') renderAdminSettings(container);
       else if (currentAdminTab === 'dev') renderAdminDevMaster(container);
+    }
+
+    /* =====================================================================
+     * NOVA ABA: CADASTRO GERAL DE CLIENTES, FICHAS, MÉTRICAS (MÊS/ANO) E HISTÓRICO
+     * ===================================================================== */
+    function renderAdminClientsDirectory(container) {
+      let clientsList = [...(DB.clients || [])];
+
+      if (directorySearchQuery.trim()) {
+        const q = directorySearchQuery.toLowerCase();
+        clientsList = clientsList.filter(c =>
+          (c.name || '').toLowerCase().includes(q) ||
+          cleanPhone(c.phone).includes(q) ||
+          (c.cpf || '').toLowerCase().includes(q) ||
+          (c.email || '').toLowerCase().includes(q)
+        );
+      }
+
+      if (directoryFilterPlan === 'vip') {
+        clientsList = clientsList.filter(c => isClientVipActive(c));
+      } else if (directoryFilterPlan === 'avulso') {
+        clientsList = clientsList.filter(c => !isClientVipActive(c));
+      }
+
+      const totalClientsCount = (DB.clients || []).length;
+      const activeVipCount = (DB.clients || []).filter(c => isClientVipActive(c)).length;
+      const totalCutsMonthAll = (DB.clients || []).reduce((acc, c) => acc + getClientDetailedMetrics(c).cutsThisMonth, 0);
+      const totalCutsYearAll = (DB.clients || []).reduce((acc, c) => acc + getClientDetailedMetrics(c).cutsThisYear, 0);
+
+      container.innerHTML = `
+        <div class="space-y-6">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <h3 class="font-royal font-bold text-xl text-white">👥 Base Cadastral & Histórico Completo de Clientes</h3>
+              <p class="text-xs text-zinc-400">Consulte dados cadastrais, status de planos, cortes feitos no mês, no ano e o prontuário completo de cada cliente.</p>
+            </div>
+            <button type="button" onclick="openClientProfileModal()" class="px-4 py-2.5 rounded-xl gold-gradient text-black font-extrabold text-xs sm:text-sm shrink-0">
+              + Cadastrar Novo Cliente
+            </button>
+          </div>
+
+          <!-- KPIs Gerais da Base de Clientes -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
+            <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl p-4">
+              <span class="text-[11px] font-bold uppercase text-zinc-400">Total Cadastrados</span>
+              <div class="text-xl sm:text-2xl font-extrabold text-white mt-1">${totalClientsCount} clientes</div>
+            </div>
+            <div class="bg-obsidian-900 border border-amber-500/30 rounded-2xl p-4">
+              <span class="text-[11px] font-bold uppercase text-amber-400">Com Plano VIP Ativo</span>
+              <div class="text-xl sm:text-2xl font-extrabold text-amber-400 mt-1">👑 ${activeVipCount} assinantes</div>
+            </div>
+            <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl p-4">
+              <span class="text-[11px] font-bold uppercase text-zinc-400">Cortes neste Mês</span>
+              <div class="text-xl sm:text-2xl font-extrabold text-emerald-400 mt-1">${totalCutsMonthAll} cortes</div>
+            </div>
+            <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl p-4">
+              <span class="text-[11px] font-bold uppercase text-zinc-400">Cortes no Ano (${new Date().getFullYear()})</span>
+              <div class="text-xl sm:text-2xl font-extrabold text-white mt-1">${totalCutsYearAll} cortes</div>
+            </div>
+          </div>
+
+          <!-- Barra de Pesquisa e Filtro por Plano -->
+          <div class="bg-obsidian-900 border border-zinc-800 rounded-2xl p-4 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
+            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar">
+              <button type="button" onclick="directoryFilterPlan='all';renderAll()" class="px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 ${directoryFilterPlan === 'all' ? 'gold-gradient text-black' : 'bg-obsidian-950 text-zinc-300 border border-zinc-800'}">
+                Todos (${totalClientsCount})
+              </button>
+              <button type="button" onclick="directoryFilterPlan='vip';renderAll()" class="px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 ${directoryFilterPlan === 'vip' ? 'gold-gradient text-black' : 'bg-obsidian-950 text-zinc-300 border border-zinc-800'}">
+                👑 Com Plano VIP (${activeVipCount})
+              </button>
+              <button type="button" onclick="directoryFilterPlan='avulso';renderAll()" class="px-3.5 py-2 rounded-xl text-xs font-bold shrink-0 ${directoryFilterPlan === 'avulso' ? 'gold-gradient text-black' : 'bg-obsidian-950 text-zinc-300 border border-zinc-800'}">
+                ✂️ Clientes Avulsos (${totalClientsCount - activeVipCount})
+              </button>
+            </div>
+            <input type="text" placeholder="Buscar por nome, WhatsApp, CPF ou e-mail..." value="${directorySearchQuery}"
+              oninput="directorySearchQuery=this.value;renderAll()"
+              class="px-4 py-2 rounded-xl bg-obsidian-950 border border-zinc-700 text-xs sm:text-sm text-white min-w-[260px]" />
+          </div>
+
+          <!-- Lista Completa de Clientes com Indicadores Mensal / Anual / Total -->
+          <div class="space-y-3">
+            ${clientsList.length === 0 ? `
+              <div class="p-10 rounded-2xl bg-obsidian-900 border border-zinc-800 text-center text-zinc-400 text-sm">
+                Nenhum cliente encontrado para esta busca.
+              </div>
+            ` : clientsList.map(c => {
+              const m = getClientDetailedMetrics(c);
+              const vipActive = isClientVipActive(c);
+              const planObj = c.planId ? DB.plans.find(p => p.id === c.planId) : null;
+
+              return `
+                <div class="bg-obsidian-900 border border-zinc-800 hover:border-zinc-700 rounded-2xl p-4 sm:p-5 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 transition">
+                  
+                  <!-- Dados Cadastrais Principais -->
+                  <div class="space-y-1.5 min-w-0 flex-1">
+                    <div class="flex items-center gap-2 flex-wrap">
+                      <h4 class="font-bold text-base text-white">${c.name}</h4>
+                      ${vipActive ? `
+                        <span class="px-2.5 py-0.5 text-[10px] rounded-full gold-gradient text-black font-extrabold">
+                          👑 ${planObj ? planObj.name : 'Plano VIP Ativo'} • Vence ${formatDateBR(c.planExpiresAt)}
+                        </span>
+                      ` : c.planId ? `
+                        <span class="px-2.5 py-0.5 text-[10px] rounded-full bg-rose-500/15 text-rose-400 border border-rose-500/30 font-bold">
+                          ⚠️ Plano Vencido em ${formatDateBR(c.planExpiresAt)}
+                        </span>
+                      ` : `
+                        <span class="px-2.5 py-0.5 text-[10px] rounded-full bg-zinc-800 text-zinc-400 font-semibold">
+                          Cliente Avulso
+                        </span>
+                      `}
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-zinc-400">
+                      <span>📱 WhatsApp: <strong class="text-zinc-200">${formatPhoneDisplay(c.phone)}</strong></span>
+                      ${c.cpf ? `<span>🪪 CPF: <strong class="text-zinc-300">${c.cpf}</strong></span>` : ''}
+                      ${c.birthDate ? `<span>🎂 Nasc: <strong class="text-zinc-300">${formatDateBR(c.birthDate)}</strong></span>` : ''}
+                      <span>📅 Último corte: <strong class="text-amber-400">${m.lastVisitDate ? formatDateBR(m.lastVisitDate) : 'Sem registro'}</strong></span>
+                    </div>
+
+                    ${c.notes ? `<p class="text-[11px] text-zinc-500 italic">Obs: "${c.notes}"</p>` : ''}
+                  </div>
+
+                  <!-- Contadores de Cortes (Mês / Ano / Total / Gasto) -->
+                  <div class="grid grid-cols-4 gap-2 w-full lg:w-auto shrink-0 text-center bg-obsidian-950 p-2.5 rounded-xl border border-zinc-800/80">
+                    <div class="px-2.5">
+                      <div class="text-[10px] uppercase text-zinc-400 font-bold">No Mês</div>
+                      <div class="text-sm font-extrabold text-amber-400">${m.cutsThisMonth}</div>
+                    </div>
+                    <div class="px-2.5 border-l border-zinc-800">
+                      <div class="text-[10px] uppercase text-zinc-400 font-bold">No Ano</div>
+                      <div class="text-sm font-extrabold text-white">${m.cutsThisYear}</div>
+                    </div>
+                    <div class="px-2.5 border-l border-zinc-800">
+                      <div class="text-[10px] uppercase text-zinc-400 font-bold">Total Cortes</div>
+                      <div class="text-sm font-extrabold text-emerald-400">${m.totalCutsEver}</div>
+                    </div>
+                    <div class="px-2.5 border-l border-zinc-800">
+                      <div class="text-[10px] uppercase text-zinc-400 font-bold">Total Gasto</div>
+                      <div class="text-xs sm:text-sm font-extrabold text-white">${formatBRL(m.totalSpentEver)}</div>
+                    </div>
+                  </div>
+
+                  <!-- Botões de Ação -->
+                  <div class="flex items-center gap-2 w-full lg:w-auto justify-end">
+                    <button type="button" onclick="openClientFullHistoryModal('${c.id}')" class="px-3.5 py-2.5 rounded-xl gold-gradient text-black font-extrabold text-xs">
+                      📋 Ver Ficha & Histórico
+                    </button>
+                    <button type="button" onclick="openClientVipAssignModal('${c.id}')" class="px-3 py-2.5 rounded-xl bg-obsidian-950 hover:bg-zinc-800 border border-zinc-700 text-amber-300 text-xs font-bold">
+                      👑 Plano
+                    </button>
+                  </div>
+
+                </div>
+              `;
+            }).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    function openClientProfileModal(clientId = null) {
+      const c = clientId ? DB.clients.find(x => x.id === clientId) : null;
+      openModal(c ? `Editar Cadastro — ${c.name}` : 'Novo Cadastro de Cliente', `
+        <form onsubmit="saveClientProfileForm(event, '${clientId || ''}')" class="space-y-4">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Nome Completo *</label>
+              <input id="cli-form-name" type="text" required value="${c ? c.name : ''}" placeholder="Ex: João Pedro Alves"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">WhatsApp (com DDD) *</label>
+              <input id="cli-form-phone" type="tel" required value="${c ? c.phone : ''}" placeholder="(48) 99999-9999"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">CPF (Para Nota Fiscal)</label>
+              <input id="cli-form-cpf" type="text" value="${c?.cpf || ''}" placeholder="000.000.000-00"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Data de Nascimento</label>
+              <input id="cli-form-birth" type="date" value="${c?.birthDate || ''}"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">E-mail</label>
+              <input id="cli-form-email" type="email" value="${c?.email || ''}" placeholder="cliente@email.com"
+                class="w-full px-3.5 py-2.5 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm" />
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 p-3.5 rounded-xl bg-obsidian-950 border border-zinc-800">
+            <div>
+              <label class="block text-xs font-bold uppercase text-amber-400 mb-1">Plano de Assinatura VIP</label>
+              <select id="cli-form-plan" class="w-full px-3 py-2 rounded-xl bg-obsidian-900 border border-zinc-700 text-white text-sm">
+                <option value="">Cliente Avulso (Sem Plano)</option>
+                ${DB.plans.map(p => `<option value="${p.id}" ${c?.planId === p.id ? 'selected' : ''}>${p.name} (${formatBRL(p.price)})</option>`).join('')}
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase text-amber-400 mb-1">Vencimento do Plano</label>
+              <input id="cli-form-plan-exp" type="date" value="${c?.planExpiresAt || addDaysISO(getTodayISO(), 30)}"
+                class="w-full px-3 py-2 rounded-xl bg-obsidian-900 border border-zinc-700 text-white text-sm" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Preferências de Corte / Observações</label>
+            <textarea id="cli-form-notes" rows="2" placeholder="Ex: Gosta de degradê navalhado baixo, usa pomada efeito seco..."
+              class="w-full px-3.5 py-2 rounded-xl bg-obsidian-950 border border-zinc-700 text-white text-sm">${c?.notes || ''}</textarea>
+          </div>
+
+          <button type="submit" class="w-full py-3.5 rounded-xl gold-gradient text-black font-extrabold text-sm">
+            Salvar Ficha Cadastral
+          </button>
+        </form>
+      `);
+    }
+
+    async function saveClientProfileForm(e, clientId) {
+      e.preventDefault();
+      const name = document.getElementById('cli-form-name').value.trim();
+      const phone = cleanPhone(document.getElementById('cli-form-phone').value);
+      const cpf = document.getElementById('cli-form-cpf').value.trim();
+      const birthDate = document.getElementById('cli-form-birth').value;
+      const email = document.getElementById('cli-form-email').value.trim();
+      const planId = document.getElementById('cli-form-plan').value || null;
+      const planExpiresAt = planId ? document.getElementById('cli-form-plan-exp').value : null;
+      const notes = document.getElementById('cli-form-notes').value.trim();
+
+      if (clientId) {
+        const idx = DB.clients.findIndex(x => x.id === clientId);
+        if (idx > -1) {
+          DB.clients[idx] = {
+            ...DB.clients[idx],
+            name, phone, cpf, birthDate, email, planId, planExpiresAt, notes
+          };
+        }
+      } else {
+        DB.clients.push({
+          id: uid('cli'),
+          name, phone, cpf, birthDate, email,
+          createdAt: getTodayISO(),
+          totalCuts: 0,
+          totalSpent: 0,
+          lastVisitDate: null,
+          planId,
+          planExpiresAt,
+          notes
+        });
+      }
+
+      await saveStoreDatabase(true);
+      closeModal();
+      renderAll();
+    }
+
+    function openClientFullHistoryModal(clientId) {
+      const c = DB.clients.find(x => x.id === clientId);
+      if (!c) return;
+      const m = getClientDetailedMetrics(c);
+      const vipActive = isClientVipActive(c);
+      const planObj = c.planId ? DB.plans.find(p => p.id === c.planId) : null;
+
+      openModal(`📋 Prontuário & Histórico — ${c.name}`, `
+        <div class="space-y-5">
+          <!-- Cabeçalho Cadastral -->
+          <div class="p-4 rounded-2xl bg-obsidian-950 border border-zinc-800 space-y-2">
+            <div class="flex items-center justify-between gap-2 flex-wrap">
+              <div>
+                <h4 class="font-bold text-base text-white">${c.name}</h4>
+                <p class="text-xs text-zinc-400">WhatsApp: <strong class="text-zinc-200">${formatPhoneDisplay(c.phone)}</strong> ${c.cpf ? `• CPF: ${c.cpf}` : ''}</p>
+              </div>
+              <button type="button" onclick="openClientProfileModal('${c.id}')" class="px-3 py-1.5 rounded-xl bg-zinc-800 hover:bg-zinc-700 text-amber-400 text-xs font-bold">
+                ✏️ Editar Dados Cadastrais
+              </button>
+            </div>
+            <div class="flex flex-wrap gap-3 text-xs text-zinc-400 pt-2 border-t border-zinc-800/80">
+              <span>🎂 Aniversário: <strong>${c.birthDate ? formatDateBR(c.birthDate) : 'Não informado'}</strong></span>
+              <span>✉️ E-mail: <strong>${c.email || 'Não informado'}</strong></span>
+              <span>👑 Plano: <strong class="${vipActive ? 'text-emerald-400' : 'text-zinc-300'}">${vipActive ? `${planObj ? planObj.name : 'VIP'} (Vence ${formatDateBR(c.planExpiresAt)})` : 'Sem plano ativo'}</strong></span>
+            </div>
+            ${c.notes ? `<div class="text-xs text-amber-300/90 bg-amber-500/10 p-2.5 rounded-xl border border-amber-500/20"><strong>Preferências do Cliente:</strong> ${c.notes}</div>` : ''}
+          </div>
+
+          <!-- Resumo de Cortes no Mês, Ano e Geral -->
+          <div class="grid grid-cols-4 gap-2 text-center">
+            <div class="p-3 rounded-xl bg-obsidian-950 border border-zinc-800">
+              <div class="text-[10px] uppercase text-zinc-400 font-bold">Cortes no Mês</div>
+              <div class="text-lg font-extrabold text-amber-400 mt-0.5">${m.cutsThisMonth}</div>
+            </div>
+            <div class="p-3 rounded-xl bg-obsidian-950 border border-zinc-800">
+              <div class="text-[10px] uppercase text-zinc-400 font-bold">Cortes no Ano</div>
+              <div class="text-lg font-extrabold text-white mt-0.5">${m.cutsThisYear}</div>
+            </div>
+            <div class="p-3 rounded-xl bg-obsidian-950 border border-zinc-800">
+              <div class="text-[10px] uppercase text-zinc-400 font-bold">Total Geral</div>
+              <div class="text-lg font-extrabold text-emerald-400 mt-0.5">${m.totalCutsEver}</div>
+            </div>
+            <div class="p-3 rounded-xl bg-obsidian-950 border border-zinc-800">
+              <div class="text-[10px] uppercase text-zinc-400 font-bold">Total Gasto</div>
+              <div class="text-sm font-extrabold text-white mt-1">${formatBRL(m.totalSpentEver)}</div>
+            </div>
+          </div>
+
+          <!-- Linha do Tempo Completa de Atendimentos -->
+          <div>
+            <h5 class="text-xs font-extrabold uppercase tracking-wider text-zinc-400 mb-2.5">
+              Histórico Cronológico de Cortes e Agendamentos (${m.allAppointments.length})
+            </h5>
+            ${m.allAppointments.length === 0 ? `
+              <div class="p-6 rounded-xl bg-obsidian-950 border border-zinc-800 text-center text-xs text-zinc-500">
+                Nenhum atendimento registrado para este cliente ainda.
+              </div>
+            ` : `
+              <div class="space-y-2 max-h-64 overflow-y-auto pr-1">
+                ${m.allAppointments.map(apt => {
+                  const srv = DB.services.find(s => s.id === apt.serviceId);
+                  const barb = DB.barbers.find(b => b.id === apt.barberId);
+                  return `
+                    <div class="p-3 rounded-xl bg-obsidian-950 border border-zinc-800 flex items-center justify-between gap-2">
+                      <div>
+                        <div class="flex items-center gap-2">
+                          <span class="px-2 py-0.5 rounded text-[10px] font-bold ${
+                            apt.status === 'completed' ? 'bg-emerald-500/15 text-emerald-400' :
+                            apt.status === 'confirmed' ? 'bg-amber-500/15 text-amber-400' : 'bg-rose-500/15 text-rose-400'
+                          }">
+                            ${apt.status === 'completed' ? 'CONCLUÍDO' : apt.status === 'confirmed' ? 'AGENDADO' : 'CANCELADO'}
+                          </span>
+                          <span class="text-xs font-bold text-white">${formatDateBR(apt.date)} às ${apt.time}</span>
+                        </div>
+                        <p class="text-xs text-amber-400 font-semibold mt-1">${srv ? srv.name : 'Corte/Procedimento'}</p>
+                        <p class="text-[11px] text-zinc-400">Barbeiro: ${barb ? barb.name : '-'} • ${apt.isVipCovered ? 'Plano VIP (R$ 0)' : formatBRL(apt.price)}</p>
+                      </div>
+                      <button type="button" onclick="openReceiptModal('${apt.id}')" class="px-2.5 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-zinc-200 text-[11px] font-bold shrink-0">
+                        🧾 Recibo
+                      </button>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            `}
+          </div>
+        </div>
+      `);
     }
 
     /* 1. AGENDA & RECIBOS */
@@ -2103,7 +2644,7 @@
 
       let client = DB.clients.find(c => cleanPhone(c.phone) === phone);
       if (!client) {
-        client = { id: uid('cli'), name, phone, totalCuts: 0, totalSpent: 0, lastVisitDate: null, planId: null, planExpiresAt: null, notes: '' };
+        client = { id: uid('cli'), name, phone, cpf: '', birthDate: '', email: '', createdAt: getTodayISO(), totalCuts: 0, totalSpent: 0, lastVisitDate: null, planId: null, planExpiresAt: null, notes: '' };
         DB.clients.push(client);
       }
       const isVip = paymentMethod === 'VIP' || (isClientVipActive(client) && srv?.vipIncluded);
@@ -2656,22 +3197,22 @@
       renderAll();
     }
 
-    /* 5. CRM DE CLIENTES */
+    /* 5. CRM DE RETENÇÃO & RANKING */
     function renderAdminCRM(container) {
       let list = [...DB.clients];
       if (crmSearchQuery.trim()) {
         const q = crmSearchQuery.toLowerCase();
         list = list.filter(c => c.name.toLowerCase().includes(q) || cleanPhone(c.phone).includes(q));
       }
-      if (crmSortFilter === 'ranking') list.sort((a, b) => Number(b.totalCuts || 0) - Number(a.totalCuts || 0));
-      else if (crmSortFilter === 'missing') list.sort((a, b) => daysSinceDate(b.lastVisitDate) - daysSinceDate(a.lastVisitDate));
+      if (crmSortFilter === 'ranking') list.sort((a, b) => getClientDetailedMetrics(b).totalCutsEver - getClientDetailedMetrics(a).totalCutsEver);
+      else if (crmSortFilter === 'missing') list.sort((a, b) => daysSinceDate(getClientDetailedMetrics(b).lastVisitDate) - daysSinceDate(getClientDetailedMetrics(a).lastVisitDate));
       else if (crmSortFilter === 'vip') list = list.filter(c => isClientVipActive(c));
 
       container.innerHTML = `
         <div class="space-y-6">
           <div>
-            <h3 class="font-royal font-bold text-xl text-white">CRM de Clientes & Retenção</h3>
-            <p class="text-xs text-zinc-400">Ranking de fidelidade, recuperação de clientes sumidos via WhatsApp e gestão de assinantes VIP.</p>
+            <h3 class="font-royal font-bold text-xl text-white">🏆 CRM Comercial & Retenção de Clientes Sumidos</h3>
+            <p class="text-xs text-zinc-400">Ranking de quem mais cortou e disparo rápido de mensagens de retorno no WhatsApp para clientes sumidos.</p>
           </div>
 
           <div class="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 bg-obsidian-900 border border-zinc-800 p-4 rounded-2xl">
@@ -2686,7 +3227,8 @@
 
           <div class="space-y-3">
             ${list.map((c, idx) => {
-              const daysAway = daysSinceDate(c.lastVisitDate);
+              const m = getClientDetailedMetrics(c);
+              const daysAway = daysSinceDate(m.lastVisitDate);
               const vipActive = isClientVipActive(c);
               const returnMsg = encodeURIComponent(`Fala ${c.name.split(' ')[0]}, beleza? Já faz ${daysAway === 999 ? 'um tempo' : daysAway + ' dias'} do seu último corte aqui na ${DB.settings.name}. Bora agendar seu horário da semana? 💈`);
               return `
@@ -2700,13 +3242,13 @@
                         ${daysAway >= 25 && daysAway < 999 ? `<span class="px-2 py-0.5 text-[10px] rounded-full bg-rose-500/15 text-rose-400 font-bold">Sumido há ${daysAway} dias</span>` : ''}
                       </div>
                       <p class="text-xs text-zinc-400 mt-0.5">
-                        Tel: ${formatPhoneDisplay(c.phone)} • Cortes: <strong class="text-amber-400">${c.totalCuts || 0}</strong> • Gasto: <strong class="text-emerald-400">${formatBRL(c.totalSpent || 0)}</strong>
+                        Tel: ${formatPhoneDisplay(c.phone)} • No Mês: <strong class="text-amber-400">${m.cutsThisMonth}</strong> • No Ano: <strong>${m.cutsThisYear}</strong> • Total: <strong class="text-emerald-400">${m.totalCutsEver} cortes</strong>
                       </p>
                     </div>
                   </div>
                   <div class="flex items-center gap-2">
-                    <a href="https://wa.me/55${cleanPhone(c.phone)}?text=${returnMsg}" target="_blank" class="px-3 py-2 rounded-xl bg-emerald-600/20 text-emerald-300 text-xs font-bold">WhatsApp Retorno</a>
-                    <button type="button" onclick="openClientVipAssignModal('${c.id}')" class="px-3 py-2 rounded-xl bg-amber-500/15 text-amber-300 text-xs font-bold">👑 Plano VIP</button>
+                    <a href="https://wa.me/55${cleanPhone(c.phone)}?text=${returnMsg}" target="_blank" class="px-3 py-2 rounded-xl bg-emerald-600/20 text-emerald-300 text-xs font-bold">📲 Chamar Retorno</a>
+                    <button type="button" onclick="openClientFullHistoryModal('${c.id}')" class="px-3 py-2 rounded-xl bg-zinc-800 text-zinc-200 text-xs font-bold">📋 Ficha</button>
                   </div>
                 </div>
               `;
@@ -2982,29 +3524,88 @@
       renderAll();
     }
 
-    /* 8. PERSONALIZAÇÃO DO PORTAL DIVIDIDO */
+    /* =====================================================================
+     * 8. PERSONALIZAÇÃO COMPLETA DO SITE, MODO DE TEMAS E MÓDULOS PERSONALIZÁVEIS
+     * ===================================================================== */
     function renderAdminSettings(container) {
       const s = DB.settings;
+      const mods = s.modules || {};
+      const currentTheme = s.themePreset || 'gold';
+
       container.innerHTML = `
-        <form onsubmit="saveShopSettings(event)" class="max-w-3xl space-y-6 bg-obsidian-900 border border-zinc-800 rounded-2xl p-6">
+        <form onsubmit="saveShopSettings(event)" class="max-w-4xl space-y-6 bg-obsidian-900 border border-zinc-800 rounded-2xl p-6">
           <div>
-            <h3 class="font-royal font-bold text-xl text-white">Personalizar Tela Inicial (Split-Screen) & Horários</h3>
-            <p class="text-xs text-zinc-400">Qualquer logo enviada receberá automaticamente o acabamento monocromático preto/prata na capa e marca d'água cinza ao fundo.</p>
+            <h3 class="font-royal font-bold text-xl text-white">Personalizar Tela Inicial (Split-Screen), Temas & Módulos</h3>
+            <p class="text-xs text-zinc-400">Personalize cores, efeito da logo, imagem de fundo, horários e quais módulos ficam visíveis para os clientes.</p>
           </div>
 
+          <!-- BLOCO A: MODO DE TEMAS VISUAIS -->
+          <div class="p-4 rounded-2xl bg-obsidian-950 border border-zinc-800 space-y-3">
+            <label class="block text-xs font-extrabold uppercase tracking-wider text-amber-400">
+              🎨 1. Modo de Tema & Paleta de Cores da Barbearia
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-5 gap-2.5">
+              ${Object.entries(THEME_PRESETS).map(([key, t]) => `
+                <label class="cursor-pointer p-3 rounded-xl border ${currentTheme === key ? 'border-amber-400 bg-zinc-900' : 'border-zinc-800 bg-obsidian-900/60'} flex flex-col gap-2">
+                  <div class="flex items-center justify-between">
+                    <span class="w-6 h-6 rounded-full border border-white/20" style="background: linear-gradient(135deg, ${t.light}, ${t.main})"></span>
+                    <input type="radio" name="shop-theme-preset" value="${key}" ${currentTheme === key ? 'checked' : ''}
+                      onchange="applyThemePreset(this.value)" class="accent-amber-500" />
+                  </div>
+                  <span class="text-xs font-bold text-white leading-tight">${t.name}</span>
+                </label>
+              `).join('')}
+            </div>
+          </div>
+
+          <!-- BLOCO B: MÓDULOS 100% PERSONALIZÁVEIS (LIGAR / DESLIGAR) -->
+          <div class="p-4 rounded-2xl bg-obsidian-950 border border-zinc-800 space-y-3">
+            <label class="block text-xs font-extrabold uppercase tracking-wider text-amber-400">
+              🧩 2. Módulos Personalizáveis (Ativar / Desativar na Vitrine do Cliente)
+            </label>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+              <label class="flex items-center gap-2.5 p-3 rounded-xl bg-obsidian-900 border border-zinc-800 cursor-pointer text-xs font-semibold text-zinc-200">
+                <input id="mod-combos" type="checkbox" ${mods.combos !== false ? 'checked' : ''} class="w-4 h-4 accent-amber-500" />
+                <span>🔥 Exibir Aba Combos VIP</span>
+              </label>
+              <label class="flex items-center gap-2.5 p-3 rounded-xl bg-obsidian-900 border border-zinc-800 cursor-pointer text-xs font-semibold text-zinc-200">
+                <input id="mod-plans" type="checkbox" ${mods.plans !== false ? 'checked' : ''} class="w-4 h-4 accent-amber-500" />
+                <span>👑 Exibir Planos Mensais (Clube VIP)</span>
+              </label>
+              <label class="flex items-center gap-2.5 p-3 rounded-xl bg-obsidian-900 border border-zinc-800 cursor-pointer text-xs font-semibold text-zinc-200">
+                <input id="mod-products" type="checkbox" ${mods.products !== false ? 'checked' : ''} class="w-4 h-4 accent-amber-500" />
+                <span>🛍️ Exibir Vitrine de Produtos</span>
+              </label>
+              <label class="flex items-center gap-2.5 p-3 rounded-xl bg-obsidian-900 border border-zinc-800 cursor-pointer text-xs font-semibold text-zinc-200">
+                <input id="mod-team" type="checkbox" ${mods.team !== false ? 'checked' : ''} class="w-4 h-4 accent-amber-500" />
+                <span>💈 Exibir Carrossel de Barbeiros</span>
+              </label>
+              <label class="flex items-center gap-2.5 p-3 rounded-xl bg-obsidian-900 border border-zinc-800 cursor-pointer text-xs font-semibold text-zinc-200">
+                <input id="mod-demo" type="checkbox" ${mods.demoButton !== false ? 'checked' : ''} class="w-4 h-4 accent-amber-500" />
+                <span>⚡ Botão Cliente Demo na Capa</span>
+              </label>
+              <label class="flex items-center gap-2.5 p-3 rounded-xl bg-obsidian-900 border border-zinc-800 cursor-pointer text-xs font-semibold text-zinc-200">
+                <input id="set-logo-noir" type="checkbox" ${s.logoNoirEffect !== false ? 'checked' : ''} class="w-4 h-4 accent-amber-500" />
+                <span>🖤 Filtro Noir Preto/Prata na Logo</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- BLOCO C: UPLOAD DA LOGO E CAPA SPLIT-SCREEN -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-2xl bg-obsidian-950 border border-zinc-800">
             <div>
-              <label class="block text-xs font-bold uppercase text-amber-400 mb-1.5">1. Logo da Barbearia (Efeito Noir Automático)</label>
+              <label class="block text-xs font-bold uppercase text-amber-400 mb-1.5">3. Logo da Barbearia (Upload Celular/PC)</label>
               <input id="set-logo-file" type="file" accept="image/*" class="w-full text-xs text-zinc-400 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:bg-zinc-800 file:text-amber-400 file:font-bold" />
             </div>
             <div>
-              <label class="block text-xs font-bold uppercase text-amber-400 mb-1.5">2. Foto Temática do Lado Esquerdo (Upload ou URL)</label>
+              <label class="block text-xs font-bold uppercase text-amber-400 mb-1.5">4. Foto Temática do Lado Esquerdo (Upload ou URL)</label>
               <input id="set-hero-file" type="file" accept="image/*" class="w-full text-xs text-zinc-400 file:mr-3 file:py-2 file:px-3 file:rounded-xl file:border-0 file:bg-zinc-800 file:text-amber-400 file:font-bold mb-2" />
               <input id="set-hero-url" type="text" value="${s.heroBgDataUrl || ''}" placeholder="Ou cole o link de uma foto de corte de cabelo"
                 class="w-full px-3 py-2 rounded-xl bg-obsidian-900 border border-zinc-700 text-white text-xs" />
             </div>
           </div>
 
+          <!-- BLOCO D: INFORMAÇÕES E HORÁRIOS -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label class="block text-xs font-bold uppercase text-zinc-400 mb-1">Nome da Barbearia</label>
@@ -3058,7 +3659,7 @@
           </div>
 
           <button type="submit" class="w-full py-3.5 rounded-xl gold-gradient text-black font-extrabold text-sm">
-            Salvar Personalização e Atualizar Portal
+            Salvar Personalização, Temas e Módulos
           </button>
         </form>
       `;
@@ -3077,6 +3678,18 @@
       } else {
         DB.settings.heroBgDataUrl = document.getElementById('set-hero-url').value.trim();
       }
+
+      const selectedTheme = document.querySelector('input[name="shop-theme-preset"]:checked')?.value || 'gold';
+      DB.settings.themePreset = selectedTheme;
+      DB.settings.logoNoirEffect = document.getElementById('set-logo-noir').checked;
+
+      DB.settings.modules = {
+        combos: document.getElementById('mod-combos').checked,
+        plans: document.getElementById('mod-plans').checked,
+        products: document.getElementById('mod-products').checked,
+        team: document.getElementById('mod-team').checked,
+        demoButton: document.getElementById('mod-demo').checked
+      };
 
       DB.settings.name = document.getElementById('set-name').value.trim();
       DB.settings.phone = document.getElementById('set-phone').value.trim();
@@ -3285,7 +3898,6 @@
       setTimeout(() => el.remove(), 3400);
     }
 
-    // Inicializa a interface imediatamente e sincroniza com o Supabase em segundo plano
     restoreClientSession();
     renderAll();
     loadStoreDatabase().then(() => {
